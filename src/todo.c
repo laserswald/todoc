@@ -33,7 +33,7 @@ void list_tasks(char* filename){
         return;
     }
     char buffer[256];
-    while((fgets(file, buffer, 255)) != NULL){
+    while((fgets(buffer, 255, file)) != NULL){
         printf("%s", buffer);
     } 
 
