@@ -3,7 +3,7 @@ CC = tcc
 all: todo.exe
 
 todo.exe: src/todo.c textdb.o
-	$(CC) -o todo.exe src/todo.c textdb.o
+	$(CC) -o todo.exe src/todo.c textdb.o -I./include
 	
 textdb.o: src/textdb.c
 

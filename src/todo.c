@@ -20,29 +20,38 @@ int check_range_exp(int number, char* expression){
     
 }
 
+// TODO: This does nothing.
 int check_in_exp(int number, char* expression){
     return 0;
 }
 
+// TODO: Make this say more stuff.
 void list_tasks(char* filename){
     FILE* file = fopen(filename, "r");
     if (!file){
         puts("Could not open file.");
         return;
     }
-    while 
+    char buffer[256];
+    while((fgets(file, buffer, 255)) != NULL){
+        printf("%s", buffer);
+    } 
+
 }
 
+// WARNING: Broken code!
 void list_tasks_matching(char* filename, char* string){
 	FILE* file = fopen(filename, "r");
 	char buffer[256];
-	while(f)
+	//while(f)
 }
 
+// TODO: This does nothing. 
 void complete_task(char* filename, int number){
 }
 
 int main(int argc, char* argv[]){
+    // TODO: optionally compile in custom argument parser.
     if (argc > 1){
         if (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "add") == 0){
             add_task("todo.txt", argv[2]);
@@ -50,10 +59,11 @@ int main(int argc, char* argv[]){
             puts("Debug: removing task");
             remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
         } else if (strcmp(argv[1], "-l") == 0){
-		if (argc = 3) list_tasks
-	    list_tasks_matching("todo.txt", argv[2]);
+		if (argc = 3) 
+	        //list_tasks_matching("todo.txt", argv[2]);
+            list_tasks("todo.txt");
         }
-    } else {
+    } else 
         list_tasks("todo.txt");
     return 0;
 }
