@@ -46,8 +46,10 @@ void list_tasks_matching(char* filename, char* string){
 	//while(f)
 }
 
-// TODO: This does nothing. 
-void complete_task(char* filename, int number){
+void complete_task(char* filename, int number)
+{
+    move_line(filename, "done.txt", number);
+    printf("Task #%d complete.\n", number);
 }
 
 int main(int argc, char* argv[]){
@@ -56,14 +58,18 @@ int main(int argc, char* argv[]){
         if (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "add") == 0){
             add_task("todo.txt", argv[2]);
         } else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "remove")){
-            puts("Debug: removing task");
             remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
-        } else if (strcmp(argv[1], "-l") == 0){
-		if (argc = 3) 
-	        //list_tasks_matching("todo.txt", argv[2]);
-            list_tasks("todo.txt");
-        }
-    } else 
+        } else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "done")){
+            complete_task("todo.txt", atoi(argv[2]));
+        } 
+        
+        else if (strcmp(argv[1], "-l") == 0){
+            if (argc = 3) 
+	            //list_tasks_matching("todo.txt", argv[2]);
+                list_tasks("todo.txt");
+            }
+    } else { 
         list_tasks("todo.txt");
+    }
     return 0;
 }
