@@ -55,20 +55,28 @@ void complete_task(char* filename, int number)
 int main(int argc, char* argv[]){
     // TODO: optionally compile in custom argument parser.
     if (argc > 1){
+        printf("Debug: Argv[1] = %s\n", argv[1]);
         if (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "add") == 0){
             add_task("todo.txt", argv[2]);
-        } else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "remove")){
-            remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
-        } else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "done")){
-            complete_task("todo.txt", atoi(argv[2]));
         } 
-        
+
+        else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "rem") == 0){
+            puts("Debug: removing task");
+            remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
+        }
+
+        else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "do") == 0){
+            puts("Debug: completing task");
+            complete_task("todo.txt", atoi(argv[2]));
+        }
+
         else if (strcmp(argv[1], "-l") == 0){
             if (argc = 3) 
 	            //list_tasks_matching("todo.txt", argv[2]);
                 list_tasks("todo.txt");
             }
-    } else { 
+    } 
+    else { 
         list_tasks("todo.txt");
     }
     return 0;

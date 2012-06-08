@@ -62,6 +62,7 @@ int move_line(char* filename, char* destination, int line){
     copy_single_line(source, dest, line);
     fclose(source);
     fclose(dest);
+    puts("Removing line");
     remove_line(filename, "move.tmp", line);
     remove("move.tmp");
 }
