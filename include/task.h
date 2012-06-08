@@ -3,10 +3,7 @@
 
 typedef struct task{
 	char* description;
-	char** tags;
-	int taglen;
-	char priority;
-	
+	char priority;	
 }Task;
 
 Task* Task_new();
