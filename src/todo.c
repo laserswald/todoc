@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "textdb.h"
+#include "filter.h"
 
 void add_task(char* filename, char* string){
     FILE* file;
@@ -43,7 +44,11 @@ void list_tasks(char* filename){
 void list_tasks_matching(char* filename, char* string){
 	FILE* file = fopen(filename, "r");
 	char buffer[256];
-	//while(f)
+    while(fgets(buffer, 255, file) != NULL){
+        if (isIn(buffer, string)){
+            printf("Match: %s", buffer);
+        }
+    }
 }
 
 void complete_task(char* filename, int number)
@@ -72,8 +77,7 @@ int main(int argc, char* argv[]){
 
         else if (strcmp(argv[1], "-l") == 0){
             if (argc = 3) 
-	            //list_tasks_matching("todo.txt", argv[2]);
-                list_tasks("todo.txt");
+	            list_tasks_matching("todo.txt", argv[2]);
             }
     } 
     else { 
