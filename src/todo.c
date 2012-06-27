@@ -26,8 +26,8 @@ int check_range_exp(int number, char* expression){
 int list_tasks(char* filename){
     FILE* file = fopen(filename, "r");
     if (!file){
-        puts("Could not open file.");
-        return 0;
+        // Bugfix: make a new file when there is none.
+        file = fopen(filename, "w+");
     }
 
     printf("Todo list in file '%s': \n", filename);
