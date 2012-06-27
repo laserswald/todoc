@@ -1,0 +1,22 @@
+# Todoc is a command line todo list.
+
+## Features:
+
+* Add a task with 
+    todoc add "Herp a derp"
+  or
+    todoc -a "Herp a derp"
+
+* Remove a task with 
+    todoc rem 1
+  or 
+    todoc -r 1
+
+* Complete a task with 
+    todoc -d 1
+
+* Search for a task with 
+    todoc -l "Search string"
+    or
+    todoc -l #tag
+
