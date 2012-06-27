@@ -9,7 +9,7 @@ objects = $(patsubst %.c,%.o,$(sources))
 objectpath = obj
 objs = $(patsubst %,$(objectpath)/%,$(objects))
 
-binary = todo.exe
+binary = todo
 
 all: setup $(binary)
 
@@ -30,7 +30,7 @@ clean:
 rebuild: clean all
 
 dist:
-	tar -czvf todoc-0.0.1.tar.gz src/todo.c src/textdb.c src/filter.c include/*.h makefile README.mkdn
+	tar -czvf todoc-0.0.1.tar.gz $(srcs) include/*.h makefile README.mkdn
 
 setup: 
-	mkdir $(objectpath)
+	mkdir -p $(objectpath)

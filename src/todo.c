@@ -11,7 +11,7 @@ void add_task(char* filename, char* string){
         puts("File could not be opened.");
         abort();
     }
-    fprintf(file, "\n%s\n", string);
+    fprintf(file, "%s\n", string);
     printf("Task added:\n%s\n", string);
 }
 
@@ -21,26 +21,28 @@ int check_range_exp(int number, char* expression){
     
 }
 
-// TODO: This does nothing.
-int check_in_exp(int number, char* expression){
-    return 0;
-}
-
 // TODO: Make this say more stuff.
-void list_tasks(char* filename){
+// Warning: untested.
+int list_tasks(char* filename){
     FILE* file = fopen(filename, "r");
     if (!file){
         puts("Could not open file.");
-        return;
+        return 0;
     }
+
+    printf("Todo list in file '%s': \n", filename);
+    int count = 0;
     char buffer[256];
     while((fgets(buffer, 255, file)) != NULL){
-        printf("%s", buffer);
+        printf("\t%d: %s", count, buffer);
+        count++;
     } 
-
+    printf("Total tasks: %d.", count);
 }
 
-// WARNING: Broken code!
+/** List the tasks with a match in the string.
+ *
+ */
 void list_tasks_matching(char* filename, char* string){
 	FILE* file = fopen(filename, "r");
 	char buffer[256];
@@ -51,6 +53,9 @@ void list_tasks_matching(char* filename, char* string){
     }
 }
 
+/** Complete a task.
+ *
+ */
 void complete_task(char* filename, int number)
 {
     move_line(filename, "done.txt", number);
