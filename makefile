@@ -31,6 +31,6 @@ rebuild: clean all
 
 dist:
 	tar -czvf todoc-0.0.1.tar.gz $(srcs) include/*.h makefile README.mkdn
-
+	zip todoc-dev.zip src include makefile README.mkdn
 setup: 
 	mkdir -p $(objectpath)
