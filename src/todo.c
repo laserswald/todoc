@@ -37,7 +37,7 @@ int list_tasks(char* filename){
         printf("\t%d: %s", count, buffer);
         count++;
     } 
-    printf("Total tasks: %d.", count);
+    printf("Total tasks: %d.\n", count);
 }
 
 /** List the tasks with a match in the string.
