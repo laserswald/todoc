@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I./include
+CFLAGS = -g -I./include
 
 sources = todo.c textdb.c filter.c
 sourcepath = src
@@ -23,7 +23,7 @@ task_test.exe: src/task.c task.h proto/task_test.c
 	$(CC) -o task_test.exe src/task.c task.h proto/task_test.c -lseatest
 
 clean: 
-	rm textdb.o filter.o
+	rm $(objs)
 
 .PHONY: setup clean rebuild dist
 
