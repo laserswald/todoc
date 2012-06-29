@@ -2,8 +2,7 @@
 
 ## Features:
 
-Add a task with 
-    todoc add "Herp a derp"
+Add a task with `todoc add "Herp a derp"`
 or
     todoc -a "Herp a derp"
 
