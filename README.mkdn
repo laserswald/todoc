@@ -1,20 +1,24 @@
 # Todoc is a command line todo list.
 
-## Features:
+## Basic use:
 
-Add a task with `todoc add "Herp a derp"`
-or
-    todoc -a "Herp a derp"
+* Add a task with `todo add "Herp a derp"` or `todo -a "Herp a derp"`
 
-Remove a task with 
-    todoc rem 1 
+* Remove a task with `todo rem 1` or `todo -r 1`
+
+* Complete a task with `todo -d 1`
+
+* Search for a task with `todo -l "Search string"` or `todoc -l #tag`. 
+
+##Building:
+    
+It's easy to build *todoc*. It's completely compatible with MinGW on Windows, and GCC on Linux. Just clone it and type
+
+`make`
+
 or 
-    todoc -r 1
 
-* Complete a task with "todoc -d 1"
+`mingw32-make` 
 
-* Search for a task with 
-    todoc -l "Search string"
-    or
-    todoc -l #tag
+depending on your system.
 
