@@ -22,5 +22,13 @@ int tasklist_append(struct tasklist_t* this, Task* t){
         // Make sure it's heard.
     }
     struct tasklist_t* index = this;
+    //Probably sure we can move this to another function.
 
+    while (index->next != NULL){
+        index = index->next;
+    }
+    struct tasklist_t* new = tasklist_new();
+    new->task = t;
+    index->next = new;
+    return 0;
 }
