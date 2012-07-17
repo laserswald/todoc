@@ -1,20 +1,21 @@
-#ifndef TaskList
-#define TaskList
+#ifndef TASKLIST
+#define TASKLIST
 
 #include "task.h"
 
-typedef struct tasklist_t {
-    TaskList *next;
-    Task* this;
-}TaskList;
+struct tasklist_t {
+    struct tasklist_t *next;
+    struct task_t *task;
+};
 
-TaskList* TaskList_new();
-void TaskList_delete(TaskList *list);
 
-int TaskList_append(TaskList *list, Task *task);
-TaskList* TaskList_filter(TaskList *list, char *string);
+struct tasklist_t* tasklist_new();
+void tasklist_free(struct tasklist_t *list);
 
-TaskList* TaskList_merge(TaskList *list, TaskList *other);
-void TaskList_display(TaskList *list)
+int tasklist_append(struct tasklist_t *list, Task *task);
+struct tasklist_t* tasklist_filter(struct tasklist_t *list, char *string);
+
+struct tasklist_t* tasklist_merge(struct tasklist_t *list, struct tasklist_t *other);
+void tasklist_display(struct tasklist_t *list);
 
 #endif

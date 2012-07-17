@@ -1,19 +1,26 @@
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
 #include "tasklist.h"
 
-TaskList* TaskList_new(){
-    TaskList* this = (TaskList*)malloc(sizeof(TaskList));
+struct tasklist_t* tasklist_new(){
+    struct tasklist_t* this = (struct tasklist_t*)malloc(sizeof(struct tasklist_t));
     this->task = NULL;
     this->next = NULL;
     return this;
 }
 
-void TaskList_free(TaskList* list){
+void tasklist_free(struct tasklist_t* list){
     free(list->task);
-    TaskList_free(list->next); 
+    tasklist_free(list->next); 
 }
 
-int TaskList_append(TaskList* this, Task* t){
+int tasklist_append(struct tasklist_t* this, Task* t){
     if (this == NULL){
         // Make sure it's heard.
     }
+    struct tasklist_t* index = this;
+
 }

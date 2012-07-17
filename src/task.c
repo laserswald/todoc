@@ -1,14 +1,15 @@
 #include "task.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+
 /* WARNING: Unclean code! */
 Task* Task_new(){
 	Task* t = (Task*)malloc(sizeof(Task));
 	t->description = NULL;
 	return t;
-}
-
-void Task_parse(Task* t, char* string){
-	char* buffer = 
 }
 
 /* WARNING: Unclean code! */
@@ -17,9 +18,9 @@ void Task_append(Task* t, char* string)
 	/* Hack: maybe I should make a resize + append function....*/
 	int oldlen, newlen;
 	oldlen = strlen(t->description);
-	newlen = strlen(desc) + oldlen;
+	newlen = strlen(string) + oldlen;
 	t->description = realloc(t->description, (sizeof(char)*newlen)+1);
-	t->description = strcat(t->description, desc);
+	t->description = strcat(t->description, string);
 }
 
 /** Dumps out the current task's data in Todo.txt format.*/
@@ -55,7 +56,7 @@ Task_dump(Task* t)
 
 int 
 Task_has_keyword(Task* t, char* keyword){
-	if (strstr(t->description, keyword) = NULL){
+	if (strstr(t->description, keyword) == NULL){
 		return 0;
 	}
 	return 1;

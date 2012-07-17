@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "textdb.h"
+#include "task.h"
+#include "tasklist.h"
 
 void add_task(char* filename, char* string){
     FILE* file;
@@ -16,8 +18,7 @@ void add_task(char* filename, char* string){
 
 int check_range_exp(int number, char* expression){
     char* end_num = strpbrk(expression, "-")+1;
-    printf("second half of expression: %s", end_num);
-    
+    printf("second half of expression: %s", end_num);    
 }
 
 // TODO: This does nothing.
