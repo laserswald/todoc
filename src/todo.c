@@ -7,12 +7,12 @@
 #include "tasklist.h"
 
 void add_task(char* filename, char* string){
-    FILE* file;
-    if ((file = fopen(filename, "a")) == NULL){
-        puts("File could not be opened.");
-        abort();
-    }
-    fprintf(file, "\n%s\n", string);
+    struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    struct task_t* task = task_new();
+    task_setString(task, string);   
+    tasklist_append(list, task);
+    tasklist_dump(list, filename);
     printf("Task added:\n%s\n", string);
 }
 
@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
             add_task("todo.txt", argv[2]);
         } else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "remove")){
             puts("Debug: removing task");
-            remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
+           // remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
         } else if (strcmp(argv[1], "-l") == 0){
 		if (argc = 3) 
 	        //list_tasks_matching("todo.txt", argv[2]);

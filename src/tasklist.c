@@ -17,18 +17,67 @@ void tasklist_free(struct tasklist_t* list){
     tasklist_free(list->next); 
 }
 
-int tasklist_append(struct tasklist_t* this, Task* t){
+int tasklist_append(struct tasklist_t* this, struct task_t* t){
     if (this == NULL){
         // Make sure it's heard.
     }
     struct tasklist_t* index = this;
     //Probably sure we can move this to another function.
 
-    while (index->next != NULL){
+    while (index->task != NULL && index != NULL){
         index = index->next;
     }
-    struct tasklist_t* new = tasklist_new();
-    new->task = t;
-    index->next = new;
+    if (!index){
+        struct tasklist_t* new = tasklist_new();
+        new->task = t;
+        index->next = new;
+    } else {
+        index->task = t;
+    }
     return 0;
+}
+
+struct tasklist_t* tasklist_filter(struct tasklist_t* list, char* filter){
+    if (!list || !list->task && !list->next){
+        puts("Empty tasklist.")
+        return NULL;
+    }
+}
+
+void tasklist_dump(struct tasklist_t *list, char* filename)
+{
+    FILE* f = fopen(filename, "w");
+    if (f == NULL){
+        puts("Could not open file for tasklist writing.");
+        return;
+    }
+    struct tasklist_t *iter = list;
+    while (iter != NULL){
+        fprintf(f, "%s\n", iter->task->description);
+        iter = iter->next;
+    }
+    fclose(f);
+    return;
+}
+
+void tasklist_read(struct tasklist_t *list, char* filename){
+    FILE* f = fopen(filename, "w");
+    if (f == NULL){
+        puts("Could not open file for tasklist writing.");
+        return;
+    }
+    struct tasklist_t* iter = list;
+    
+    // Moves the index to the end.
+    while (iter->next){
+        iter = iter->next;
+    }    
+    char buffer[256];
+    while (fgets(buffer, 255, f) != NULL){
+        struct tasklist_t* new = tasklist_new();
+        new->task = task_new();
+        task_append(new->task, buffer);
+        iter->next = new;
+        iter = iter->next;
+    }
 }

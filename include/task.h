@@ -1,19 +1,20 @@
 #ifndef TASK
 #define TASK
 
-typedef struct task{
+struct task_t{
 	char* description;
 	char priority;	
-}Task;
+};
 
-Task* Task_new();
+struct task_t* task_new();
 
-void Task_append(Task* t, char* string);
+void task_setString(struct task_t* t, char* string);
+void task_append(struct task_t* t, char* string);
 
-int Task_has_project(Task* t, char* project);
-int Task_has_context(Task* t, char* context);
+int task_has_project(struct task_t* t, char* project);
+int task_has_context(struct task_t* t, char* context);
 
-char* Task_dump(Task* t);
+char* task_dump(struct task_t* t);
 
-void Task_print(Task* t);
+void task_print(struct task_t* t);
 #endif

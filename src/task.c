@@ -6,14 +6,19 @@
 #include <stddef.h>
 
 /* WARNING: Unclean code! */
-Task* Task_new(){
-	Task* t = (Task*)malloc(sizeof(Task));
+struct task_t* task_new(){
+	struct task_t* t = (struct task_t*)malloc(sizeof(struct task_t));
 	t->description = NULL;
 	return t;
 }
 
+void task_setString(struct task_t* t, char* string)
+{
+    t->description = strdup(string);
+}
+
 /* WARNING: Unclean code! */
-void Task_append(Task* t, char* string)
+void task_append(struct task_t* t, char* string)
 {
 	/* Hack: maybe I should make a resize + append function....*/
 	int oldlen, newlen;
@@ -26,7 +31,7 @@ void Task_append(Task* t, char* string)
 /** Dumps out the current task's data in Todo.txt format.*/
 /* WARNING: Unclean code! */
 char* 
-Task_dump(Task* t)
+task_dump(struct task_t* t)
 {
 	int dumpsize = 0;
 	char* dump;
@@ -55,7 +60,7 @@ Task_dump(Task* t)
 }
 
 int 
-Task_has_keyword(Task* t, char* keyword){
+task_has_keyword(struct task_t* t, char* keyword){
 	if (strstr(t->description, keyword) == NULL){
 		return 0;
 	}
