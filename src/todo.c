@@ -10,10 +10,10 @@ void add_task(char* filename, char* string){
     struct tasklist_t* list = tasklist_new();
     tasklist_read(list, filename);
     struct task_t* task = task_new();
-    task_setString(task, string);   
+    task_set_string(task, string);   
     tasklist_append(list, task);
     tasklist_dump(list, filename);
-    printf("Task added:\n%s\n", string);
+    printf(" added:\n%s\n", string);
 }
 
 int check_range_exp(int number, char* expression){
@@ -24,20 +24,9 @@ int check_range_exp(int number, char* expression){
 // TODO: Make this say more stuff.
 // Warning: untested.
 int list_tasks(char* filename){
-    FILE* file = fopen(filename, "r");
-    if (!file){
-        // Bugfix: make a new file when there is none.
-        file = fopen(filename, "w+");
-    }
-
-    printf("Todo list in file '%s': \n", filename);
-    int count = 0;
-    char buffer[256];
-    while((fgets(buffer, 255, file)) != NULL){
-        printf("\t%d: %s", count, buffer);
-        count++;
-    } 
-    printf("Total tasks: %d.\n", count);
+    struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    
 }
 
 /** List the tasks with a match in the string.
@@ -58,8 +47,8 @@ void list_tasks_matching(char* filename, char* string){
  */
 void complete_task(char* filename, int number)
 {
-    move_line(filename, "done.txt", number);
-    printf("Task #%d complete.\n", number);
+    //move_line(filename, "done.txt", number);
+    printf(" #%d complete.\n", number);
 }
 
 int main(int argc, char* argv[]){

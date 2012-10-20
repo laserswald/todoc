@@ -19,7 +19,7 @@ void tasklist_free(struct tasklist_t* list){
 
 int tasklist_append(struct tasklist_t* this, struct task_t* t){
     if (this == NULL){
-        // Make sure it's heard.
+        return 1;
     }
     struct tasklist_t* index = this;
     //Probably sure we can move this to another function.
@@ -37,11 +37,32 @@ int tasklist_append(struct tasklist_t* this, struct task_t* t){
     return 0;
 }
 
+struct task_t *tasklist_remove(struct tasklist_t* list, int index){
+    // Move to the correct link.
+    int linknum = 0;
+
+    struct tasklist_t *tlp;
+    while (1){
+        if (linknum = index){
+            
+        } else if (linknum < index){
+            linknum++;
+            tlp = tlp->next;
+        }
+    }   
+}
+
 struct tasklist_t* tasklist_filter(struct tasklist_t* list, char* filter){
     if (!list || !list->task && !list->next){
         puts("Empty tasklist.")
         return NULL;
     }
+}
+
+void tasklist_display(struct tasklist_t* list){
+    
+    struct tasklist_t* list
+    while(
 }
 
 void tasklist_dump(struct tasklist_t *list, char* filename)
