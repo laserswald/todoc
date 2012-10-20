@@ -1,6 +1,5 @@
 CC = gcc
 CFLAGS = -g -I./include
-
 sources = todo.c task.c tasklist.c filter.c
 sourcepath = src
 srcs = $(patsubst %,$(sourcepath)/%,$(sources))
