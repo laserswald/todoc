@@ -38,16 +38,17 @@ int tasklist_append(struct tasklist_t* this, struct task_t* t){
 }
 
 struct tasklist_t* tasklist_filter(struct tasklist_t* list, char* filter){
-    if (!list || !list->task && !list->next){
-        puts("Empty tasklist.")
+    if (!list || (!list->task && !list->next) ){
+        puts("Empty tasklist.");
         return NULL;
     }
 }
 
 void tasklist_display(struct tasklist_t* list){
-    
-    struct tasklist_t* list
-    while(
+    struct tasklist_t* iter = list;
+    while(iter != NULL){
+        printf("%s\n", iter->task->description);
+    }
 }
 
 void tasklist_dump(struct tasklist_t *list, char* filename)
@@ -59,7 +60,7 @@ void tasklist_dump(struct tasklist_t *list, char* filename)
     }
     struct tasklist_t *iter = list;
     while (iter != NULL){
-        fprintf(f, "%s\n", task_(iter->task));
+        fprintf(f, "%s\n", iter->task->description);
         iter = iter->next;
     }
     fclose(f);
