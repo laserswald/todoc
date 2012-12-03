@@ -18,9 +18,9 @@ void tasklist_dump(struct tasklist_t *list, char* filename);
 
 int tasklist_append(struct tasklist_t *list, struct task_t *task);
 
-struct tasklist_t* tasklist_filter(struct tasklist_t *list, char *string);
+struct tasklist_t* tasklist_search(struct tasklist_t *list, char *string);
 
 struct tasklist_t* tasklist_merge(struct tasklist_t *list, struct tasklist_t *other);
-void tasklist_display(struct tasklist_t *list);
+int tasklist_display(struct tasklist_t *list);
 
 #endif
