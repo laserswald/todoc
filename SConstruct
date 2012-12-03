@@ -6,6 +6,9 @@ dbgenv = Environment(CPPPATH="include", CFLAGS=["-g"])
 
 todolib = dbgenv.Library("todotxt", ["src/task.c", 'src/tasklist.c'])
 mainprogram = dbgenv.Program("todoc", 'src/todo.c', LIBS=[todolib]) 
-testprogram = dbgenv.Program("todoc_test", ["tests/seatest.c", "tests/todo_test.c", "tests/task_test.c", "tests/tasklist_test.c"], LIBS=[todolib])
 
+testprogram = dbgenv.Program("tests/todoc_test", ["tests/seatest.c", "tests/todo_test.c", "tests/task_test.c", "tests/tasklist_test.c"], LIBS=[todolib])
+# Make a test runner that automagically runs all the tests.
+testrunner = dbgenv.Alias("tests/todoc_test", [testprogram], testprogram[0].path)
+AlwaysBuild(testrunner)
 
