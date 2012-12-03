@@ -4,8 +4,13 @@
 #include <stdlib.h>
 #include "textdb.h"
 #include "filter.h"
+#include "debug.h"
 
 void add_task(char* filename, char* string){
+    if (string == NULL){
+        puts("Cannot add null task.");
+        return;
+    }    
     FILE* file;
     if ((file = fopen(filename, "a")) == NULL){
         puts("File could not be opened.");
@@ -17,7 +22,6 @@ void add_task(char* filename, char* string){
 
 int check_range_exp(int number, char* expression){
     char* end_num = strpbrk(expression, "-")+1;
-    printf("second half of expression: %s", end_num);
     
 }
 
@@ -65,25 +69,29 @@ void complete_task(char* filename, int number)
 int main(int argc, char* argv[]){
     // TODO: optionally compile in custom argument parser.
     if (argc > 1){
-        printf("Debug: Argv[1] = %s\n", argv[1]);
+        debugprint("Argv[1] = %s\n", argv[1]);
         if (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "add") == 0){
             add_task("todo.txt", argv[2]);
         } 
 
         else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "rem") == 0){
-            puts("Debug: removing task");
+            debugprint("removing task");
             remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
         }
 
         else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "do") == 0){
-            puts("Debug: completing task");
+            debugprint("completing task");
             complete_task("todo.txt", atoi(argv[2]));
         }
 
         else if (strcmp(argv[1], "-l") == 0){
-            if (argc = 3) 
+            if (argc = 3){ 
 	            list_tasks_matching("todo.txt", argv[2]);
+            } else {
+                list_tasks("todo.txt");
             }
+
+        }
     } 
     else { 
         list_tasks("todo.txt");
