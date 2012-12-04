@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+#include <stdbool.h>
 
 #include "task.h"
 
@@ -12,6 +13,7 @@ struct task_t* task_new(){
     // Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
     t->priority = ' ';
+    t->complete = false;
 	return t;
 }
 
@@ -42,6 +44,10 @@ char get_priority(struct task_t* task){
     return ch;
 }
 
+void task_complete(struct task_t* task){
+    task->complete = true;
+}
+
 /** Dumps out the current task's data in Todo.txt format.*/
 /* WARNING: Unclean code! */
 const char* task_dump(struct task_t* t){
@@ -49,7 +55,23 @@ const char* task_dump(struct task_t* t){
     if (t == NULL) return "";
     if (t->description == NULL) return "";
     if (strcmp(t->description, "") == 0) return "";
-	return t->description;
+
+    char* returnString = (char*)malloc(sizeof(char)* 1);
+    int strLength = 0;
+    // Build each part of the task
+    
+
+    if (t->complete){
+        strLength += 2;
+        returnString = realloc(returnString, strLength+1);
+        strcat(returnString, "x ");
+    }
+    
+    strLength += strlen(t->description);
+    returnString = realloc(returnString, strLength);    
+    strcat(returnString, t->description);
+
+	return returnString;
 }
 
 int task_has_keyword(struct task_t* t, char* keyword){

@@ -1,6 +1,7 @@
 #include "seatest.h"
 #include "task.h"
 
+#include <assert.h>
 
 void task_setup(){
 }
@@ -11,7 +12,7 @@ void append_test(){
     
     // Tests adding to blank task.
     task_append(task, "Items.");
-    assert_string_equal(task->description, "Items.");
+    assert_string_equal(task_dump(task), "Items.");
     
     // Tests adding to NULL pointer.
     int error = task_append(NULL, "derp.");
@@ -33,6 +34,13 @@ void keyword_test(){
     assert_true(has);
 }
 
+void complete_test(){
+    struct task_t * task = task_new();
+    task_append(task, "Testing completion");
+    task_complete(task);
+    assert(strcmp(task_dump(task), "x Testing completion") == 0);
+}
+
 void task_fixture(){
     test_fixture_start();
     
@@ -42,6 +50,7 @@ void task_fixture(){
     run_test(append_test);
     run_test(dump_test);
     run_test(keyword_test);
+    run_test(complete_test);
     //run_test(read_test);
 
     test_fixture_end();

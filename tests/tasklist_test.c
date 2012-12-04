@@ -54,13 +54,14 @@ void tlist_remove_test(){
 
 void tlist_load_test(){
     struct tasklist_t *list = tasklist_new();
-    tasklist_read(list, "testtodo.txt");    
-    assert_string_equal(list->task->description, "A test task in a file.");
+    tasklist_read(list, "tests/testtodo.txt");    
+    assert_string_equal(list->task->description, "A test task in a file.\n");
 }
 
 void tasklist_fixture(){
     test_fixture_start();
     run_test(tlist_append_test);
     run_test(tlist_search_test);
+    run_test(tlist_load_test);
     test_fixture_end();   
 }

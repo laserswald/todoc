@@ -8,7 +8,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 1
-#define VERSION_BUILD 100
+#define VERSION_BUILD 103
+
+
 
 void add_task(char* filename, char* string){
     struct tasklist_t* list = tasklist_new();
@@ -50,7 +52,10 @@ void remove_task(char* filename, int number){
  */
 void complete_task(char* filename, int number)
 {
-    //move_line(filename, "done.txt", number);
+    struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    struct task_t* task = tasklist_get(number);
+    task_complete(task);    
     printf(" #%d complete.\n", number);
 }
 

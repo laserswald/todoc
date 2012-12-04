@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 /*  task.h
  *  
  *  A task structure and accompanying functions.
@@ -7,7 +9,8 @@
 
 struct task_t{
 	char* description;
-	char priority;	
+	char priority;
+    bool complete;    
 };
 
 struct task_t* task_new();
@@ -15,6 +18,8 @@ struct task_t* task_new();
 void task_set_string(struct task_t* t, char* string);
 
 int task_append(struct task_t* t, char* string);
+
+void task_complete(struct task_t* task);
 
 int task_has_keyword(struct task_t* t, char* string);
 
