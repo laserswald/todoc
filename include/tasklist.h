@@ -3,26 +3,26 @@
 
 #include "task.h"
 
-struct tasklist_t {
+typedef struct tasklist_t {
     struct tasklist_t *next;
-    struct task_t *task;
-};
+    Task *task;
+}Tasklist;
 
 
-struct tasklist_t* tasklist_new();
-void tasklist_free(struct tasklist_t *list);
+Tasklist* tasklist_new();
+void tasklist_free(Tasklist *list);
 
-int tasklist_read(struct tasklist_t *list, char* filename);
-int tasklist_dump(struct tasklist_t *list, char* filename);
+int tasklist_read(Tasklist *list, char* filename);
+int tasklist_dump(Tasklist *list, char* filename);
 
-struct task_t* tasklist_get(struct tasklist_t* list, int index);
-struct tasklist_t* tasklist_remove(struct tasklist_t* list, int index);
+Task* tasklist_get(Tasklist* list, int index);
+Tasklist* tasklist_remove(Tasklist* list, int index);
 
-int tasklist_append(struct tasklist_t *list, struct task_t *task);
+int tasklist_append(Tasklist *list, Task *task);
 
-struct tasklist_t* tasklist_search(struct tasklist_t *list, char *string);
+Tasklist* tasklist_search(Tasklist *list, char *string);
 
-struct tasklist_t* tasklist_merge(struct tasklist_t *list, struct tasklist_t *other);
-int tasklist_display(struct tasklist_t *list);
+Tasklist* tasklist_merge(Tasklist *list, Tasklist *other);
+int tasklist_display(Tasklist *list);
 
 #endif

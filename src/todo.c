@@ -15,8 +15,8 @@ int add_task(char* filename, char* string){
 
     puts("-- Adding new task.");
 
-    struct tasklist_t* list = tasklist_new();
-    struct task_t* task = task_new();
+    Tasklist* list = tasklist_new();
+    Task* task = task_new();
     
     if (tasklist_read(list, filename) != 0){
         puts("ERROR: could not read tasklist.");
@@ -42,7 +42,7 @@ int add_task(char* filename, char* string){
 // Warning: untested.
 int list_tasks(char* filename){
     puts("-- Listing all tasks.");
-    struct tasklist_t* list = tasklist_new();
+    Tasklist* list = tasklist_new();
     tasklist_read(list, filename);
     tasklist_display(list);
 }
@@ -52,9 +52,9 @@ int list_tasks(char* filename){
  */
 void list_tasks_matching(char* filename, char* string){
     printf("-- Listing matches for '%s'\n", string);
-	struct tasklist_t* list = tasklist_new();
+	Tasklist* list = tasklist_new();
     tasklist_read(list, filename);
-    struct tasklist_t* matches = tasklist_search(list, string);
+    Tasklist* matches = tasklist_search(list, string);
     int count = tasklist_display(matches);
     if (count == 0){
         puts("No matches.");
@@ -66,12 +66,12 @@ void list_tasks_matching(char* filename, char* string){
 // Removes a task given the filename and the index.
 int remove_task(char* filename, int number){
     // Open up the tasklist.
-    struct tasklist_t* list = tasklist_new();
+    Tasklist* list = tasklist_new();
     if (tasklist_read(list, filename) != 0){
         puts("ERROR: could not read tasklist.");
         goto error;
     }
-    struct task_t* t = tasklist_get(list, number);
+    Task* t = tasklist_get(list, number);
     printf("Are you sure you want to remove %d: %s? (y/n)", number, task_dump(t));
     char answer[5];
     char* ans = answer;
@@ -93,9 +93,9 @@ int remove_task(char* filename, int number){
 void complete_task(char* filename, int number)
 {
     printf("-- Completing task number %d.", number);
-    struct tasklist_t* list = tasklist_new();
+    Tasklist* list = tasklist_new();
     tasklist_read(list, filename);
-    struct task_t* task = tasklist_get(list, number);
+    Task* task = tasklist_get(list, number);
     task_complete(task);
     tasklist_dump(list, filename);
     printf(" #%d complete.\n", number);

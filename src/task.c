@@ -6,9 +6,10 @@
 
 #include "task.h"
 
-struct task_t* task_new(){
-	// Allocate a new task.
-    struct task_t* t = (struct task_t*)malloc(sizeof(struct task_t));
+
+// Make a new task. 
+Task* task_new(){
+    Task* t = (Task*)malloc(sizeof(Task));
 
     // Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
@@ -17,25 +18,44 @@ struct task_t* task_new(){
 	return t;
 }
 
-void task_free(struct task_t* task){
+/** Frees a task from memory, deleting it.
+ *
+ */
+void task_free(Task* task){
     free(task);
 }
 
-void task_set_string(struct task_t* t, char* string){
+/** Set the task's description to the given string.
+ * This function simply duplicates the given string 
+ * to a new section in memory and sets the task's 
+ * description to it.
+ *
+ * @param t The task to manipulate
+ * @param string The string to set the description to.
+ */
+void task_set_string(Task* t, char* string){
     t->description = strdup(string);
 }
 
-/** Append text to a task. 
- *  This function reallocates the description 
+/** Append text to a task.
+ * This function adds the string given to the task's description.
+ * 
+ * @param t The task to edit.
+ * @param string The string to append.
+ *
+ * @return 0 if there was no error; 1 if there is.
  */
-int task_append(struct task_t* t, char* string){
+int task_append(Task* t, char* string){
 
     // If it's a null, return true, there's an error.
 	if (t == NULL) return 1;     
 	int oldlen, newlen;
-	
+    
+    // Get the length of the string before and after. 
     oldlen = strlen(t->description);
 	newlen = strlen(string) + oldlen + 1;
+
+    // Reallocate the string's space in memory and concatenate the given string.
 	t->description = realloc(t->description, (sizeof(char) * newlen));
 	strncat(t->description, string, newlen);
     
@@ -43,42 +63,49 @@ int task_append(struct task_t* t, char* string){
     return 0;
 }
 
-char get_priority(struct task_t* task){
+// Get the priority of this task.
+char get_priority(Task* task){
     char ch = task->priority;
     return ch;
 }
 
-void task_complete(struct task_t* task){
+// Set the completion status of this task.
+void task_complete(Task* task){
     task->complete = true;
 }
 
 /** Dumps out the current task's data in Todo.txt format.*/
-/* WARNING: Unclean code! */
-const char* task_dump(struct task_t* t){
-	// Error checking.
+const char* task_dump(Task* t){
+	// Sanity checks.
     if (t == NULL) return "";
     if (t->description == NULL) return "";
     if (strcmp(t->description, "") == 0) return "";
-
+    
+    // Allocate a string of size 1 to add onto.
     char* returnString = (char*)malloc(sizeof(char)* 1);
     int strLength = 0;
-    // Build each part of the task
-    
 
+    // Build each part of the task.
+
+    // Build the completion part
     if (t->complete){
         strLength += 2;
         returnString = realloc(returnString, strLength+1);
         strcat(returnString, "x ");
     }
     
+    // Add the description.
     strLength += strlen(t->description);
     returnString = realloc(returnString, strLength);    
     strcat(returnString, t->description);
 
+    // return the string.
 	return returnString;
 }
 
-void task_parse(struct task_t* task, char* string){
+
+// FIXME: This is not complete or even working.
+void task_parse(Task* task, char* string){
     char* restOfString = malloc(256); 
     // Get the completion status.
     if(sscanf(string, "x %s", restOfString) != EOF){
@@ -95,10 +122,11 @@ void task_parse(struct task_t* task, char* string){
     free(restOfString);
 }
 
-int task_has_keyword(struct task_t* t, char* keyword){
+// Returns true if the search finds something; false otherwise.
+bool task_has_keyword(Task* t, char* keyword){
 	if (strstr(t->description, keyword) == NULL){
-		return 0;
+		return false;
 	} else {
-	    return 1;
+	    return true;
     }
 }

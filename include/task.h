@@ -7,28 +7,28 @@
 #ifndef TASK
 #define TASK
 
-struct task_t{
+typedef struct task_t{
 	char* description;
 	char priority;
     bool complete;    
-};
+}Task;
 
-struct task_t* task_new();
-void task_free(struct task_t* task);
-void task_set_string(struct task_t* t, char* string);
+Task* task_new();
+void task_free(Task* task);
+void task_set_string(Task* t, char* string);
 
-int task_append(struct task_t* t, char* string);
+int task_append(Task* t, char* string);
 
-void task_complete(struct task_t* task);
+void task_complete(Task* task);
 
-int task_has_keyword(struct task_t* t, char* string);
+bool task_has_keyword(Task* t, char* string);
 
-void task_parse(struct task_t* t, char* string);
+void task_parse(Task* t, char* string);
 
-int task_has_project(struct task_t* t, char* project);
-int task_has_context(struct task_t* t, char* context);
+int task_has_project(Task* t, char* project);
+int task_has_context(Task* t, char* context);
 
-const char* task_dump(struct task_t* t);
+const char* task_dump(Task* t);
 
-void task_print(struct task_t* t);
+void task_print(Task* t);
 #endif

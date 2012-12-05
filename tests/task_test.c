@@ -7,7 +7,7 @@ void task_setup(){
 }
 
 void append_test(){
-    struct task_t* task = NULL;
+    Task* task = NULL;
     task = task_new();
     
     // Tests adding to blank task.
@@ -21,28 +21,28 @@ void append_test(){
 }
 
 void dump_test(){
-    struct task_t *task = task_new();
+    Task *task = task_new();
     task_append(task, "Testing task.");
     char* dump = (char*)task_dump(task);
     assert_string_equal("Testing task.", dump);
 }
 
 void keyword_test(){
-    struct task_t *task = task_new();
+    Task *task = task_new();
     task_append(task, "Testing search.");
     int has = task_has_keyword(task, "search");
     assert_true(has);
 }
 
 void complete_test(){
-    struct task_t * task = task_new();
+    Task * task = task_new();
     task_append(task, "Testing completion");
     task_complete(task);
     assert_true(strcmp(task_dump(task), "x Testing completion") == 0);
 }
 
 void parse_test(){
-    struct task_t* task = task_new();
+    Task* task = task_new();
     task_parse(task, "A pretty simple task");
     // It should look the same as the parsed string.
     assert_string_equal(task_dump(task), "A pretty simple task");
@@ -52,7 +52,7 @@ void parse_test(){
     assert_string_equal(task->description, "A pretty simple task");
 
 
-    struct task_t* completetask = task_new();
+    Task* completetask = task_new();
     task_parse(completetask, "x A complete task");
 }
 
