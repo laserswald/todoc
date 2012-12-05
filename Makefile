@@ -1,7 +1,6 @@
 CC = gcc
 CFLAGS = -g -I./include
-
-sources = todo.c textdb.c filter.c
+sources = todo.c task.c tasklist.c filter.c
 sourcepath = src
 srcs = $(patsubst %,$(sourcepath)/%,$(sources))
 
@@ -11,7 +10,7 @@ objs = $(patsubst %,$(objectpath)/%,$(objects))
 
 binary = todo
 
-all: setup $(binary)
+all: setup $(binary) todo_test 
 
 $(binary): $(objs)
 	$(CC) -o $(binary) $^ -I./include
@@ -19,8 +18,8 @@ $(binary): $(objs)
 $(objectpath)/%.o: src/%.c 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-task_test.exe: src/task.c task.h proto/task_test.c
-	$(CC) -o task_test.exe src/task.c task.h proto/task_test.c -lseatest
+todo_test: src/task.c include/task.h tests/todo_test.c tests/seatest.c tests/taskTester.c
+	$(CC) -o task_test.exe $^ $(CFLAGS) -I./tests
 
 clean: 
 	rm $(objs)

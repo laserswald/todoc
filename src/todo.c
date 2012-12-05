@@ -2,59 +2,89 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "textdb.h"
-#include "filter.h"
-#include "debug.h"
+#include "task.h"
+#include "tasklist.h"
 
-void add_task(char* filename, char* string){
-    if (string == NULL){
-        puts("Cannot add null task.");
-        return;
-    }    
-    FILE* file;
-    if ((file = fopen(filename, "a")) == NULL){
-        puts("File could not be opened.");
-        abort();
-    }
-    fprintf(file, "%s\n", string);
-    printf("Task added:\n%s\n", string);
-}
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 2
+#define VERSION_BUILD 1
 
-int check_range_exp(int number, char* expression){
-    char* end_num = strpbrk(expression, "-")+1;
+int add_task(char* filename, char* string){
+
+    puts("-- Adding new task.");
+
+    struct tasklist_t* list = tasklist_new();
+    struct task_t* task = task_new();
     
+    if (tasklist_read(list, filename) != 0){
+        puts("ERROR: could not read tasklist.");
+        goto error;
+    }
+    
+    task_append(task, string);   
+    tasklist_append(list, task);
+    if (tasklist_dump(list, filename) != 0){
+        puts("ERROR: could not write tasklist.");
+        goto error;
+    }
+    
+    printf("-- Added:\n%s\n", string);
+    tasklist_free(list);
+    return 0;
+
+    error:
+        return 1;
 }
 
 // TODO: Make this say more stuff.
 // Warning: untested.
 int list_tasks(char* filename){
-    FILE* file = fopen(filename, "r");
-    if (!file){
-        // Bugfix: make a new file when there is none.
-        file = fopen(filename, "w+");
-    }
-
-    printf("Todo list in file '%s': \n", filename);
-    int count = 0;
-    char buffer[256];
-    while((fgets(buffer, 255, file)) != NULL){
-        printf("\t%d: %s", count, buffer);
-        count++;
-    } 
-    printf("Total tasks: %d.\n", count);
+    puts("-- Listing all tasks.");
+    struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    tasklist_display(list);
 }
 
 /** List the tasks with a match in the string.
  *
  */
 void list_tasks_matching(char* filename, char* string){
-	FILE* file = fopen(filename, "r");
-	char buffer[256];
-    while(fgets(buffer, 255, file) != NULL){
-        if (isIn(buffer, string)){
-            printf("Match: %s", buffer);
+    printf("-- Listing matches for '%s'\n", string);
+	struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    struct tasklist_t* matches = tasklist_search(list, string);
+    int count = tasklist_display(matches);
+    if (count == 0){
+        puts("No matches.");
+    } else {
+        printf("Number of matches: %d.\n", count);
+    }
+}
+
+// Removes a task given the filename and the index.
+int remove_task(char* filename, int number){
+    // Open up the tasklist.
+    struct tasklist_t* list = tasklist_new();
+    if (tasklist_read(list, filename) != 0){
+        puts("ERROR: could not read tasklist.");
+        goto error;
+    }
+    struct task_t* t = tasklist_get(list, number);
+    printf("Are you sure you want to remove %d: %s? (y/n)", number, task_dump(t));
+    char answer[5];
+    char* ans = answer;
+    fgets(ans, 5, stdin);
+    if (strcmp(answer, "y\n") == 0){
+        puts("-- Removing task.");
+        tasklist_remove(list, number);
+        if (tasklist_dump(list, filename) != 0){
+            puts("ERROR: could not write tasklist.");
         }
     }
+    error:
+        return 1;
 }
 
 /** Complete a task.
@@ -62,39 +92,97 @@ void list_tasks_matching(char* filename, char* string){
  */
 void complete_task(char* filename, int number)
 {
-    move_line(filename, "done.txt", number);
-    printf("Task #%d complete.\n", number);
+    printf("-- Completing task number %d.", number);
+    struct tasklist_t* list = tasklist_new();
+    tasklist_read(list, filename);
+    struct task_t* task = tasklist_get(list, number);
+    task_complete(task);
+    tasklist_dump(list, filename);
+    printf(" #%d complete.\n", number);
+}
+
+void print_help(){
+    printf("todoc version %d.%d.%d by Ben Davenport-Ray and contributors.\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
+}
+
+bool strings_equal(char* subject, char* first, char* sec){
+    if(strcmp(subject, first) == 0 ||
+       strcmp(subject, sec) == 0){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 int main(int argc, char* argv[]){
-    // TODO: optionally compile in custom argument parser.
-    if (argc > 1){
-        debugprint("Argv[1] = %s\n", argv[1]);
-        if (strcmp(argv[1], "-a") == 0 || strcmp(argv[1], "add") == 0){
-            add_task("todo.txt", argv[2]);
-        } 
 
-        else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "rem") == 0){
-            debugprint("removing task");
-            remove_line("todo.txt", "todo.txt~", atoi(argv[2]));
-        }
+    char* taskfile = "todo.txt";
+    char* donefile = "done.txt";
 
-        else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "do") == 0){
-            debugprint("completing task");
-            complete_task("todo.txt", atoi(argv[2]));
-        }
+    bool verbose = false;
 
-        else if (strcmp(argv[1], "-l") == 0){
-            if (argc = 3){ 
-	            list_tasks_matching("todo.txt", argv[2]);
-            } else {
-                list_tasks("todo.txt");
+    int status = EXIT_SUCCESS;
+    // parse the command line arguments.
+    int i;
+    for (i = 0; i < argc; i++){
+        // Add a new task.
+        if (strings_equal(argv[i], "add", "-a")){
+            if (add_task(taskfile, argv[i+1]) != 0){
+                status = EXIT_FAILURE;
             }
-
+            i++;
+            continue;
         }
-    } 
-    else { 
-        list_tasks("todo.txt");
+
+        // Remove a task.
+        if (strings_equal(argv[i], "remove", "-r")){
+            int index = atoi(argv[i+1]);
+            if (remove_task(taskfile, index) != 0){
+                status = EXIT_FAILURE;
+            }
+            i++;
+            continue;
+        }
+
+        // Complete a task.
+        if (strings_equal(argv[i], "do", "-d")){
+            int index = atoi(argv[i+1]);
+            complete_task(taskfile, index);
+            i++;
+            continue;
+        }
+        
+        // List the tasks matching the string in the file.
+        if (strings_equal(argv[i], "search", "-s")){
+            list_tasks_matching(taskfile, argv[i+1]);
+            i++;
+            continue;
+        }
+        
+        // Show all the tasks in the file.
+        if(strings_equal(argv[i], "list", "-l")){
+            list_tasks(taskfile);
+            continue;
+        }
+        
+        // Show the help dialog.
+        if (strcmp(argv[i], "-h") == 0){
+            print_help();
+        }
+
+        // Set the taskfile flag.
+        if (strcmp(argv[i], "-f") == 0){
+            taskfile = argv[i+1];
+            i++;
+            continue;
+        }
+
+        // Set the verbosity flag.
+        if (strcmp(argv[i], "-v") == 0){
+            verbose = true;
+        }
     }
-    return 0;
+
+    puts("-- Done.");
+    return status;
 }
