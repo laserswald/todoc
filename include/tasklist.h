@@ -16,7 +16,7 @@ int tasklist_read(Tasklist *list, char* filename);
 int tasklist_dump(Tasklist *list, char* filename);
 
 Task* tasklist_get(Tasklist* list, int index);
-Tasklist* tasklist_remove(Tasklist* list, int index);
+Task* tasklist_remove(Tasklist* list, int index);
 
 int tasklist_append(Tasklist *list, Task *task);
 

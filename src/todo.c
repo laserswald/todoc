@@ -100,8 +100,28 @@ void complete_task(char* filename, int number)
     printf(" #%d complete.\n", number);
 }
 
-void print_help(){
+
+// Help functions.
+void print_version(){
     printf("todoc version %d.%d.%d by Ben Davenport-Ray and contributors.\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
+}
+
+void print_short_help(){ 
+    puts("todoc [options] <command> [number] [description]");
+}
+
+void print_help(){
+    print_short_help();
+    puts("Manage tasks in a todo.txt file.\n");
+    puts("Options:\n"
+         " -f file \t\tSet the file used.\n"
+         " -h \t\t\tShow the extended help.\n\n"
+         "Commands:\n"
+         " -a|add 'task'\t\tadds the task to the list\n"
+         " -d|do index\t\tmarks the task at the index as done\n"
+         " -r|remove index\tremoves the task at the index\n"
+         " -s|search 'query'\tsearches for the text in the tasklist\n"
+         " -l|list\t\tshows all the tasks\n");
 }
 
 bool strings_equal(char* subject, char* first, char* sec){
@@ -122,6 +142,11 @@ int main(int argc, char* argv[]){
 
     int status = EXIT_SUCCESS;
     // parse the command line arguments.
+    
+    if (argc < 2){
+        print_short_help();
+        exit(status);
+    }
     int i;
     for (i = 0; i < argc; i++){
         // Add a new task.

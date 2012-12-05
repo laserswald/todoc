@@ -61,7 +61,7 @@ Task* tasklist_get(Tasklist* list, int index){
 }
 
 // Remove the task at the index.
-Tasklist* tasklist_remove(Tasklist* list, int index){
+Task* tasklist_remove(Tasklist* list, int index){
     if (!list || !list->task && !list->next) {
         return NULL;
     }
@@ -72,7 +72,7 @@ Tasklist* tasklist_remove(Tasklist* list, int index){
     }
     Tasklist* removed = slider->next;
     slider->next = slider->next->next;
-    return removed;
+    return removed->task;
 }
 
 // Construct a tasklist of tasks that match the filter.
@@ -101,7 +101,7 @@ int tasklist_display(Tasklist* list){
     Tasklist* iter = list;
     int count = 0;
     while(iter != NULL && iter->task != NULL){
-        printf("%d: %s", count, task_dump(iter->task));
+        printf("%d: %s", count, iter->task->description);
         iter = iter->next;
         count++;
     }
