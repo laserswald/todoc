@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
+#include "task.h"
 #include "tasklist.h"
 
 struct tasklist_t* tasklist_new(){
@@ -13,7 +13,8 @@ struct tasklist_t* tasklist_new(){
 }
 
 void tasklist_free(struct tasklist_t* list){
-    free(list->task);
+    if (list == NULL) return;
+    task_free(list->task);
     tasklist_free(list->next); 
     free(list);
 }
@@ -45,10 +46,25 @@ struct task_t* tasklist_get(struct tasklist_t* list, int index){
     }
     struct tasklist_t* slider = list;
     int i = 0;
-    while (i <= index && slider->next != NULL){
+    while (i < index && slider->next != NULL){
         slider = slider->next;
+        i++;
     }
     return slider->task;
+}
+
+struct tasklist_t* tasklist_remove(struct tasklist_t* list, int index){
+    if (!list || !list->task && !list->next) {
+        return NULL;
+    }
+    struct tasklist_t* slider = list;
+    int i = 0;
+    while (i < index-1){
+        slider = slider->next;
+    }
+    struct tasklist_t* removed = slider->next;
+    slider->next = slider->next->next;
+    return removed;
 }
 
 struct tasklist_t* tasklist_search(struct tasklist_t* list, char* filter){
@@ -59,8 +75,7 @@ struct tasklist_t* tasklist_search(struct tasklist_t* list, char* filter){
 
     struct tasklist_t* matches = tasklist_new();
     struct tasklist_t* current = list;
-    while (current != NULL){
-        
+    while (current != NULL){ 
         if (task_has_keyword(current->task, filter)){
             tasklist_append(matches, current->task);
         }
@@ -71,8 +86,8 @@ struct tasklist_t* tasklist_search(struct tasklist_t* list, char* filter){
 
 int tasklist_display(struct tasklist_t* list){
     struct tasklist_t* iter = list;
-    int count = 1;
-    while(iter != NULL){
+    int count = 0;
+    while(iter != NULL && iter->task != NULL){
         // Change this to a task's print function or something.
         printf("%d: %s", count, iter->task->description);
         iter = iter->next;
@@ -81,27 +96,26 @@ int tasklist_display(struct tasklist_t* list){
     return count;
 }
 
-void tasklist_dump(struct tasklist_t *list, char* filename)
+int tasklist_dump(struct tasklist_t *list, char* filename)
 {
     FILE* f = fopen(filename, "w");
     if (f == NULL){
-        puts("Could not open file for tasklist writing.");
-        return;
+        return 1;
     }
     struct tasklist_t *iter = list;
     while (iter != NULL){
-        fprintf(f, "%s\n", iter->task->description);
+        fprintf(f, "%s", task_dump(iter->task));
         iter = iter->next;
     }
     fclose(f);
-    return;
+    return 0;
 }
 
-void tasklist_read(struct tasklist_t *list, char* filename){
+int tasklist_read(struct tasklist_t *list, char* filename){
     FILE* f = fopen(filename, "r");
     if (f == NULL){
         puts("Could not open file for tasklist writing.");
-        return;
+        return 1;
     }
     struct tasklist_t* iter = list;
     
@@ -111,9 +125,15 @@ void tasklist_read(struct tasklist_t *list, char* filename){
     }    
     char buffer[256];
     while (fgets(buffer, 255, f) != NULL){
-        //printf("Buffer: %s\n", buffer);
+        // Remove the ending newline.
+        char* start = buffer;
+        char* endOfString = strchr(buffer, '\n');
+        if (endOfString != NULL){
+            endOfString = '\0';
+        }
         struct task_t* temp = task_new();
         task_append(temp, buffer);
         tasklist_append(list, temp);
     }
+    return 0;
 }

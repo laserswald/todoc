@@ -12,9 +12,11 @@ struct tasklist_t {
 struct tasklist_t* tasklist_new();
 void tasklist_free(struct tasklist_t *list);
 
-void tasklist_read(struct tasklist_t *list, char* filename);
-void tasklist_dump(struct tasklist_t *list, char* filename);
+int tasklist_read(struct tasklist_t *list, char* filename);
+int tasklist_dump(struct tasklist_t *list, char* filename);
 
+struct task_t* tasklist_get(struct tasklist_t* list, int index);
+struct tasklist_t* tasklist_remove(struct tasklist_t* list, int index);
 
 int tasklist_append(struct tasklist_t *list, struct task_t *task);
 

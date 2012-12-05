@@ -12,7 +12,7 @@ void append_test(){
     
     // Tests adding to blank task.
     task_append(task, "Items.");
-    assert_string_equal(task_dump(task), "Items.");
+    assert_string_equal(task->description, "Items.");
     
     // Tests adding to NULL pointer.
     int error = task_append(NULL, "derp.");
@@ -38,7 +38,22 @@ void complete_test(){
     struct task_t * task = task_new();
     task_append(task, "Testing completion");
     task_complete(task);
-    assert(strcmp(task_dump(task), "x Testing completion") == 0);
+    assert_true(strcmp(task_dump(task), "x Testing completion") == 0);
+}
+
+void parse_test(){
+    struct task_t* task = task_new();
+    task_parse(task, "A pretty simple task");
+    // It should look the same as the parsed string.
+    assert_string_equal(task_dump(task), "A pretty simple task");
+    // Tests the completion status.
+    assert_true(task->complete == false);
+    // Test that the description is the same as the given string.
+    assert_string_equal(task->description, "A pretty simple task");
+
+
+    struct task_t* completetask = task_new();
+    task_parse(completetask, "x A complete task");
 }
 
 void task_fixture(){

@@ -17,6 +17,10 @@ struct task_t* task_new(){
 	return t;
 }
 
+void task_free(struct task_t* task){
+    free(task);
+}
+
 void task_set_string(struct task_t* t, char* string){
     t->description = strdup(string);
 }
@@ -31,9 +35,9 @@ int task_append(struct task_t* t, char* string){
 	int oldlen, newlen;
 	
     oldlen = strlen(t->description);
-	newlen = strlen(string) + oldlen;
-	t->description = realloc(t->description, (sizeof(char)*newlen)+1);
-	strcat(t->description, string);
+	newlen = strlen(string) + oldlen + 1;
+	t->description = realloc(t->description, (sizeof(char) * newlen));
+	strncat(t->description, string, newlen);
     
     // No error, so return false.
     return 0;
@@ -72,6 +76,23 @@ const char* task_dump(struct task_t* t){
     strcat(returnString, t->description);
 
 	return returnString;
+}
+
+void task_parse(struct task_t* task, char* string){
+    char* restOfString = malloc(256); 
+    // Get the completion status.
+    if(sscanf(string, "x %s", restOfString) != EOF){
+        task->complete = true;
+    } else {
+        task->complete = false;
+        restOfString = string;
+    }
+    string = restOfString;
+    int c = -1;
+    if (sscanf(string, "(%c) %s", c, restOfString)){
+        
+    }
+    free(restOfString);
 }
 
 int task_has_keyword(struct task_t* t, char* keyword){
