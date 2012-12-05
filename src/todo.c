@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "textdb.h"
 #include "task.h"
 #include "tasklist.h"
 
