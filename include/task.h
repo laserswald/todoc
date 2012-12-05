@@ -1,22 +1,34 @@
+#include <stdbool.h>
+
+/*  task.h
+ *  
+ *  A task structure and accompanying functions.
+ */
 #ifndef TASK
 #define TASK
 
-typedef struct task{
+struct task_t{
 	char* description;
-	char** tags;
-	int taglen;
 	char priority;
-	
-}Task;
+    bool complete;    
+};
 
-Task* Task_new();
+struct task_t* task_new();
+void task_free(struct task_t* task);
+void task_set_string(struct task_t* t, char* string);
 
-void Task_append(Task* t, char* string);
+int task_append(struct task_t* t, char* string);
 
-int Task_has_project(Task* t, char* project);
-int Task_has_context(Task* t, char* context);
+void task_complete(struct task_t* task);
 
-char* Task_dump(Task* t);
+int task_has_keyword(struct task_t* t, char* string);
 
-void Task_print(Task* t);
+void task_parse(struct task_t* t, char* string);
+
+int task_has_project(struct task_t* t, char* project);
+int task_has_context(struct task_t* t, char* context);
+
+const char* task_dump(struct task_t* t);
+
+void task_print(struct task_t* t);
 #endif
