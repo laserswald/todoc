@@ -28,7 +28,7 @@ void task_parse(Task* t, char* string);
 int task_has_project(Task* t, char* project);
 int task_has_context(Task* t, char* context);
 
-const char* task_dump(Task* t);
+char* task_dump(Task* t);
 
 void task_print(Task* t);
 #endif

@@ -1,6 +1,5 @@
 #include "seatest.h"
 #include "task.h"
-
 #include <assert.h>
 
 void task_setup(){
@@ -45,7 +44,8 @@ void parse_test(){
     Task* task = task_new();
     task_parse(task, "A pretty simple task");
     // It should look the same as the parsed string.
-    assert_string_equal(task_dump(task), "A pretty simple task");
+    char* string = (char*)task_dump(task);
+    assert_string_equal("A pretty simple task", string);
     // Tests the completion status.
     assert_true(task->complete == false);
     // Test that the description is the same as the given string.
@@ -70,4 +70,3 @@ void task_fixture(){
 
     test_fixture_end();
 }
-

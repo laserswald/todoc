@@ -1,6 +1,7 @@
 #ifndef TASKLIST
 #define TASKLIST
 
+#include "stdio.h"
 #include "task.h"
 
 typedef struct tasklist_t {
@@ -12,8 +13,8 @@ typedef struct tasklist_t {
 Tasklist* tasklist_new();
 void tasklist_free(Tasklist *list);
 
-int tasklist_read(Tasklist *list, char* filename);
-int tasklist_dump(Tasklist *list, char* filename);
+int tasklist_read(Tasklist *list, FILE* file);
+int tasklist_dump(Tasklist *list, FILE* file);
 
 Task* tasklist_get(Tasklist* list, int index);
 Task* tasklist_remove(Tasklist* list, int index);
