@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -I./include
-sources = todo.c task.c tasklist.c
+sources = todo.c task.c tasklist.c linkedlist.c
 sourcepath = src
 srcs = $(patsubst %,$(sourcepath)/%,$(sources))
 
@@ -10,7 +10,7 @@ objs = $(patsubst %,$(objectpath)/%,$(objects))
 
 binary = todoc
 
-all: setup $(binary) todo_test 
+all: setup $(binary) todo_test run_test
 
 $(binary): $(objs)
 	$(CC) -o $(binary) $^ -I./include
@@ -18,8 +18,8 @@ $(binary): $(objs)
 $(objectpath)/%.o: src/%.c 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-todo_test: src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/seatest.c tests/task_test.c tests/tasklist_test.c
-	$(CC) -o task_test.exe $^ $(CFLAGS) -I./tests
+todo_test: src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/seatest.c tests/task_test.c tests/tasklist_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
+	$(CC) -o todo_test $^ $(CFLAGS) -I./tests
 
 clean: 
 	rm $(objs)
@@ -29,7 +29,10 @@ clean:
 rebuild: clean all
 
 dist:
-	tar -czvf todoc-0.2.0.tar.gz $(srcs) include/*.h Makefile SConstruct README.mkdn
-	zip todoc-dev.zip src include Makefile SConstruct README.mkdn
+	tar -czvf todoc-0.2.tar.gz $(srcs) include tests Makefile SConstruct README.mkdn
+
 setup: 
 	mkdir -p $(objectpath)
+
+run_test: todo_test
+	exec ./todo_test

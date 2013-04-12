@@ -84,13 +84,13 @@ void seatest_simple_test_result(int passed, char* reason, const char* function, 
 
 void seatest_assert_true(int test, const char* function, unsigned int line)
 {
-	seatest_simple_test_result(test, "Should of been true", function, line);
+	seatest_simple_test_result(test, "Should have been true", function, line);
 
 }
 
 void seatest_assert_false(int test, const char* function, unsigned int line)
 {
-	seatest_simple_test_result(!test, "Should of been false", function, line);	
+	seatest_simple_test_result(!test, "Should have been false", function, line);	
 }
 
 
@@ -126,7 +126,7 @@ void seatest_assert_double_equal( double expected, double actual, double delta, 
 	seatest_simple_test_result( result <= delta, s, function, line);	
 }
 
-void seatest_assert_string_equal(char* expected, char* actual, const char* function, unsigned int line)
+void seatest_assert_string_equal(const char* expected, char* actual, const char* function, unsigned int line)
 {
 	char s[SEATEST_PRINT_BUFFER_SIZE];
 	sprintf(s, "Expected %s but was %s", expected, actual);
@@ -244,5 +244,9 @@ int run_tests(void (*tests)(void))
 
 	_getch();
 	return sea_tests_failed == 0;
+}
+
+int run_silent(void (*tests)(void)){
+    
 }
 

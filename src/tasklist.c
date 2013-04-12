@@ -65,10 +65,17 @@ Task* tasklist_remove(Tasklist* list, int index){
     if (!list || !list->task && !list->next) {
         return NULL;
     }
+    // TODO: Does not work; wait until dedicated linked list implementation.
+    if (index = 0){
+        Task* returned = list->task;
+        return returned;
+    }
+
     Tasklist* slider = list;
     int i = 0;
-    while (i < index-1){
+    while (i < index && slider->next != NULL){
         slider = slider->next;
+        i++;
     }
     Tasklist* removed = slider->next;
     slider->next = slider->next->next;
@@ -109,12 +116,7 @@ int tasklist_display(Tasklist* list){
 }
 
 // Write a tasklist to a file.
-int tasklist_dump(Tasklist *list, char* filename){
-    // Open the file and check if anything broke.
-    FILE* f = fopen(filename, "w");
-    if (f == NULL){
-        return 1;
-    }
+int tasklist_dump(Tasklist *list, FILE* f){
     // Make a reference to the list to iterate over.
     Tasklist *iter = list;
 
@@ -123,20 +125,11 @@ int tasklist_dump(Tasklist *list, char* filename){
         fprintf(f, "%s", task_dump(iter->task));
         iter = iter->next;
     }
-    // Close the file.
-    fclose(f);
     return 0;
 }
 
 // Read a tasklist from a file.
-int tasklist_read(Tasklist *list, char* filename){
-
-    // Open the file and check if it broke.
-    FILE* f = fopen(filename, "r");
-    if (f == NULL){
-        puts("Could not open file for tasklist writing.");
-        return 1;
-    }
+int tasklist_read(Tasklist *list, FILE* f){
     
     // Make a reference to the list to iterate over.
     Tasklist* iter = list;
@@ -164,6 +157,5 @@ int tasklist_read(Tasklist *list, char* filename){
         // Add it to the list.
         tasklist_append(list, temp);
     }
-    fclose(f);
     return 0;
 }

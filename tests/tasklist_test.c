@@ -66,16 +66,16 @@ void tlist_search_test(){
 
 void tlist_remove_test(){
     Tasklist* list = make_three_item_list();
-    Tasklist* taskl = tasklist_remove(list, 1);
-    assert_string_equal(taskl->task->description, "This is the second task. #notfirst");
-    assert_string_equal(task_dump(tasklist_get(list, 1)),  "This is the third task. #notfirst");
+    Task* task = tasklist_remove(list, 1);
+    assert_string_equal("This is the second task. #notfirst", task->description);
+    assert_string_equal("This is the third task. #notfirst", task_dump(tasklist_get(list, 1)));
     assert_string_equal("This is the first task. #first", task_dump(tasklist_remove(list, 0)));
-
 }
 
 void tlist_load_test(){
     Tasklist *list = tasklist_new();
-    tasklist_read(list, "tests/testtodo.txt");    
+    FILE* f = fopen("tests/testtodo.txt", "r");
+    tasklist_read(list, f);    
     assert_string_equal(list->task->description, "A test task in a file.\n");
 }
 

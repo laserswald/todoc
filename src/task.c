@@ -75,7 +75,7 @@ void task_complete(Task* task){
 }
 
 /** Dumps out the current task's data in Todo.txt format.*/
-const char* task_dump(Task* t){
+char* task_dump(Task* t){
 	// Sanity checks.
     if (t == NULL) return "";
     if (t->description == NULL) return "";
