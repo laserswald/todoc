@@ -1,0 +1,9 @@
+Todoc is a relatively simple program; it has two main objects: 
+
+    Tasks, which encapsulate the data needed for a task;
+    Tasklists, which manages collections of tasks.
+
+
+Main program logic (src/todo.c)
+-------------------------------
+
