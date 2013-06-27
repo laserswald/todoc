@@ -32,6 +32,8 @@ int lladd(LList* list, void* thingy);
 // Removes an element from a list.
 int llrem(LList* list, int index);
 
+void* llpop(LList* list);
+
 // Returns a pointer to a list value.
 void* llget(LList* list, int index);
 

@@ -8,8 +8,8 @@
 #include "tasklist.h"
 
 #define VERSION_MAJOR 0
-#define VERSION_MINOR 2
-#define VERSION_BUILD 4
+#define VERSION_MINOR 3
+#define VERSION_BUILD 1
 
 int add_task(char* filename, char* string){
     puts("-- Adding new task.");
@@ -19,8 +19,11 @@ int add_task(char* filename, char* string){
     
     FILE* file = fopen(filename, "r");
     if (file == NULL){
-        perror("Could not open file.");
-        goto error;
+        file = fopen(filename, "w+");
+        if (file == NULL){
+            perror("Add task");
+            goto error;
+        }
     }
 
     if (tasklist_read(list, file) != 0){
@@ -40,7 +43,9 @@ int add_task(char* filename, char* string){
     return 0;
 
     error:
-        return 1;
+    tasklist_free(list);
+    task_free(task);
+    return 1;
 }
 
 /** List the tasks in the file given.
@@ -55,6 +60,7 @@ int list_tasks(char* filename){
         errno = 0;
         return -1;
     }
+    
     puts("-- Listing all tasks.");
     Tasklist* list = tasklist_new();
     tasklist_read(list, file);
@@ -66,7 +72,7 @@ int list_tasks(char* filename){
  *
  */
 void list_tasks_matching(char* filename, char* string){
-    
+    if (string == NULL) string = "";
     FILE* file = fopen(filename, "r");
     if (file == NULL){
         perror("Could not open file");
@@ -218,7 +224,7 @@ int main(int argc, char* argv[]){
         }
         
         // Show all the tasks in the file.
-        if(strings_equal(argv[i], "list", "-l")){
+        if(strings_equal(argv[i], "ls", "-l")){
             list_tasks(taskfile);
             continue;
         }

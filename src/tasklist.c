@@ -108,7 +108,7 @@ int tasklist_display(Tasklist* list){
     Tasklist* iter = list;
     int count = 0;
     while(iter != NULL && iter->task != NULL){
-        printf("%d: %s", count, iter->task->description);
+        printf("%d: %s\n", count, iter->task->description);
         iter = iter->next;
         count++;
     }

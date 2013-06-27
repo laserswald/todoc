@@ -40,6 +40,25 @@ error:
     return -1;
 }
 
+// Removes an item from the linked list.
+int llrem(LList* l, int index){
+    int i;
+    struct element* slider = l->head;
+    for (i = 0; i < index; i++) {
+        if (slider == NULL) {
+            goto error;
+        }
+        slider = slider->next;
+    }
+    if (slider->next == NULL){l->tail = slider->prev;}
+    else slider->next->prev = slider->prev;
+    if (slider->prev == NULL){l->head = slider->next;}
+    slider->prev->next = slider->next;
+    free(slider); 
+error:
+    return -1;
+} 
+
 // Destroys the linked list.
 int destroy_llist(LList* list)
 {

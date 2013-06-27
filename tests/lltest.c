@@ -29,6 +29,25 @@ void add_test()
     destroy_llist(list);    
 }
 
+void rem_test(void){
+    LList* list = new_llist();
+    int items[] = {1, 2, 3};
+    int i;
+    for (i = 0; i < 3; i++) {
+        int* ip = &items[i];
+        void* vp = ip;
+        lladd(list, vp);
+    }
+    
+    llrem(list, 0);
+    int* first = (int*)list->head->data;
+    int f = *first;
+    sp_assert(f == 2, "Removal did not happen.");    
+    
+    llrem(list, 1);
+    sp_assert(list->tail == list->head, "Removal from back messed up.");
+}
+
 void get_test(void){
     
 }
@@ -36,5 +55,6 @@ void get_test(void){
 void linkedlist_fixture()
 {
     add_test();
+    rem_test();
     get_test();
 }
