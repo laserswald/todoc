@@ -33,6 +33,8 @@ int add_task(char* filename, char* string){
     
     task_append(task, string);   
     tasklist_append(list, task);
+
+    freopen(filename, "r+", file);
     if (tasklist_dump(list, file) != 0){
         puts("ERROR: could not write tasklist.");
         goto error;

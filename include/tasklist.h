@@ -3,10 +3,9 @@
 
 #include "stdio.h"
 #include "task.h"
-
+#include "linkedlist.h"
 typedef struct tasklist_t {
-    struct tasklist_t *next;
-    Task *task;
+    LList* list;
 }Tasklist;
 
 
