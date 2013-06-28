@@ -40,24 +40,75 @@ error:
     return -1;
 }
 
-// Removes an item from the linked list.
-int llrem(LList* l, int index){
+int slide(struct element* sl, int howmuch){
     int i;
-    struct element* slider = l->head;
-    for (i = 0; i < index; i++) {
-        if (slider == NULL) {
-            goto error;
+    for (i = 0; i < howmuch; i++) {
+        if (sl == NULL) {
+            return -1;
         }
-        slider = slider->next;
+        sl = sl->next;
     }
+    return 0;
+}
+
+// Removes an item from the linked list.
+void* llrem(LList* l, int index){
+    struct element* slider = l->head;
+    int status = slide(slider, index);
+    if (status != 0) return NULL;
     if (slider->next == NULL){l->tail = slider->prev;}
     else slider->next->prev = slider->prev;
     if (slider->prev == NULL){l->head = slider->next;}
     slider->prev->next = slider->next;
+    void* data = slider->data;
     free(slider); 
-error:
-    return -1;
+    return data;
 } 
+
+void* llget(LList* l, int index){
+    void* item;
+    int i;
+    struct element* slider = l->head;
+    for (i = 0; i < index; i++) {
+        if (slider == NULL) {
+            return NULL;
+        }
+        slider = slider->next;
+    }
+    item = slider->data;
+    return item;
+}
+
+int llapply(LList* list, void (*function)(void*)){
+    struct element* current = list->head;
+    while(current != NULL){
+        (*function)(current->data);
+        current = current->next;
+    }
+    return 0;
+}
+
+LList* llmap(LList* list, void* (*function)(void*)){
+    LList* newlist = new_llist();
+    struct element* current = list->head;
+    while(current != NULL){
+        lladd(newlist, (*function)(current->data));
+        current = current->next;
+    }
+    return newlist;
+}
+
+LList* llfilter(LList* list, bool (*fun)(void*)){
+    LList* newlist = new_llist();
+    struct element* current = list->head;
+    while(current != NULL){
+        if ((*fun)(current->data)){
+            lladd(newlist, current->data);
+        }
+        current = current->next;
+    }
+    return newlist;
+}
 
 // Destroys the linked list.
 int destroy_llist(LList* list)

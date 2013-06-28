@@ -49,7 +49,17 @@ void rem_test(void){
 }
 
 void get_test(void){
-    
+    LList* list = new_llist();
+    int items[] = {1, 2, 3};
+    int i;
+    for (i = 0; i < 3; i++) {
+        int* ip = &items[i];
+        void* vp = ip;
+        lladd(list, vp);
+    }
+    int test = *(int*)llget(list, 1);
+    sp_assert(test == 2, "Get did not get the right thing");
+
 }
 
 void linkedlist_fixture()

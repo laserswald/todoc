@@ -1,6 +1,8 @@
 #ifndef _LLIST
 #define _LLIST
 
+#include <stdbool.h>
+
 struct element{
     struct element* prev;
     struct element* next;
@@ -30,9 +32,11 @@ int destroy_llist(LList* list);
 int lladd(LList* list, void* thingy);
 
 // Removes an element from a list.
-int llrem(LList* list, int index);
+void* llrem(LList* list, int index);
 
 void* llpop(LList* list);
+
+LList* llfilter(LList* list, bool (*function)(void*));
 
 // Returns a pointer to a list value.
 void* llget(LList* list, int index);
