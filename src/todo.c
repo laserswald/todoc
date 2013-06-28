@@ -39,8 +39,9 @@ int add_task(char* filename, char* string){
         goto error;
     }
     
-    printf("-- Added: %s\n", string);
+    printf("Added: %s\n", string);
     tasklist_free(list);
+    task_free(task);
     return 0;
 
     error:
@@ -63,9 +64,11 @@ int list_tasks(char* filename){
     }
     
     Tasklist* list = tasklist_new();
+    // TODO: Error handling for reading file.
     tasklist_read(list, file);
     fclose(file);
     tasklist_display(list);
+    // TODO: Display the amount of tasks.
     printf("---\n");
     tasklist_free(list);
     return 0;
@@ -91,6 +94,9 @@ void list_tasks_matching(char* filename, char* string){
     } else {
         printf("Number of matches: %d.\n", count);
     }
+    fclose(file);
+    tasklist_free(list);
+    tasklist_free(matches);
 }
 
 // Removes a task given the file and the index.
@@ -148,6 +154,9 @@ void complete_task(char* filename, int number)
     tasklist_dump(list, file);
     fclose(file);
     printf("Marked task '%s' (%d) as done.", task->description, number);
+    task_free(task);
+    tasklist_free(list);
+    fclose(file);
 }
 
 
@@ -209,7 +218,7 @@ int main(int argc, char* argv[]){
         }
 
         // Remove a task.
-        if (strings_equal(argv[i], "remove", "-r")){
+        if (strings_equal(argv[i], "rm", "-r")){
             int index = atoi(argv[i+1]);
             if (remove_task(taskfile, index) != 0){
                 status = EXIT_FAILURE;
@@ -256,6 +265,7 @@ int main(int argc, char* argv[]){
         if (strcmp(argv[i], "-v") == 0){
             verbose = true;
         }
+
     }
 
     return status;

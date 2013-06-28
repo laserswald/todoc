@@ -44,22 +44,21 @@ error:
     return -1;
 }
 
-int slide(struct element* sl, int howmuch){
+struct element* slide(struct element* sl, int howmuch){
     int i;
     for (i = 0; i < howmuch; i++) {
         if (sl == NULL) {
-            return -1;
+            return NULL;
         }
         sl = sl->next;
     }
-    return 0;
+    return sl;
 }
 
 // Removes an item from the linked list.
 void* llrem(LList* l, int index){
     struct element* slider = l->head;
-    int status = slide(slider, index);
-    if (status != 0) return NULL;
+    slider = slide(slider, index);
     if (slider == l->tail){l->tail = slider->prev;}
     else slider->next->prev = slider->prev;
     if (slider == l->head){l->head = slider->next;}
@@ -75,8 +74,8 @@ void* llget(LList* l, int index){
     }
     void* item;
     struct element* slider = l->head;
-    int status = slide(slider, index);
-    if (status == -1){
+    slider = slide(slider, index);
+    if (slider == NULL){
         return NULL;
     }
     item = slider->data;
