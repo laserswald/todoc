@@ -147,7 +147,7 @@ void complete_task(char* filename, int number)
     file = fopen(filename, "w");
     tasklist_dump(list, file);
     fclose(file);
-    printf("Marked task '%s' (%d) as done.", task_dump(task), number);
+    printf("Marked task '%s' (%d) as done.", task->description, number);
 }
 
 
