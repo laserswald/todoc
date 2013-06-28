@@ -15,6 +15,10 @@ LList* new_llist(){
     return this;
 }
 
+LList* destroy_element(struct element* target){
+    free(target);
+}
+
 int lladd(LList* l, void* item)
 {
     struct element* elem = (struct element*) malloc(sizeof(struct element));
@@ -56,24 +60,24 @@ void* llrem(LList* l, int index){
     struct element* slider = l->head;
     int status = slide(slider, index);
     if (status != 0) return NULL;
-    if (slider->next == NULL){l->tail = slider->prev;}
+    if (slider == l->tail){l->tail = slider->prev;}
     else slider->next->prev = slider->prev;
-    if (slider->prev == NULL){l->head = slider->next;}
-    slider->prev->next = slider->next;
+    if (slider == l->head){l->head = slider->next;}
+    else slider->prev->next = slider->next;
     void* data = slider->data;
-    free(slider); 
+    destroy_element(slider); 
     return data;
 } 
 
 void* llget(LList* l, int index){
+    if (l == NULL || l->head == NULL || l->tail == NULL){
+        return NULL;
+    }
     void* item;
-    int i;
     struct element* slider = l->head;
-    for (i = 0; i < index; i++) {
-        if (slider == NULL) {
-            return NULL;
-        }
-        slider = slider->next;
+    int status = slide(slider, index);
+    if (status == -1){
+        return NULL;
     }
     item = slider->data;
     return item;

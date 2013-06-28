@@ -12,7 +12,6 @@
 #define VERSION_BUILD 1
 
 int add_task(char* filename, char* string){
-    puts("-- Adding new task.");
 
     Tasklist* list = tasklist_new();
     Task* task = task_new();
@@ -40,7 +39,7 @@ int add_task(char* filename, char* string){
         goto error;
     }
     
-    printf("-- Added:\n%s\n", string);
+    printf("-- Added: %s\n", string);
     tasklist_free(list);
     return 0;
 
@@ -63,10 +62,12 @@ int list_tasks(char* filename){
         return -1;
     }
     
-    puts("-- Listing all tasks.");
     Tasklist* list = tasklist_new();
     tasklist_read(list, file);
+    fclose(file);
     tasklist_display(list);
+    printf("---\n");
+    tasklist_free(list);
     return 0;
 }
 
@@ -81,7 +82,6 @@ void list_tasks_matching(char* filename, char* string){
         errno = 0;
         return;
     }
-    printf("-- Listing matches for '%s'\n", string);
 	Tasklist* list = tasklist_new();
     tasklist_read(list, file);
     Tasklist* matches = tasklist_search(list, string);
@@ -98,7 +98,7 @@ int remove_task(char* filename, int number){
     
     FILE* file = fopen(filename, "r");
     if (file == NULL){
-        perror("Could not open file");
+        perror("Cannot remove task");
         errno = 0;
         return;
     }
@@ -108,19 +108,28 @@ int remove_task(char* filename, int number){
         puts("ERROR: could not read tasklist.");
         goto error;
     }
+    fclose(file);
+    fopen(filename, "w");
     Task* t = tasklist_get(list, number);
+    if (t == NULL){
+        puts("There is no task with that number.");
+        goto error;
+    }
     printf("Are you sure you want to remove %d: %s? (y/n)", number, task_dump(t));
     char answer[5];
     char* ans = answer;
     fgets(ans, 5, stdin);
     if (strcmp(answer, "y\n") == 0){
-        puts("-- Removing task.");
         tasklist_remove(list, number);
         if (tasklist_dump(list, file) != 0){
             puts("ERROR: could not write tasklist.");
         }
     }
+    printf("Task %d deleted.\n", number);
+    task_free(t);
+    tasklist_free(list);
     error:
+        fclose(file);
         return 1;
 }
 
@@ -129,7 +138,6 @@ int remove_task(char* filename, int number){
  */
 void complete_task(char* filename, int number)
 {    
-    printf("-- Completing task number %d.", number);
     Tasklist* list = tasklist_new();
     FILE* file = fopen(filename, "r");
     tasklist_read(list, file);
@@ -139,7 +147,7 @@ void complete_task(char* filename, int number)
     file = fopen(filename, "w");
     tasklist_dump(list, file);
     fclose(file);
-    printf(" #%d complete.\n", number);
+    printf("Marked task '%s' (%d) as done.", task_dump(task), number);
 }
 
 
@@ -250,7 +258,5 @@ int main(int argc, char* argv[]){
         }
     }
 
-    //debugprint("Closing the file.");
-    puts("-- Done.");
     return status;
 }
