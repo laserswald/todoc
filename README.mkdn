@@ -6,21 +6,28 @@
 
 * Add a task with `todoc add "Herp a derp"` or `todoc -a "Herp a derp"`
 
-* Remove a task with `todoc remove 1` or `todoc -r 1`
+* Remove a task with `todoc rm 1` or `todoc -r 1`
 
-* Complete a task with `todoc done 1` or `todoc -d 1`
+* Complete a task with `todoc do 1` or `todoc -d 1`
 
 * Search for a task with `todoc search "Search string"` or `todoc -s "Search string"`. 
 
-##Building:
-    
-Todoc uses *scons* for it's build system.
-Use 
-`scons`
-from the command line in the folder you choose to extract it to build it.
+## Building:
 
+Building Todoc is easy. Use the classic
+
+    make
+
+to build the program. Installation hasn't been placed into the makefile (yet!) but I'm working on it.
 
 ## Changelog:
+
++ fixed a bug from do command for double free of closing file
+
+* **0.2.1**:
+    + Fixed some bugs involving file opening and closing.
+    + Fixed a really strange deallocation bug with deallocating things multiple times (I don't even.) 
+    + New, hopefully more reliable (certainly more testable) seperation of Tasklist into a layer over a generic linked list.
 
 *  **0.2**: Major restructuring into objects.
     + Cleaner, more friendly output. (Issue 3)
@@ -32,4 +39,5 @@ from the command line in the folder you choose to extract it to build it.
     - Appending a task conserves memory
     - Error system makes program return failure if something bad happens
     - Added testing code for most of the library
+
 

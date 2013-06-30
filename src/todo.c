@@ -154,9 +154,7 @@ void complete_task(char* filename, int number)
     tasklist_dump(list, file);
     fclose(file);
     printf("Marked task '%s' (%d) as done.", task->description, number);
-    task_free(task);
     tasklist_free(list);
-    fclose(file);
 }
 
 
