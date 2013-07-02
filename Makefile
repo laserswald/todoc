@@ -18,7 +18,7 @@ $(binary): $(objs)
 $(objectpath)/%.o: src/%.c 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-todo_test: src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/seatest.c tests/task_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
+todo_test: src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/task_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
 	$(CC) -o todo_test $^ $(CFLAGS) -I./tests
 
 clean: 
