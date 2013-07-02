@@ -205,7 +205,8 @@ int main(int argc, char* argv[]){
         exit(status);
     }
     int i;
-    for (i = 0; i < argc; i++){
+		//start the loop at 1 because argv[0] refers to the binary file
+    for (i = 1; i < argc; i++){
         // Add a new task.
         if (strings_equal(argv[i], "add", "-a")){
             if (add_task(taskfile, argv[i+1]) != 0){
