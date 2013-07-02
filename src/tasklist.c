@@ -14,10 +14,17 @@ Tasklist* tasklist_new(){
     return this;
 }
 
+void destroytask(void* item){
+    Task* t = (Task*)item;
+    task_free(t);    
+}
+
 // Destroy the given tasklist.
 void tasklist_free(Tasklist* list){
     if (list == NULL) return;
+    llapply(list->list, &destroytask);
     destroy_llist(list->list);
+    free(list);
 }
 
 // Add a new task to the end of this list.

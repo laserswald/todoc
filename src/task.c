@@ -22,6 +22,7 @@ Task* task_new(){
  *
  */
 void task_free(Task* task){
+    free(task->description);
     free(task);
 }
 

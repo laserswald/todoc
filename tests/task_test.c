@@ -1,6 +1,7 @@
-#include "seatest.h"
+
+#include <stdbool.h>
 #include "task.h"
-#include <assert.h>
+#include "speedunit.h"
 
 void task_setup(){
 }
@@ -11,33 +12,36 @@ void append_test(){
     
     // Tests adding to blank task.
     task_append(task, "Items.");
-    assert_string_equal(task->description, "Items.");
+    sp_assert(strcmp(task->description, "Items.") == 0, 
+                        "Task description and input items are unequal.");
     
     // Tests adding to NULL pointer.
     int error = task_append(NULL, "derp.");
     // Make sure that the error is returned.
-    assert_true(error);
+    sp_assert(error != NULL, "Error code was not returned.");
 }
 
 void dump_test(){
     Task *task = task_new();
     task_append(task, "Testing task.");
     char* dump = (char*)task_dump(task);
-    assert_string_equal("Testing task.", dump);
+    sp_assert(strcmp("Testing task.", dump) == 0, 
+                        "Dumped task is not the same as given task information.");
 }
 
 void keyword_test(){
     Task *task = task_new();
     task_append(task, "Testing search.");
     int has = task_has_keyword(task, "search");
-    assert_true(has);
+    sp_assert(has != false, "Search did not find the word.");
 }
 
 void complete_test(){
     Task * task = task_new();
     task_append(task, "Testing completion");
     task_complete(task);
-    assert_true(strcmp(task_dump(task), "x Testing completion") == 0);
+    sp_assert(strcmp(task_dump(task), "x Testing completion") == 0, 
+            "Task completion did not work");
 }
 
 void parse_test(){
@@ -45,28 +49,22 @@ void parse_test(){
     task_parse(task, "A pretty simple task");
     // It should look the same as the parsed string.
     char* string = (char*)task_dump(task);
-    assert_string_equal("A pretty simple task", string);
+    sp_assert(strcmp("A pretty simple task", string) == 0,);
     // Tests the completion status.
     assert_true(task->complete == false);
     // Test that the description is the same as the given string.
-    assert_string_equal(task->description, "A pretty simple task");
+    sp_assert(strcmp(task->description, "A pretty simple task") == 0, "Description is not the same");
 
 
     Task* completetask = task_new();
     task_parse(completetask, "x A complete task");
+    
 }
 
 void task_fixture(){
-    test_fixture_start();
-    
-    
-    fixture_setup(task_setup);
-
-    run_test(append_test);
-    run_test(dump_test);
-    run_test(keyword_test);
-    run_test(complete_test);
-    //run_test(read_test);
-
-    test_fixture_end();
+    append_test();
+    dump_test();
+    keyword_test();
+    complete_test();
+    parse_test(); 
 }
