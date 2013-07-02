@@ -77,12 +77,17 @@ void task_complete(Task* task){
 /** Dumps out the current task's data in Todo.txt format.*/
 char* task_dump(Task* t){
 	// Sanity checks.
-    if (t == NULL) return "";
-    if (t->description == NULL) return "";
-    if (strcmp(t->description, "") == 0) return "";
+    if (t == NULL) return NULL;
+    if (t->description == NULL) return NULL;
+    if (strcmp(t->description, "") == 0) return NULL;
     
     // Allocate a string of size 1 to add onto.
     char* returnString = (char*)malloc(sizeof(char)* 1);
+    if (returnString == NULL){
+        puts("Could not allocate space for task dump string.");
+        return NULL;
+    }
+    returnString[0] == '\0';
     int strLength = 0;
 
     // Build each part of the task.
@@ -97,7 +102,12 @@ char* task_dump(Task* t){
     // Add the description.
     strLength += strlen(t->description);
     returnString = realloc(returnString, strLength);    
-    strcat(returnString, t->description);
+    if (returnString == NULL){
+        perror("Cannot dump task");
+        free(returnString);
+        return NULL;
+    }
+    returnString = strcat(returnString, t->description);
 
     // return the string.
 	return returnString;

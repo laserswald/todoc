@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "linkedlist.h"
 #include "speedunit.h"
+
 void add_test()
 {
     LList* list = new_llist();
@@ -59,6 +60,7 @@ void get_test(void){
     }
     int test = *(int*)llget(list, 1);
     sp_assert(test == 2, "Get did not get the right thing");
+    
 }
 
 void linkedlist_fixture()
