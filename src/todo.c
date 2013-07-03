@@ -192,7 +192,7 @@ bool strings_equal(char* subject, char* first, char* sec){
 
 int main(int argc, char* argv[]){
 
-    char* taskfile = "todo.txt";
+    char* taskfilename = "todo.txt";
     char* donefile = "done.txt";
 
     bool verbose = false;
@@ -208,7 +208,7 @@ int main(int argc, char* argv[]){
     for (i = 0; i < argc; i++){
         // Add a new task.
         if (strings_equal(argv[i], "add", "-a")){
-            if (add_task(taskfile, argv[i+1]) != 0){
+            if (add_task(taskfilename, argv[i+1]) != 0){
                 status = EXIT_FAILURE;   // We done goofed.
             }
             i++;  // Skip the next argument.
@@ -218,7 +218,7 @@ int main(int argc, char* argv[]){
         // Remove a task.
         if (strings_equal(argv[i], "rm", "-r")){
             int index = atoi(argv[i+1]);
-            if (remove_task(taskfile, index) != 0){
+            if (remove_task(taskfilename, index) != 0){
                 status = EXIT_FAILURE;
             }
             i++;
@@ -228,21 +228,21 @@ int main(int argc, char* argv[]){
         // Complete a task.
         if (strings_equal(argv[i], "do", "-d")){
             int index = atoi(argv[i+1]);
-            complete_task(taskfile, index);
+            complete_task(taskfilename, index);
             i++;
             continue;
         }
         
         // List the tasks matching the string in the file.
         if (strings_equal(argv[i], "search", "-s")){
-            list_tasks_matching(taskfile, argv[i+1]);
+            list_tasks_matching(taskfilename, argv[i+1]);
             i++;
             continue;
         }
         
         // Show all the tasks in the file.
         if(strings_equal(argv[i], "ls", "-l")){
-            list_tasks(taskfile);
+            list_tasks(taskfilename);
             continue;
         }
         
@@ -251,10 +251,9 @@ int main(int argc, char* argv[]){
             print_help();
         }
 
-        // Set the taskfile flag.
+        // Set the taskfilename flag.
         if (strcmp(argv[i], "-f") == 0){
-            char* taskfilename = argv[i+1];
-            
+            taskfilename = argv[i+1]; 
             i++;
             continue;
         }
