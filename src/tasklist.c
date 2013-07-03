@@ -46,7 +46,8 @@ Task* tasklist_remove(Tasklist* list, int index){
 Tasklist* tasklist_search(Tasklist* list, char* filter){
 
     bool filterfunc(void* v){
-        char* str = (char*)v;
+				Task* tmptsk = (Task*)v;
+				char* str = (char*)tmptsk->description;
         if (strstr(str, filter) != NULL) return true;
         else return false;
     }

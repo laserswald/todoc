@@ -1,0 +1,225 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -I.\/include$/;"	m
+DEBUG_H	include/debug.h	2;"	d
+GetTickCount	tests/seatest.c	/^unsigned int GetTickCount() { return 0;}$/;"	f
+INDEX_NONEXISTENT	include/linkedlist.h	19;"	d
+LList	include/linkedlist.h	/^typedef struct llist LList;$/;"	t	typeref:struct:llist
+SEATEST_H	tests/seatest.h	2;"	d
+SEATEST_PRINT_BUFFER_SIZE	tests/seatest.h	11;"	d
+SEATEST_PROJECT_HOME	tests/seatest.h	10;"	d
+SEATEST_VERSION	tests/seatest.h	9;"	d
+TASK	include/task.h	8;"	d
+TASKLIST	include/tasklist.h	2;"	d
+TASK_SORT	include/task_sort.h	2;"	d
+Task	include/task.h	/^}Task;$/;"	t	typeref:struct:task_t
+Tasklist	include/tasklist.h	/^}Tasklist;$/;"	t	typeref:struct:tasklist_t
+_LLIST	include/linkedlist.h	2;"	d
+_getch	tests/seatest.c	/^void _getch( void ) { }$/;"	f	signature:( void )
+add_task	src/todo.c	/^int add_task(char* filename, char* string){$/;"	f	signature:(char* filename, char* string)
+add_test	tests/lltest.c	/^void add_test()$/;"	f
+alphaSort	include/task_sort.h	/^int alphaSort(char* a, char* b);$/;"	p	signature:(char* a, char* b)
+append_test	tests/taskTester.c	/^void append_test(){$/;"	f
+append_test	tests/task_test.c	/^void append_test(){$/;"	f
+arglist	include/argparse.h	/^struct arglist$/;"	s
+argname	include/argparse.h	/^	char* argname;$/;"	m	struct:arglist	access:public
+assert_bit_mask_matches	tests/seatest.h	50;"	d
+assert_bit_not_set	tests/seatest.h	49;"	d
+assert_bit_set	tests/seatest.h	48;"	d
+assert_double_equal	tests/seatest.h	53;"	d
+assert_fail	tests/seatest.h	51;"	d
+assert_false	tests/seatest.h	43;"	d
+assert_float_equal	tests/seatest.h	52;"	d
+assert_int_equal	tests/seatest.h	44;"	d
+assert_n_array_equal	tests/seatest.h	47;"	d
+assert_string_contains	tests/seatest.h	54;"	d
+assert_string_doesnt_contain	tests/seatest.h	55;"	d
+assert_string_ends_with	tests/seatest.h	57;"	d
+assert_string_equal	tests/seatest.h	46;"	d
+assert_string_starts_with	tests/seatest.h	56;"	d
+assert_true	tests/seatest.h	42;"	d
+assert_ulong_equal	tests/seatest.h	45;"	d
+binary	Makefile	/^binary = todoc$/;"	m
+complete	include/task.h	/^    bool complete;    $/;"	m	struct:task_t	access:public
+complete_task	src/todo.c	/^void complete_task(char* filename, int number)$/;"	f	signature:(char* filename, int number)
+complete_test	tests/task_test.c	/^void complete_test(){$/;"	f
+data	include/linkedlist.h	/^    void* data;$/;"	m	struct:element	access:public
+dbprintf	include/debug.h	11;"	d
+dbprintf	include/debug.h	13;"	d
+description	include/task.h	/^	char* description;$/;"	m	struct:task_t	access:public
+destroy_element	src/linkedlist.c	/^LList* destroy_element(struct element* target){$/;"	f	signature:(struct element* target)
+destroy_llist	include/linkedlist.h	/^int destroy_llist(LList* list);$/;"	p	signature:(LList* list)
+destroy_llist	src/linkedlist.c	/^int destroy_llist(LList* list)$/;"	f	signature:(LList* list)
+dump_test	tests/taskTester.c	/^void dump_test(){$/;"	f
+dump_test	tests/task_test.c	/^void dump_test(){$/;"	f
+element	include/linkedlist.h	/^struct element{$/;"	s
+fixture_filter	tests/seatest.c	/^void fixture_filter(char* filter)$/;"	f	signature:(char* filter)
+fixture_filter	tests/seatest.h	/^void fixture_filter(char* filter);$/;"	p	signature:(char* filter)
+fixture_setup	tests/seatest.c	/^void fixture_setup(void (*setup)( void ))$/;"	f	signature:(void (*setup)( void ))
+fixture_setup	tests/seatest.h	/^void fixture_setup(void (*setup)( void ));$/;"	p	signature:(void (*setup)( void ))
+fixture_teardown	tests/seatest.c	/^void fixture_teardown(void (*teardown)( void ))$/;"	f	signature:(void (*teardown)( void ))
+fixture_teardown	tests/seatest.h	/^void fixture_teardown(void (*teardown)( void ));$/;"	p	signature:(void (*teardown)( void ))
+get_priority	src/task.c	/^char get_priority(Task* task){$/;"	f	signature:(Task* task)
+get_test	tests/lltest.c	/^void get_test(void){$/;"	f	signature:(void)
+head	include/linkedlist.h	/^    struct element* head;$/;"	m	struct:llist	typeref:struct:llist::element	access:public
+keyword_test	tests/taskTester.c	/^void keyword_test(){$/;"	f
+keyword_test	tests/task_test.c	/^void keyword_test(){$/;"	f
+length	include/linkedlist.h	/^    int length;$/;"	m	struct:llist	access:public
+linkedlist_fixture	tests/lltest.c	/^void linkedlist_fixture()$/;"	f
+list	include/tasklist.h	/^    LList* list;$/;"	m	struct:tasklist_t	access:public
+list_tasks	src/todo.c	/^int list_tasks(char* filename){$/;"	f	signature:(char* filename)
+list_tasks_matching	src/todo.c	/^void list_tasks_matching(char* filename, char* string){$/;"	f	signature:(char* filename, char* string)
+lladd	include/linkedlist.h	/^int lladd(LList* list, void* thingy);$/;"	p	signature:(LList* list, void* thingy)
+lladd	src/linkedlist.c	/^int lladd(LList* l, void* item)$/;"	f	signature:(LList* l, void* item)
+llapply	include/linkedlist.h	/^int llapply(LList* list, void (*function)(void*));$/;"	p	signature:(LList* list, void (*function)(void*))
+llapply	src/linkedlist.c	/^int llapply(LList* list, void (*function)(void*)){$/;"	f	signature:(LList* list, void (*function)(void*))
+llfilter	include/linkedlist.h	/^LList* llfilter(LList* list, bool (*function)(void*));$/;"	p	signature:(LList* list, bool (*function)(void*))
+llfilter	src/linkedlist.c	/^LList* llfilter(LList* list, bool (*fun)(void*)){$/;"	f	signature:(LList* list, bool (*fun)(void*))
+llget	include/linkedlist.h	/^void* llget(LList* list, int index);$/;"	p	signature:(LList* list, int index)
+llget	src/linkedlist.c	/^void* llget(LList* l, int index){$/;"	f	signature:(LList* l, int index)
+llist	include/linkedlist.h	/^struct llist {$/;"	s
+llmap	include/linkedlist.h	/^LList* llmap(LList* list, void* (*function)(void*));$/;"	p	signature:(LList* list, void* (*function)(void*))
+llmap	src/linkedlist.c	/^LList* llmap(LList* list, void* (*function)(void*)){$/;"	f	signature:(LList* list, void* (*function)(void*))
+llpop	include/linkedlist.h	/^void* llpop(LList* list);$/;"	p	signature:(LList* list)
+llrem	include/linkedlist.h	/^void* llrem(LList* list, int index);$/;"	p	signature:(LList* list, int index)
+llrem	src/linkedlist.c	/^void* llrem(LList* l, int index){$/;"	f	signature:(LList* l, int index)
+main	src/todo.c	/^int main(int argc, char* argv[]){$/;"	f	signature:(int argc, char* argv[])
+main	tests/todo_test.c	/^int main(int argc, char** argv){$/;"	f	signature:(int argc, char** argv)
+make_single_item_list	tests/tasklist_test.c	/^Tasklist* make_single_item_list(){$/;"	f
+make_three_item_list	tests/tasklist_test.c	/^Tasklist* make_three_item_list(){$/;"	f
+new_llist	include/linkedlist.h	/^LList* new_llist();$/;"	p	signature:()
+new_llist	src/linkedlist.c	/^LList* new_llist(){$/;"	f
+next	include/argparse.h	/^	struct arglist *next;$/;"	m	struct:arglist	typeref:struct:arglist::arglist	access:public
+next	include/linkedlist.h	/^    struct element* next;$/;"	m	struct:element	typeref:struct:element::element	access:public
+objectpath	Makefile	/^objectpath = obj$/;"	m
+objects	Makefile	/^objects = $(patsubst %.c,%.o,$(sources))$/;"	m
+objs	Makefile	/^objs = $(patsubst %,$(objectpath)\/%,$(objects))$/;"	m
+option	include/argparse.h	/^	char* option;$/;"	m	struct:arglist	access:public
+parse_test	tests/task_test.c	/^void parse_test(){$/;"	f
+prev	include/linkedlist.h	/^    struct element* prev;$/;"	m	struct:element	typeref:struct:element::element	access:public
+print_help	src/todo.c	/^void print_help(){$/;"	f
+print_short_help	src/todo.c	/^void print_short_help(){ $/;"	f
+print_version	src/todo.c	/^void print_version(){$/;"	f
+priority	include/task.h	/^	char priority;$/;"	m	struct:task_t	access:public
+prioritySort	include/task_sort.h	/^int prioritySort(char* a, char* b);$/;"	p	signature:(char* a, char* b)
+read_args	include/argparse.h	/^struct arglist *read_args(int argc, char** argv, char* arge);/;"	p	signature:(int argc, char** argv, char* arge)
+rem_test	tests/lltest.c	/^void rem_test(void){$/;"	f	signature:(void)
+remove_task	src/todo.c	/^int remove_task(char* filename, int number){$/;"	f	signature:(char* filename, int number)
+required	include/argparse.h	/^	int required;$/;"	m	struct:arglist	access:public
+run_silent	tests/seatest.c	/^int run_silent(void (*tests)(void)){$/;"	f	signature:(void (*tests)(void))
+run_test	tests/seatest.h	65;"	d
+run_tests	tests/seatest.c	/^int run_tests(void (*tests)(void))$/;"	f	signature:(void (*tests)(void))
+run_tests	tests/seatest.h	/^int run_tests(void (*tests)(void));$/;"	p	signature:(void (*tests)(void))
+seatest_assert_double_equal	tests/seatest.c	/^void seatest_assert_double_equal( double expected, double actual, double delta, const char* function, unsigned int line )$/;"	f	signature:( double expected, double actual, double delta, const char* function, unsigned int line )
+seatest_assert_double_equal	tests/seatest.h	/^void seatest_assert_double_equal(double expected, double actual, double delta, const char* function, unsigned int line);$/;"	p	signature:(double expected, double actual, double delta, const char* function, unsigned int line)
+seatest_assert_false	tests/seatest.c	/^void seatest_assert_false(int test, const char* function, unsigned int line)$/;"	f	signature:(int test, const char* function, unsigned int line)
+seatest_assert_false	tests/seatest.h	/^void seatest_assert_false(int test, const char* function, unsigned int line);$/;"	p	signature:(int test, const char* function, unsigned int line)
+seatest_assert_float_equal	tests/seatest.c	/^void seatest_assert_float_equal( float expected, float actual, float delta, const char* function, unsigned int line )$/;"	f	signature:( float expected, float actual, float delta, const char* function, unsigned int line )
+seatest_assert_float_equal	tests/seatest.h	/^void seatest_assert_float_equal(float expected, float actual, float delta, const char* function, unsigned int line);$/;"	p	signature:(float expected, float actual, float delta, const char* function, unsigned int line)
+seatest_assert_int_equal	tests/seatest.c	/^void seatest_assert_int_equal(int expected, int actual, const char* function, unsigned int line)$/;"	f	signature:(int expected, int actual, const char* function, unsigned int line)
+seatest_assert_int_equal	tests/seatest.h	/^void seatest_assert_int_equal(int expected, int actual, const char* function, unsigned int line);$/;"	p	signature:(int expected, int actual, const char* function, unsigned int line)
+seatest_assert_string_contains	tests/seatest.c	/^void seatest_assert_string_contains(char* expected, char* actual, const char* function, unsigned int line)$/;"	f	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_contains	tests/seatest.h	/^void seatest_assert_string_contains(char* expected, char* actual, const char* function, unsigned int line);$/;"	p	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_doesnt_contain	tests/seatest.c	/^void seatest_assert_string_doesnt_contain(char* expected, char* actual, const char* function, unsigned int line)$/;"	f	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_doesnt_contain	tests/seatest.h	/^void seatest_assert_string_doesnt_contain(char* expected, char* actual, const char* function, unsigned int line);$/;"	p	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_ends_with	tests/seatest.c	/^void seatest_assert_string_ends_with(char* expected, char* actual, const char* function, unsigned int line)$/;"	f	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_ends_with	tests/seatest.h	/^void seatest_assert_string_ends_with(char* expected, char* actual, const char* function, unsigned int line);$/;"	p	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_equal	tests/seatest.c	/^void seatest_assert_string_equal(const char* expected, char* actual, const char* function, unsigned int line)$/;"	f	signature:(const char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_equal	tests/seatest.h	/^void seatest_assert_string_equal(const char* expected, char* actual, const char* function, unsigned int line);$/;"	p	signature:(const char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_starts_with	tests/seatest.c	/^void seatest_assert_string_starts_with(char* expected, char* actual, const char* function, unsigned int line)$/;"	f	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_string_starts_with	tests/seatest.h	/^void seatest_assert_string_starts_with(char* expected, char* actual, const char* function, unsigned int line);$/;"	p	signature:(char* expected, char* actual, const char* function, unsigned int line)
+seatest_assert_true	tests/seatest.c	/^void seatest_assert_true(int test, const char* function, unsigned int line)$/;"	f	signature:(int test, const char* function, unsigned int line)
+seatest_assert_true	tests/seatest.h	/^void seatest_assert_true(int test, const char* function, unsigned int line);$/;"	p	signature:(int test, const char* function, unsigned int line)
+seatest_assert_ulong_equal	tests/seatest.c	/^void seatest_assert_ulong_equal(unsigned long expected, unsigned long actual, const char* function, unsigned int line)$/;"	f	signature:(unsigned long expected, unsigned long actual, const char* function, unsigned int line)
+seatest_assert_ulong_equal	tests/seatest.h	/^void seatest_assert_ulong_equal(unsigned long expected, unsigned long actual, const char* function, unsigned int line);$/;"	p	signature:(unsigned long expected, unsigned long actual, const char* function, unsigned int line)
+seatest_header_printer	tests/seatest.c	/^void seatest_header_printer(char* s, int length, char f)$/;"	f	signature:(char* s, int length, char f)
+seatest_run_test	tests/seatest.c	/^void seatest_run_test(void)$/;"	f	signature:(void)
+seatest_run_test	tests/seatest.h	/^void seatest_run_test(void);$/;"	p	signature:(void)
+seatest_setup	tests/seatest.c	/^void seatest_setup( void )$/;"	f	signature:( void )
+seatest_setup	tests/seatest.h	/^void seatest_setup( void );$/;"	p	signature:( void )
+seatest_should_run	tests/seatest.c	/^int seatest_should_run( char* fixture, char* test)$/;"	f	signature:( char* fixture, char* test)
+seatest_should_run	tests/seatest.h	/^int seatest_should_run( char* fixture, char* test);$/;"	p	signature:( char* fixture, char* test)
+seatest_simple_test_result	tests/seatest.c	/^void seatest_simple_test_result(int passed, char* reason, const char* function, unsigned int line)$/;"	f	signature:(int passed, char* reason, const char* function, unsigned int line)
+seatest_simple_test_result	tests/seatest.h	/^void seatest_simple_test_result(int passed, char* reason, const char* function, unsigned int line);$/;"	p	signature:(int passed, char* reason, const char* function, unsigned int line)
+seatest_suite_setup	tests/seatest.c	/^void seatest_suite_setup( void )$/;"	f	signature:( void )
+seatest_suite_setup	tests/seatest.h	/^void seatest_suite_setup( void );$/;"	p	signature:( void )
+seatest_suite_teardown	tests/seatest.c	/^void seatest_suite_teardown( void )$/;"	f	signature:( void )
+seatest_suite_teardown	tests/seatest.h	/^void seatest_suite_teardown( void );$/;"	p	signature:( void )
+seatest_teardown	tests/seatest.c	/^void seatest_teardown( void )$/;"	f	signature:( void )
+seatest_teardown	tests/seatest.h	/^void seatest_teardown( void );$/;"	p	signature:( void )
+seatest_test_fixture_end	tests/seatest.c	/^void seatest_test_fixture_end()$/;"	f
+seatest_test_fixture_end	tests/seatest.h	/^void seatest_test_fixture_end( void );$/;"	p	signature:( void )
+seatest_test_fixture_start	tests/seatest.c	/^void seatest_test_fixture_start(char* filepath)$/;"	f	signature:(char* filepath)
+seatest_test_fixture_start	tests/seatest.h	/^void seatest_test_fixture_start(char* filepath);$/;"	p	signature:(char* filepath)
+slide	src/linkedlist.c	/^struct element* slide(struct element* sl, int howmuch){$/;"	f	signature:(struct element* sl, int howmuch)
+sourcepath	Makefile	/^sourcepath = src$/;"	m
+sources	Makefile	/^sources = todo.c task.c tasklist.c linkedlist.c$/;"	m
+sp_assert	tests/speedunit.h	6;"	d
+sp_pfail	tests/speedunit.h	5;"	d
+srcs	Makefile	/^srcs = $(patsubst %,$(sourcepath)\/%,$(sources))$/;"	m
+strings_equal	src/todo.c	/^bool strings_equal(char* subject, char* first, char* sec){$/;"	f	signature:(char* subject, char* first, char* sec)
+suite_setup	tests/seatest.c	/^void suite_setup(void (*setup)( void ))$/;"	f	signature:(void (*setup)( void ))
+suite_setup	tests/seatest.h	/^void suite_setup(void (*setup)( void ));$/;"	p	signature:(void (*setup)( void ))
+suite_teardown	tests/seatest.c	/^void suite_teardown(void (*teardown)( void ))$/;"	f	signature:(void (*teardown)( void ))
+suite_teardown	tests/seatest.h	/^void suite_teardown(void (*teardown)( void ));$/;"	p	signature:(void (*teardown)( void ))
+tail	include/linkedlist.h	/^    struct element* tail;$/;"	m	struct:llist	typeref:struct:llist::element	access:public
+task_append	include/task.h	/^int task_append(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
+task_append	src/task.c	/^int task_append(Task* t, char* string){$/;"	f	signature:(Task* t, char* string)
+task_complete	include/task.h	/^void task_complete(Task* task);$/;"	p	signature:(Task* task)
+task_complete	src/task.c	/^void task_complete(Task* task){$/;"	f	signature:(Task* task)
+task_dump	include/task.h	/^char* task_dump(Task* t);$/;"	p	signature:(Task* t)
+task_dump	src/task.c	/^char* task_dump(Task* t){$/;"	f	signature:(Task* t)
+task_fixture	tests/taskTester.c	/^void task_fixture(){$/;"	f
+task_fixture	tests/task_test.c	/^void task_fixture(){$/;"	f
+task_free	include/task.h	/^void task_free(Task* task);$/;"	p	signature:(Task* task)
+task_free	src/task.c	/^void task_free(Task* task){$/;"	f	signature:(Task* task)
+task_has_context	include/task.h	/^int task_has_context(Task* t, char* context);$/;"	p	signature:(Task* t, char* context)
+task_has_keyword	include/task.h	/^bool task_has_keyword(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
+task_has_keyword	src/task.c	/^bool task_has_keyword(Task* t, char* keyword){$/;"	f	signature:(Task* t, char* keyword)
+task_has_project	include/task.h	/^int task_has_project(Task* t, char* project);$/;"	p	signature:(Task* t, char* project)
+task_new	include/task.h	/^Task* task_new();$/;"	p	signature:()
+task_new	src/task.c	/^Task* task_new(){$/;"	f
+task_parse	include/task.h	/^void task_parse(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
+task_parse	src/task.c	/^void task_parse(Task* task, char* string){$/;"	f	signature:(Task* task, char* string)
+task_print	include/task.h	/^void task_print(Task* t);$/;"	p	signature:(Task* t)
+task_set_string	include/task.h	/^void task_set_string(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
+task_set_string	src/task.c	/^void task_set_string(Task* t, char* string){$/;"	f	signature:(Task* t, char* string)
+task_setup	tests/taskTester.c	/^void task_setup(){$/;"	f
+task_setup	tests/task_test.c	/^void task_setup(){$/;"	f
+task_t	include/task.h	/^typedef struct task_t{$/;"	s
+tasklist_append	include/tasklist.h	/^int tasklist_append(Tasklist *list, Task *task);$/;"	p	signature:(Tasklist *list, Task *task)
+tasklist_append	src/tasklist.c	/^int tasklist_append(Tasklist* this, Task* t){$/;"	f	signature:(Tasklist* this, Task* t)
+tasklist_display	include/tasklist.h	/^int tasklist_display(Tasklist *list);$/;"	p	signature:(Tasklist *list)
+tasklist_display	src/tasklist.c	/^int tasklist_display(Tasklist* list){$/;"	f	signature:(Tasklist* list)
+tasklist_dump	include/tasklist.h	/^int tasklist_dump(Tasklist *list, FILE* file);$/;"	p	signature:(Tasklist *list, FILE* file)
+tasklist_dump	src/tasklist.c	/^int tasklist_dump(Tasklist *list, FILE* f){$/;"	f	signature:(Tasklist *list, FILE* f)
+tasklist_fixture	tests/tasklist_test.c	/^void tasklist_fixture(){$/;"	f
+tasklist_free	include/tasklist.h	/^void tasklist_free(Tasklist *list);$/;"	p	signature:(Tasklist *list)
+tasklist_free	src/tasklist.c	/^void tasklist_free(Tasklist* list){$/;"	f	signature:(Tasklist* list)
+tasklist_get	include/tasklist.h	/^Task* tasklist_get(Tasklist* list, int index);$/;"	p	signature:(Tasklist* list, int index)
+tasklist_get	src/tasklist.c	/^Task* tasklist_get(Tasklist* list, int index){$/;"	f	signature:(Tasklist* list, int index)
+tasklist_merge	include/tasklist.h	/^Tasklist* tasklist_merge(Tasklist *list, Tasklist *other);$/;"	p	signature:(Tasklist *list, Tasklist *other)
+tasklist_new	include/tasklist.h	/^Tasklist* tasklist_new();$/;"	p	signature:()
+tasklist_new	src/tasklist.c	/^Tasklist* tasklist_new(){$/;"	f
+tasklist_read	include/tasklist.h	/^int tasklist_read(Tasklist *list, FILE* file);$/;"	p	signature:(Tasklist *list, FILE* file)
+tasklist_read	src/tasklist.c	/^int tasklist_read(Tasklist *list, FILE* f){$/;"	f	signature:(Tasklist *list, FILE* f)
+tasklist_remove	include/tasklist.h	/^Task* tasklist_remove(Tasklist* list, int index);$/;"	p	signature:(Tasklist* list, int index)
+tasklist_remove	src/tasklist.c	/^Task* tasklist_remove(Tasklist* list, int index){$/;"	f	signature:(Tasklist* list, int index)
+tasklist_search	include/tasklist.h	/^Tasklist* tasklist_search(Tasklist *list, char *string);$/;"	p	signature:(Tasklist *list, char *string)
+tasklist_search	src/tasklist.c	/^Tasklist* tasklist_search(Tasklist* list, char* filter){$/;"	f	signature:(Tasklist* list, char* filter)
+tasklist_t	include/tasklist.h	/^typedef struct tasklist_t {$/;"	s
+test_file_name	tests/seatest.c	/^char* test_file_name(char* path)$/;"	f	signature:(char* path)
+test_filter	tests/seatest.c	/^void test_filter(char* filter)$/;"	f	signature:(char* filter)
+test_filter	tests/seatest.h	/^void test_filter(char* filter);$/;"	p	signature:(char* filter)
+test_fixture_end	tests/seatest.h	67;"	d
+test_fixture_start	tests/seatest.h	66;"	d
+tlist_append_test	tests/tasklist_test.c	/^void tlist_append_test(){$/;"	f
+tlist_get_test	tests/tasklist_test.c	/^void tlist_get_test(){$/;"	f
+tlist_load_test	tests/tasklist_test.c	/^void tlist_load_test(){$/;"	f
+tlist_remove_test	tests/tasklist_test.c	/^void tlist_remove_test(){$/;"	f
+tlist_search_test	tests/tasklist_test.c	/^void tlist_search_test(){$/;"	f
