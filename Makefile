@@ -9,8 +9,9 @@ objectpath = obj
 objs = $(patsubst %,$(objectpath)/%,$(objects))
 
 binary = todoc
+testbin = todoc_test
 
-all: setup $(binary) todo_test run_test
+all: setup $(binary) $(testbin) run_test
 
 $(binary): $(objs)
 	$(CC) -o $(binary) $^ -I./include
@@ -18,11 +19,11 @@ $(binary): $(objs)
 $(objectpath)/%.o: src/%.c 
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-todo_test: src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/task_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
-	$(CC) -o todo_test $^ $(CFLAGS) -I./tests
+$(testbin): src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/tasklist_test.c tests/task_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
+	$(CC) -o $(testbin) $^ $(CFLAGS) -I./tests
 
 clean: 
-	rm $(objs)
+	rm $(objs) $(binary) $(testbin)
 
 .PHONY: setup clean rebuild dist
 
@@ -34,5 +35,5 @@ dist:
 setup: 
 	mkdir -p $(objectpath)
 
-run_test: todo_test
-	exec ./todo_test
+run_test: $(testbin)
+	exec ./$(testbin)

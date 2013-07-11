@@ -19,6 +19,7 @@ void append_test(){
     int error = task_append(NULL, "derp.");
     // Make sure that the error is returned.
     sp_assert(error != 0, "Error code was not returned.");
+    task_free(task);
 }
 
 void dump_test(){
@@ -27,6 +28,7 @@ void dump_test(){
     char* dump = (char*)task_dump(task);
     sp_assert(strcmp("Testing task.", dump) == 0, 
                         "Dumped task is not the same as given task information.");
+    task_free(task);
 }
 
 void keyword_test(){
@@ -34,14 +36,17 @@ void keyword_test(){
     task_append(task, "Testing search.");
     int has = task_has_keyword(task, "search");
     sp_assert(has != false, "Search did not find the word.");
+    task_free(task);
 }
 
 void complete_test(){
     Task * task = task_new();
     task_append(task, "Testing completion");
     task_complete(task);
+    puts(task_dump(task));
     sp_assert(strcmp(task_dump(task), "x Testing completion") == 0, 
             "Task completion did not work");
+    task_free(task);
 }
 
 void parse_test(){
