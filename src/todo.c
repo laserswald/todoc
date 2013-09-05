@@ -9,10 +9,9 @@
 
 #define VERSION_MAJOR 0
 #define VERSION_MINOR 3
-#define VERSION_BUILD 1
+#define VERSION_BUILD 2
 
 int add_task(char* filename, char* string){
-
     Tasklist* list = tasklist_new();
     Task* task = task_new();
     
@@ -21,6 +20,7 @@ int add_task(char* filename, char* string){
         file = fopen(filename, "w+");
         if (file == NULL){
             perror("Add task");
+            
             goto error;
         }
     }
@@ -41,17 +41,14 @@ int add_task(char* filename, char* string){
     
     printf("Added: %s\n", string);
     tasklist_free(list);
-    task_free(task);
     return 0;
 
-    error:
+error:
     tasklist_free(list);
-    task_free(task);
     return 1;
 }
 
 /** List the tasks in the file given.
- *
  */
 int list_tasks(char* filename){
     // Open up the file, bro.
@@ -79,12 +76,14 @@ int list_tasks(char* filename){
  */
 void list_tasks_matching(char* filename, char* string){
     if (string == NULL) string = "";
+
     FILE* file = fopen(filename, "r");
     if (file == NULL){
         perror("Could not open file");
         errno = 0;
         return;
     }
+
 	Tasklist* list = tasklist_new();
     tasklist_read(list, file);
     Tasklist* matches = tasklist_search(list, string);
@@ -106,7 +105,7 @@ int remove_task(char* filename, int number){
     if (file == NULL){
         perror("Cannot remove task");
         errno = 0;
-        return;
+        goto error;
     }
     // Open up the tasklist.
     Tasklist* list = tasklist_new();
@@ -195,7 +194,7 @@ int main(int argc, char* argv[]){
     char* taskfilename = "todo.txt";
     char* donefile = "done.txt";
 
-    bool verbose = false;
+    //bool verbose = false;
 
     int status = EXIT_SUCCESS;
 
@@ -261,7 +260,7 @@ int main(int argc, char* argv[]){
 
         // Set the verbosity flag.
         if (strcmp(argv[i], "-v") == 0){
-            verbose = true;
+            // verbose = true;
         }
 
     }
