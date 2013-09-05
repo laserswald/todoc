@@ -1,39 +1,85 @@
-CC = gcc
-CFLAGS = -g -I./include
-sources = todo.c task.c tasklist.c linkedlist.c
-sourcepath = src
-srcs = $(patsubst %,$(sourcepath)/%,$(sources))
 
-objects = $(patsubst %.c,%.o,$(sources))
-objectpath = obj
-objs = $(patsubst %,$(objectpath)/%,$(objects))
+# Skeleton Medium-sized Makefile for C programs.
+#
+# by Ben Davenport-Ray
 
-binary = todoc
-testbin = todoc_test
+BINNAME=todoc
+VERSION=0.2.5
 
-all: setup $(binary) $(testbin) run_test
+SHELL=zsh
+CC=gcc
+ZIP=7z
 
-$(binary): $(objs)
-	$(CC) -o $(binary) $^ -I./include
-	
-$(objectpath)/%.o: src/%.c 
-	$(CC) -c -o $@ $< $(CFLAGS)
+BINDIR=bin
+LIBNAME=lib$(BINNAME)
 
-$(testbin): src/task.c include/task.h src/tasklist.c include/tasklist.h tests/todo_test.c tests/tasklist_test.c tests/task_test.c tests/lltest.c include/linkedlist.h src/linkedlist.c
-	$(CC) -o $(testbin) $^ $(CFLAGS) -I./tests
+DYNLIB=$(BINNAME).dll
+STATLIB=$(LIBNAME).a
+TESTPRG=$(BINNAME)_test
+EXECUTABLE=$(BINNAME)
+SONAME=$(LIBNAME).so.$(VERSION)
+
+PKGNAME=$(BINNAME)-$(VERSION)
+
+MODULES=
+
+# Source file gathering.
+SOURCE=*.c
+SRCDIR=src
+SRCS:=$(wildcard $(SRCDIR)/$(SOURCE))
+
+INCLUDE=include
+
+OBJECT=$(SRCS:.c=.o)
+OBJDIR=obj
+OBJS:=$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(OBJECT))
+LIBOBJS:=$(filter-out obj/todo.o,$(OBJS))
+
+CFLAGS= -Wall -I$(INCLUDE) -g 
+LDFLAGS= -static -L. -ltodoc
+LFLAGS= -shared -Wl,-soname,$(SONAME)
+
+TESTDIR=test
+TESTSRC:=$(wildcard $(TESTDIR)/$(SOURCE))
+TESTFLAGS=
+
+all: build check
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(DYNLIB): $(LIBOBJS)
+	$(CC) $(LFLAGS) $^ -o $(DYNLIB) 
+
+$(STATLIB): $(LIBOBJS)
+	ar rcs $@ $^ 	
+
+$(TESTPRG): $(TESTSRC)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+$(EXECUTABLE): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+build: setup $(STATLIB) $(EXECUTABLE) $(TESTPRG)
+
+rebuild: clean build
 
 clean: 
-	rm $(objs) $(binary) $(testbin)
-
-.PHONY: setup clean rebuild dist
-
-rebuild: clean all
-
+	rm -r $(OBJDIR)
+	rm  $(STATLIB)
+	rm  $(TESTPRG)
 dist:
-	tar -czvf todoc-0.2.tar.gz $(srcs) include tests Makefile SConstruct README.mkdn
+	tar -zxvf $(PKGNAME)
 
-setup: 
-	mkdir -p $(objectpath)
+distexec:
+	$(ZIP) $(PKGNAME)-win32.zip README.md $(EXECUTABLE)
 
-run_test: $(testbin)
-	exec ./$(testbin)
+check: $(TESTPRG)
+	./$(TESTPRG)
+
+setup:
+	mkdir -p $(BINDIR)
+	mkdir -p $(OBJDIR)
+
+.PHONY: all build rebuild clean dist distexec check install setup
+

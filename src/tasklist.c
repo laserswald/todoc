@@ -6,11 +6,12 @@
 #include <stdio.h>
 #include "task.h"
 #include "tasklist.h"
+#include "dbg.h"
 
 // Make a new tasklist.
 Tasklist* tasklist_new(){
     Tasklist* this = (Tasklist*)malloc(sizeof(Tasklist));
-    this->list = new_llist();
+    this->list = List_new();
     return this;
 }
 
@@ -22,8 +23,8 @@ void destroytask(void* item){
 // Destroy the given tasklist.
 void tasklist_free(Tasklist* list){
     if (list == NULL) return;
-    llapply(list->list, &destroytask);
-    destroy_llist(list->list);
+    List_do(list->list, &destroytask);
+    List_free(list->list);
     free(list);
 }
 
@@ -33,19 +34,19 @@ int tasklist_append(Tasklist* this, Task* t){
         // Make sure it's heard.
         return 1;
     }
-    lladd(this->list, t);
+    List_add(this->list, t);
     return 0;
 }
 
 // Get the task at the index.
 Task* tasklist_get(Tasklist* list, int index){
-    Task* t = (Task*)llget(list->list, index);
+    Task* t = (Task*)List_get(list->list, index);
     return t;
 }
 
 // Remove the task at the index.
 Task* tasklist_remove(Tasklist* list, int index){
-    return ( (Task*)llrem(list->list, index) );
+    return ( (Task*)List_remove(list->list, index) );
 }
 
 
@@ -58,7 +59,7 @@ Tasklist* tasklist_search(Tasklist* list, char* filter){
         else return false;
     }
     
-    LList* matches = llfilter(list->list, *filterfunc);
+    List* matches = List_filter(list->list, *filterfunc);
     Tasklist* t = tasklist_new();
     t->list = matches;
     return t;
@@ -73,7 +74,7 @@ int tasklist_display(Tasklist* list){
         printf("%d: %s\n", count, t->description);
         count ++;
     }
-    llapply(list->list, &print_task);
+    List_do(list->list, &print_task);
     return count;
 }
 
@@ -83,12 +84,14 @@ int tasklist_dump(Tasklist *list, FILE* f){
         Task* t = (Task*)item;
         fprintf(f, "%s\n", task_dump(t));
     }
-    llapply(list->list, &d);
+    List_do(list->list, &d);
     return 0;
 }
 
 // Read a tasklist from a file.
 int tasklist_read(Tasklist *list, FILE* f){
+    check(list, "Task list does not exist.");
+    check(f, "Something wrong happened with the file.");
 
     // Go through the file one line at a time.
     char buffer[256];
@@ -106,5 +109,10 @@ int tasklist_read(Tasklist *list, FILE* f){
         // Add it to the list.
         tasklist_append(list, temp);
     }
+
     return 0;
+
+error:
+    return -1;
+
 }

@@ -11,15 +11,36 @@
     Speedunit is liscenced under the DWTFYW Liscence. Effectively, I don't care
     at all about what you do to this. Just be nice and say the above, kay?
 */
-#ifndef SPEEDUNIT 
-#define SPEEDUNIT
+#ifndef __SPEEDUNIT
+#define __SPEEDUNIT
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include "dbg.h"
 
-#define sp_pfail(message) do {printf("%s: %d: fail: %s\n", __FILE__, __LINE__, message); } while (0)
+int tests_run;
+int tests_failed;
 
-#define sp_assert(test, message) do { if (!(test)) sp_pfail(message);} while (0)
+#define sp_pfail(message) do { fprintf(stderr, "fail (%s:%d): %s\n", __FILE__, __LINE__, message); tests_failed++; } while (0);
+
+#define sp_assert(a, message) if (!(a)) sp_pfail(message)
+
 #define sp_streql(str, ing, message) sp_assert(strcmp(str, ing) == 0, message)
-     
-#endif /* SPEEDUNIT */
 
+#define sp_suite_start() 
+
+#define sp_run_test(test) printf("."); \
+    test(); tests_run++
+
+#define sp_run_suite(name) \
+    debug("Running test suite: %s", "" #name);\
+    name(); \
+    puts(""); \
+    if (tests_failed != 0) {\
+        puts("FAILED");\
+    } \
+    else { \
+        puts("PASSED"); \
+    } \
+    printf("Tests run: %d\n", tests_run);
+#endif

@@ -88,7 +88,6 @@ char* task_dump(Task* t){
         puts("Could not allocate space for task dump string.");
         return NULL;
     }
-    returnString[0] == '\0';
     int strLength = 0;
 
     // Build each part of the task.
@@ -126,7 +125,7 @@ void task_parse(Task* task, char* string){
         restOfString = string;
     }
     string = restOfString;
-    int c = -1;
+    char* c = NULL;
     if (sscanf(string, "(%c) %s", c, restOfString)){
         
     }

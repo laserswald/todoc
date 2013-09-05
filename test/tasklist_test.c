@@ -1,7 +1,6 @@
 #include "task.h"
 #include "tasklist.h"
 #include "speedunit.h"
-#include "linkedlist.h"
 #include <string.h>
 
 Tasklist* make_three_item_list(){
@@ -58,10 +57,10 @@ void tlist_search_test(){
     Tasklist* list = make_three_item_list();
     Tasklist* notfirst = tasklist_search(list, "notfirst");
     sp_assert(notfirst != NULL, "Task list did not find anything.");
-    LList* nlist = notfirst->list;
+    List* nlist = notfirst->list;
     int i;
     for (i = 0; i < nlist->length; i++){
-        Task* t = (Task*)llget(nlist, i);
+        Task* t = (Task*)List_get(nlist, i);
         // TODO: Check if this exists.
         sp_assert(t, "Task is nonexistent.");
         sp_assert(strstr(t->description, "notfirst") != NULL, "Task was found with no keyword");
@@ -79,23 +78,24 @@ void tlist_remove_test(){
 
     task_free(task);
     task = tasklist_remove(list, 0);
-    printf("Task info: '%s'\n", task->description);
+    debug("Task info: '%s'", task->description);
     sp_streql("This is the first task. #first", task->description, "First task no longer exists.");
 
 }
 
 void tlist_load_test(){
     Tasklist *list = tasklist_new();
-    FILE* f = fopen("tests/testtodo.txt", "r");
+    FILE* f = fopen("test/testtodo.txt", "r");
+    sp_assert(f, "File does not exist");
     tasklist_read(list, f);
     Task* gotten = tasklist_get(list, 0);
     sp_streql(gotten->description, "A test task in a file.", "Task was not read correctly.");
 }
 
 void tasklist_fixture(){
-    tlist_append_test();
-    tlist_get_test();
-    tlist_remove_test();
-    tlist_search_test();
-    tlist_load_test();
+    sp_run_test(tlist_append_test);
+    sp_run_test(tlist_get_test);
+    sp_run_test(tlist_remove_test);
+    sp_run_test(tlist_search_test);
+    sp_run_test(tlist_load_test);
 }

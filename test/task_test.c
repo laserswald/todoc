@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include "task.h"
 #include "speedunit.h"
-
+#include "dbg.h"
 void task_setup(){
 }
 
@@ -43,7 +43,7 @@ void complete_test(){
     Task * task = task_new();
     task_append(task, "Testing completion");
     task_complete(task);
-    puts(task_dump(task));
+    debug("Task = '%s'", task_dump(task));
     sp_assert(strcmp(task_dump(task), "x Testing completion") == 0, 
             "Task completion did not work");
     task_free(task);
@@ -67,9 +67,9 @@ void parse_test(){
 }
 
 void task_fixture(){
-    append_test();
-    dump_test();
-    keyword_test();
-    complete_test();
+    sp_run_test(append_test);
+    sp_run_test(dump_test);
+    sp_run_test(keyword_test);
+    sp_run_test(complete_test);
     // parse_test(); 
 }
