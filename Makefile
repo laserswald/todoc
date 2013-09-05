@@ -6,9 +6,7 @@
 BINNAME=todoc
 VERSION=0.2.5
 
-SHELL=zsh
 CC=gcc
-ZIP=7z
 
 BINDIR=bin
 LIBNAME=lib$(BINNAME)
