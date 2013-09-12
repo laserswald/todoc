@@ -1,4 +1,3 @@
-
 # Skeleton Medium-sized Makefile for C programs.
 #
 # by Ben Davenport-Ray
@@ -66,8 +65,10 @@ clean:
 	rm -r $(OBJDIR)
 	rm  $(STATLIB)
 	rm  $(TESTPRG)
+	rm  $(EXECUTABLE)
+
 dist:
-	tar -zxvf $(PKGNAME)
+	tar -cvaf $(PKGNAME).tar.gz $(SRCS) $(INCLUDE)/*.h $(TESTSRC) test/*.h README.mkdn Makefile
 
 distexec:
 	$(ZIP) $(PKGNAME)-win32.zip README.md $(EXECUTABLE)
