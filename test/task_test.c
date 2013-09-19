@@ -1,4 +1,3 @@
-
 #include <stdbool.h>
 #include "task.h"
 #include "speedunit.h"
@@ -50,26 +49,42 @@ void complete_test(){
 }
 
 void parse_test(){
-    Task* task = task_new();
-    task_parse(task, "A pretty simple task");
-    // It should look the same as the parsed string.
-    char* string = (char*)task_dump(task);
-    sp_assert(strcmp(string, "A pretty simple task") == 0, "Standard parsing did not work");
-    // Tests the completion status.
-    sp_assert(task->complete == false, "Task's completion status was not updated correctly");
-    // Test that the description is the same as the given string.
-    sp_assert(strcmp(task->description, "A pretty simple task") == 0, "Description is not the same");
+	//set up the vars
+	int tsknum = 6;
+	Task* task[tsknum];
+	int i;
+	for (i = 0; i < tsknum; i++)
+		task[i] = task_new();
 
+	//parse them
+	task_parse(task[0], "task with nothing");
+	task_parse(task[1], "(A) task with prio only");
+	task_parse(task[2], "2013-03-02 task with date only");
+	task_parse(task[3], "(B) 2013-03-02 task with date and prio");
+	task_parse(task[4], "x (C) 2013-03-02 complete task");
+	task_parse(task[5], "invalid task (C) form 2013-03-02");
 
-    Task* completetask = task_new();
-    task_parse(completetask, "x A complete task");
-    
+	//check for valid returns	
+	for (i = 0; i < tsknum; i++)
+	{
+		Task* tsk = task[i];
+		if(!tsk) 
+		{
+			printf("\nTask[%i] failed to parse\n",i);
+			continue;
+		}
+		printf("\nTask[%i]\n-----------\n",i);
+		printf("descript: %s\n", tsk->description);
+		printf("prio: %c\n", tsk->priority);
+		printf("complete: %i\n", tsk->complete);
+		printf("datestamp: %i\n", tsk->datestamp);
+	}
 }
 
 void task_fixture(){
-    sp_run_test(append_test);
-    sp_run_test(dump_test);
-    sp_run_test(keyword_test);
-    sp_run_test(complete_test);
-    // parse_test(); 
+//    sp_run_test(append_test);
+//    sp_run_test(dump_test);
+//    sp_run_test(keyword_test);
+//    sp_run_test(complete_test);
+    sp_run_test(parse_test);
 }

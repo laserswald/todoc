@@ -34,7 +34,7 @@ OBJS:=$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(OBJECT))
 LIBOBJS:=$(filter-out obj/todo.o,$(OBJS))
 
 CFLAGS= -Wall -I$(INCLUDE) -g 
-LDFLAGS= -static -L. -ltodoc
+LDFLAGS= -g -lm -L. -ltodoc #removed -static flag so including math.h would work in task.c
 LFLAGS= -shared -Wl,-soname,$(SONAME)
 
 TESTDIR=test
@@ -50,7 +50,7 @@ $(DYNLIB): $(LIBOBJS)
 	$(CC) $(LFLAGS) $^ -o $(DYNLIB) 
 
 $(STATLIB): $(LIBOBJS)
-	ar rcs $@ $^ 	
+	ar rcs $@ $^
 
 $(TESTPRG): $(TESTSRC)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
@@ -80,4 +80,3 @@ setup:
 	mkdir -p $(OBJDIR)
 
 .PHONY: all build rebuild clean dist distexec check install setup
-

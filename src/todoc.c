@@ -192,7 +192,7 @@ bool strings_equal(char* subject, char* first, char* sec){
 int main(int argc, char* argv[]){
 
     char* taskfilename = "todo.txt";
-    char* donefile = "done.txt";
+//    char* donefile = "done.txt";
 
     //bool verbose = false;
 
