@@ -156,7 +156,6 @@ void complete_task(char* filename, int number)
     tasklist_free(list);
 }
 
-
 // Help functions.
 void print_version(){
     printf("todoc version %d.%d.%d by Ben Davenport-Ray and contributors.\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);

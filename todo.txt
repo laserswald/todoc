@@ -1,3 +1,4 @@
-(E) +License talk to Mitch about license 
-(D) +School housing
-(B) +Look up webhosting 
+(A) task one
+(B) 2013-12-22 task two
+2013-12-22 task three
+x (C) task four

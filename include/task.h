@@ -7,9 +7,6 @@
 #ifndef TASK
 #define TASK
 
-//this might need to be moved somewhere else -- Noah
-#define VALIDEXPR(a,b) if(!(a)) return b;
-
 typedef struct task_t{
 	char* description;
 	char priority;
@@ -35,16 +32,16 @@ bool task_has_keyword(Task* t, char* string);
  *
  * PARAMETERS: Task* task, char* str
  *
- * RETURNS: Task* - task with inserted data. Returns NULL if error occurs (this includes if str is
- * an invalidly formatted string).
+ * RETURNS: Task* - task with inserted data. Returns NULL if error occurs. An invalidly formatted
+ * task will not trigger an error. Instead the entire task is treated as the description of the
+ * task.
  *
- * AUTHOR: Noah Harvey
+ * AUTHOR: theNerd247
  * 
- * NOTE: this function calls malloc to set task->description
+ * NOTE: this function calls malloc to set task->description.
+ *
  */
 Task* task_parse(Task* task, char* str);
-
-//void task_parse(Task* t, char* string);
 
 int task_has_project(Task* t, char* project);
 int task_has_context(Task* t, char* context);

@@ -115,32 +115,12 @@ char* task_dump(Task* t){
 	return returnString;
 }
 
-// FIXME: This is not complete or even working.
-/*
- * void task_parse(Task* task, char* string){
- *     char* restOfString = malloc(256); 
- *     // Get the completion status.
- *     if(sscanf(string, "x %s", restOfString) != EOF){
- *         task->complete = true;
- *     } else {
- *         task->complete = false;
- *         restOfString = string;
- *     }
- *     string = restOfString;
- *     char* c = NULL;
- *     if (sscanf(string, "(%c) %s", c, restOfString)){
- *         
- *     }
- *     free(restOfString);
- * }
- *  */
-
-//helper function for task_parse
+//helper function for task_parse()
 //converts from form "YYYY-MM-DD" to DDMMYYYY as an int 
 int parsedate(char* expr){
 	int stamp = 0;
-	//because this function will only be called when expr is in correct
-	//format we don't need to do any checking 
+	//because this function should only be called when expr is in correct
+	//format we don't need to do any checking
 
 	//pull out the characters in form DDMMYYYY form
 	char tmpform[9];
@@ -153,14 +133,19 @@ int parsedate(char* expr){
 	//the "-48" is to convert from ascii to int
 	for (i = 0; i < 8; i++)
 		stamp += (tmpform[7-i]-48)*pow(10,i);
+
 	return stamp;
 }
 
 Task* task_parse(Task* task, char* str){
+	//sanity checks
+	if(!task  || !str) return NULL;	
+	if(strcmp(str,"") == 0) return NULL;
+
 	//define variables
 	size_t nmatches; //number of regex substrings
 	regex_t regexpr; //struct to hold compiled regex (man regex.h)
-	char buff[1000]; //a large buffer to use with str.sub
+	char buff[11]; //a large buffer to use with str.sub
 	size_t descstrt = 0; //holds the index of the start of the description, default: beginning of 0
 	
 	//regex string for parsing 
@@ -168,20 +153,19 @@ Task* task_parse(Task* task, char* str){
 	char* regx = "^(x )?(\\([A-Z]\\) )?([0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2} )?([^\n]*)$";
 
 	//compile the regex struct
-	VALIDEXPR(!regcomp(&regexpr,regx,REG_EXTENDED),NULL);
+	if(regcomp(&regexpr,regx,REG_EXTENDED)) return NULL;
 	nmatches = regexpr.re_nsub;
 	regmatch_t matches[nmatches];
 
 	//execute the regex tree
-	VALIDEXPR(!regexec(&regexpr,str,nmatches,matches,0),NULL);
+	if(regexec(&regexpr,str,nmatches,matches,0)) return NULL;
 
 	//grab the data matched and store it in the Task
 	size_t i;
 	for (i = 1; i < nmatches; i++)
 	{
-		//for each valid index grab info from matches[]
-		//depending on i map info grabbed and assign to task
-		/* map
+		//for each valid index grab substring using the index given by matches[]
+		/* map i =
  		 * 1 - complete?
  		 * 2 - priority?
  		 * 3 - date? 
@@ -190,6 +174,7 @@ Task* task_parse(Task* task, char* str){
 		int end  = matches[i].rm_eo;
 		if(strt == -1 || end == -1) continue;
 	
+		//depending on i set the values of the task
 		descstrt = end;	
 		switch(i)
 		{
@@ -206,9 +191,9 @@ Task* task_parse(Task* task, char* str){
 	}
 
 	//get the description which starts from the last valid end index
-	strsub(str,descstrt,strlen(str)-1,buff);
-	char* desc = (char*)malloc(sizeof(char)*strlen(buff));
-	strncpy(desc,buff,strlen(buff));
+	char* desc = (char*)malloc(sizeof(char)*(strlen(str)-descstrt+1));
+	strsub(str,descstrt,strlen(str)-1,desc);
+	free(task->description); //get rid of the old description if it exists
 	task->description = desc;
 
 	return task;
