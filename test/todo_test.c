@@ -1,4 +1,3 @@
-
 #include "speedunit.h"
 
 void task_fixture();
