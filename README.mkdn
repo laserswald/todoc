@@ -40,4 +40,5 @@ to build the program. Installation hasn't been placed into the makefile (yet!) b
     - Error system makes program return failure if something bad happens
     - Added testing code for most of the library
 
-
+## Dependencies
+*  glibc (for regex.h in task.c)

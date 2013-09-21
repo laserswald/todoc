@@ -156,7 +156,6 @@ void complete_task(char* filename, int number)
     tasklist_free(list);
 }
 
-
 // Help functions.
 void print_version(){
     printf("todoc version %d.%d.%d by Ben Davenport-Ray and contributors.\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUILD);
@@ -192,7 +191,7 @@ bool strings_equal(char* subject, char* first, char* sec){
 int main(int argc, char* argv[]){
 
     char* taskfilename = "todo.txt";
-    char* donefile = "done.txt";
+//    char* donefile = "done.txt";
 
     //bool verbose = false;
 
