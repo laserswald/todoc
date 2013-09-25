@@ -1,4 +1,4 @@
-#include <math.h> //for parsedate()
+#include <math.h> //for parsedate(), task_dump()
 #include <regex.h> //gnu's regex.h
 #include <stdbool.h>
 #include <stddef.h>
@@ -10,13 +10,14 @@
 #include "str.h"
 
 // Make a new task. 
-Task* task_new(){
-    Task* t = (Task*)malloc(sizeof(Task));
+	Task* task_new(){
+	Task* t = (Task*)malloc(sizeof(Task));
 
-    // Set the description to a newly allocated space in memory with nothing in it.
+	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
-    t->priority = ' ';
-    t->complete = false;
+	t->priority = ' ';
+	t->complete = false;
+	t->datestamp = -1;
 	return t;
 }
 
@@ -50,20 +51,20 @@ void task_set_string(Task* t, char* string){
  */
 int task_append(Task* t, char* string){
 
-    // If it's a null, return true, there's an error.
+  // If it's a null, return true, there's an error.
 	if (t == NULL) return 1;     
 	int oldlen, newlen;
     
-    // Get the length of the string before and after. 
-    oldlen = strlen(t->description);
+  // Get the length of the string before and after. 
+  oldlen = strlen(t->description);
 	newlen = strlen(string) + oldlen + 1;
 
-    // Reallocate the string's space in memory and concatenate the given string.
+  // Reallocate the string's space in memory and concatenate the given string.
 	t->description = realloc(t->description, (sizeof(char) * newlen));
 	strncat(t->description, string, newlen);
     
-    // No error, so return false.
-    return 0;
+  // No error, so return false.
+  return 0;
 }
 
 // Get the priority of this task.
@@ -98,8 +99,38 @@ char* task_dump(Task* t){
     if (t->complete){
         strLength += 2;
         returnString = realloc(returnString, strLength+1);
+				if (!returnString)
+				{
+					perror("Cannot realloc for completion");
+					free(returnString);
+					return NULL;
+				}
         strcat(returnString, "x ");
     }
+
+		// Builde the due date part
+		if(t->datestamp != -1)
+		{
+			strLength += 10;
+			returnString = realloc(returnString, strLength);
+
+			size_t i;
+			int buff[8];
+
+			/* Grab the digits  from the datestamp, below is the non-single line form for the algorithm
+			 * int num1 = ((int)(numb/pow(10,7-i)));
+			 * int num2 = ((int)(numb/pow(10,8-i)));
+			 *	tmp = (num1)-(num2)*10;
+			 */
+			for (i = 0; i < 8; i++)
+				buff[i] = ((int)(t->datestamp/pow(10,7-i)))-(((int)(t->datestamp/pow(10,8-i)))*10);
+		
+			//write the digits into a string buffer
+			char str[11];
+			str[10] = '\0';
+			sprintf(str,"%i%i%i%i-%i%i-%i%i",buff[7],buff[6],buff[5],buff[4],buff[3],buff[2],buff[1],buff[0]);
+			strcat(returnString,str);
+		}
     
     // Add the description.
     strLength += strlen(t->description);
@@ -137,6 +168,7 @@ int parsedate(char* expr){
 	return stamp;
 }
 
+//see task.h for info
 Task* task_parse(Task* task, char* str){
 	//sanity checks
 	if(!task  || !str) return NULL;	
