@@ -1,5 +1,6 @@
 #define _GNU_SOURCE // For asprintf()
-
+#include <math.h> //for parsedate(), task_dump()
+#include <regex.h> //gnu's regex.h
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -14,13 +15,14 @@
 #include "task.h"  
 
 // Make a new task. 
-Task* task_new(){
-    Task* t = (Task*)malloc(sizeof(Task));
+	Task* task_new(){
+	Task* t = (Task*)malloc(sizeof(Task));
 
-    // Set the description to a newly allocated space in memory with nothing in it.
+	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
-    t->priority = ' ';
-    t->complete = false;
+	t->priority = ' ';
+	t->complete = false;
+	t->datestamp = -1;
 	return t;
 }
 
@@ -72,7 +74,6 @@ char* task_dump(Task* t){
         //char* date =  get_date();
         check(asprintf(&returnString, "x %s", returnString) != -1, "Asprintf died.");      
     } 
-
     // return the string.
 	return returnString;
 error:
@@ -95,6 +96,7 @@ int parsedate(char* expr){
 	return atoi(tmpform);
 }
 
+<<<<<<< HEAD
 int task_parse(Task* task, char* str){
 	//sanity checks
 	if(!task || !str) return -1;	
