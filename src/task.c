@@ -1,4 +1,5 @@
 #define _GNU_SOURCE // For asprintf()
+
 #include <math.h> //for parsedate(), task_dump()
 #include <regex.h> //gnu's regex.h
 #include <stdbool.h>
@@ -74,7 +75,8 @@ char* task_dump(Task* t){
         //char* date =  get_date();
         check(asprintf(&returnString, "x %s", returnString) != -1, "Asprintf died.");      
     } 
-    // return the string.
+    
+   // return the string.
 	return returnString;
 error:
     free(returnString);
@@ -96,7 +98,6 @@ int parsedate(char* expr){
 	return atoi(tmpform);
 }
 
-<<<<<<< HEAD
 int task_parse(Task* task, char* str){
 	//sanity checks
 	if(!task || !str) return -1;	
