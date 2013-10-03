@@ -148,7 +148,7 @@ void complete_task(char* filename, int number)
     tasklist_read(list, file);
     fclose(file);
     Task* task = tasklist_get(list, number);
-    task_complete(task);
+    task_set_complete(task, true);
     file = fopen(filename, "w");
     tasklist_dump(list, file);
     fclose(file);

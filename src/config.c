@@ -1,5 +1,0 @@
-
-
-void load_configuration(){
-    
-}

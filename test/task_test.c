@@ -2,6 +2,7 @@
 #include "task.h"
 #include "speedunit.h"
 #include "dbg.h"
+
 void task_setup(){
 }
 
@@ -24,7 +25,9 @@ void append_test(){
 void dump_test(){
     Task *task = task_new();
     task_append(task, "Testing task.");
-    char* dump = (char*)task_dump(task);
+     
+    char* dump = task_dump(task);
+    debug("%s", dump);
     sp_assert(strcmp("Testing task.", dump) == 0, 
                         "Dumped task is not the same as given task information.");
     task_free(task);
@@ -41,7 +44,7 @@ void keyword_test(){
 void complete_test(){
     Task * task = task_new();
     task_append(task, "Testing completion");
-    task_complete(task);
+    task_set_complete(task, true);
     debug("Task = '%s'", task_dump(task));
     sp_assert(strcmp(task_dump(task), "x Testing completion") == 0, 
             "Task completion did not work");
@@ -55,14 +58,20 @@ void parse_test(){
 	int i;
 	for (i = 0; i < tsknum; i++)
 		task[i] = task_new();
+    
+    //set of test tasks
+    char* testTasks[] = {
+        "x task with nothing",
+	    "(A) task with prio only",
+        "2013-03-02 task with date only",
+        "(B) 2013-03-02 task with date and prio",
+        "x (C) 2013-03-02 complete task"
+    };
 
 	//test valid task_parse calls
-	task_parse(task[0], "x task with nothing");
-	task_parse(task[1], "(A) task with prio only");
-	task_parse(task[2], "2013-03-02 task with date only");
-	task_parse(task[3], "(B) 2013-03-02 task with date and prio");
-	task_parse(task[4], "x (C) 2013-03-02 complete task");
-	
+    for (i = 0; i < tsknum-1; i++) {
+        task_parse(task[i], testTasks[i]);
+    }
 	//test invalid task_parse calls
 	sp_assert(task_parse(task[5], "invalid task (D) form 2013-03-02"), "task_parse failed for invalid task format");
 	sp_assert((task_parse(NULL,"a null task string") == 0), "task_parse does not fail with NULL task");
@@ -97,20 +106,22 @@ void parse_test(){
 		switch(i)
 		{
 			case 0: 
-				sp_assert(strcmp(output, "task with nothing") == 0, "task_parse fails with simple task");
+				sp_streql(output, testTasks[i], "task_parse fails with simple task");
 				break;
 			case 1: 
-				sp_assert(strcmp(output, "(A) task with prio only") == 0, "task_parse fails with task containing priority only");
+				sp_streql(output, testTasks[i], "task_parse fails with task containing priority only");
 				break;
 			case 2: 
-				sp_assert(strcmp(output, "2013-03-02 task with date only") == 0, "task_parse fails with task containing date only");
+				sp_streql(output, testTasks[i], "task_parse fails with task containing date only");
 				break;
 			case 3: 
-				sp_assert(strcmp(output, "(B) 2013-03-02 task with date and prio") == 0, "task_parse fails with task containing prio and date");
+				sp_streql(output, testTasks[i], "task_parse fails with task containing prio and date");
 				break;
 			case 4: 
-				sp_assert(strcmp(output, "x (C) 2013-03-02 complete task") == 0, "task_parse fails with complete task with prio and date");
+				sp_streql(output, testTasks[i], "task_parse fails with complete task with prio and date");
 				break;
+            default:
+                debug("Case not given...");
 		}
 	}
 

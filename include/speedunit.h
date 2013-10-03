@@ -21,13 +21,21 @@
 int tests_run;
 int tests_failed;
 
+// \macro 
+// Print the fail message.
 #define sp_pfail(message) do { fprintf(stderr, "fail (%s:%d): %s\n", __FILE__, __LINE__, message); tests_failed++; } while (0);
 
+/** Assert that the expression is true, if not, fail with the message.
+ *
+ * \param a The expression to be evaluated.
+ * \param message The message to display. 
+ */ 
 #define sp_assert(a, message) if (!(a)) sp_pfail(message)
 
+/** Assert that two strings are equal. If not, fail with the message.
+ *
+ */
 #define sp_streql(str, ing, message) sp_assert(strcmp(str, ing) == 0, message)
-
-#define sp_suite_start() 
 
 #define sp_run_test(test) printf("."); \
     test(); tests_run++
