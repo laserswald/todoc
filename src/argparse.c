@@ -35,7 +35,7 @@ void free_argelems(ArgElement *element){
 }
 
 /* Free an argument list. */
-void free_arglist(ArgList *list){
+void ArgList_free(ArgList *list){
     free_argelems(list->head);
     free(list);
 }
