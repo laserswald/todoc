@@ -13,17 +13,18 @@
 
 #include "dbg.h"
 #include "str.h"  //from libstr library
+#include "date.h"
 #include "task.h"  
 
 // Make a new task. 
-	Task* task_new(){
+Task* task_new(){
 	Task* t = (Task*)malloc(sizeof(Task));
 
 	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
 	t->priority = ' ';
 	t->complete = false;
-	t->datestamp = -1;
+	t->datestamp = NULL;
 	return t;
 }
 
@@ -38,8 +39,8 @@ void task_set_string(Task* t, const char* string){
     t->description = strdup(string);
 }
 
+// Appends the string to the task.
 int task_append(Task* t, const char* string){
-
     // If it's a null, return true, there's an error.
 	if (t == NULL) return 1;
     if (!t->description) t->description = strdup(string);    
@@ -67,8 +68,9 @@ char* task_dump(Task* t){
     if (strcmp(t->description, "") == 0) return NULL;
     
     char* returnString;
-    asprintf(&returnString, "%s", t->description);
-    
+    int err = asprintf(&returnString, "%s", t->description);
+    check(err != 0, "Asprintf cannot load description of task");  
+
     // Build the completion part
     if (t->complete){
         // TODO: Add the completion date.  
@@ -84,20 +86,28 @@ error:
 }
 
 // TODO: Make this make more sense and move it to another file
-//helper function for task_parse()
 //converts from form "YYYY-MM-DD" to DDMMYYYY as an int 
-int parsedate(char* expr){
+date* parsedate(char* expr){
 	//pull out the characters in form DDMMYYYY form
+    
+    /* OLD CODE
 	char tmpform[9];
 	strsub(expr,8,9,tmpform);
 	strsub(expr,5,6,tmpform+2);
 	strsub(expr,0,3,tmpform+4);
 	tmpform[8] = '\0';
-
 	//the "-48" is to convert from ascii to int
 	return atoi(tmpform);
+    */
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    sscanf(expr, "%d-%d-%d", &year, &month, &day);
+    date* d = date_new(year, month, day);
+    return d;
 }
 
+//Parse a string into a Task.
 int task_parse(Task* task, char* str){
 	//sanity checks
 	if(!task || !str) return -1;	

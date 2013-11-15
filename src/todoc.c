@@ -20,7 +20,6 @@ int add_task(char* filename, char* string){
         file = fopen(filename, "w+");
         if (file == NULL){
             perror("Add task");
-            
             goto error;
         }
     }

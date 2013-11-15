@@ -3,7 +3,8 @@
 # by Ben Davenport-Ray
 
 BINNAME=todoc
-VERSION=0.2.5
+# Major, minor, build number
+VERSION=0.2.6
 
 CC=gcc
 
@@ -33,7 +34,7 @@ OBJS:=$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(OBJECT))
 LIBOBJS:=$(filter-out obj/todo.o,$(OBJS))
 
 CFLAGS= -Wall -I$(INCLUDE) -g 
-LDFLAGS= -g -lm -L. -ltodoc #removed -static flag so including math.h would work in task.c
+LDFLAGS= -g -lm -L. -ltodoc
 LFLAGS= -shared -Wl,-soname,$(SONAME)
 
 TESTDIR=test
@@ -74,7 +75,7 @@ distexec:
 	$(ZIP) $(PKGNAME)-win32.zip README.md $(EXECUTABLE)
 
 check: $(TESTPRG)
-	./$(TESTPRG)
+	exec ./$(TESTPRG)
 
 setup:
 	mkdir -p $(BINDIR)
