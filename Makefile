@@ -81,4 +81,10 @@ setup:
 	mkdir -p $(BINDIR)
 	mkdir -p $(OBJDIR)
 
-.PHONY: all build rebuild clean dist distexec check install setup
+install: $(EXECUTABLE)
+	install $(EXECUTABLE) /usr/bin
+
+uninstall:
+	rm /usr/bin/$(EXECUTABLE)
+
+.PHONY: all build rebuild clean dist distexec check install uninstall setup
