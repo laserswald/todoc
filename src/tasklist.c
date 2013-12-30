@@ -40,7 +40,7 @@ int tasklist_append(Tasklist* this, Task* t){
 
 // Get the task at the index.
 Task* tasklist_get(Tasklist* list, int index){
-    Task* t = (Task*)List_get(list->list, index);
+    Task* t = (Task*)List_get(list->list, index-1);
     return t;
 }
 
@@ -49,7 +49,7 @@ Task* tasklist_remove(Tasklist* list, int index){
     return ( (Task*)List_remove(list->list, index) );
 }
 
-
+// TODO: Double free around here.
 // Construct a tasklist of tasks that match the filter.
 Tasklist* tasklist_search(Tasklist* list, char* filter){
 
@@ -72,7 +72,7 @@ int tasklist_display(Tasklist* list){
     int count = 0;
     void print_task(void* item){
         Task* t = (Task*)item;
-        printf("%d: %s\n", count, t->description);
+        task_show(t);
         count ++;
     }
     List_do(list->list, &print_task);
@@ -96,15 +96,16 @@ int tasklist_read(Tasklist *list, FILE* f){
 
     // Go through the file one line at a time.
     char buffer[256];
+    int lineno = 0;
     while (fgets(buffer, 255, f) != NULL){
-        
+        lineno ++; 
         // Remove the ending newline.
         char* start = buffer;
         int newline = strcspn(buffer, "\n");
         start[newline] = '\0';
 
         // Make a task to hold the line.
-        Task* temp = task_new();
+        Task* temp = task_new(lineno);
         task_append(temp, buffer);
 
         // Add it to the list.

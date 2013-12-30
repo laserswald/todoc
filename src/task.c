@@ -17,9 +17,9 @@
 #include "task.h"  
 
 // Make a new task. 
-Task* task_new(){
+Task* task_new(int linenumber){
 	Task* t = (Task*)malloc(sizeof(Task));
-
+    t->linenumber = linenumber;
 	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
 	t->priority = ' ';
@@ -58,6 +58,11 @@ char get_priority(Task* task){
 // Set the completion status of this task.
 void task_set_complete(Task* task, bool status){
     task->complete = status;
+}
+
+void task_show(Task* t){
+    char* dumped = task_dump(t);
+    printf("%d: %s\n", t->linenumber, dumped);
 }
 
 /** Dumps out the current task's data in Todo.txt format.*/

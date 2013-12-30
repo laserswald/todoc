@@ -11,6 +11,7 @@
 
 /** A structure storing information about tasks. */
 typedef struct task_t{
+    int linenumber; /** The line number in the file. */
 	char* description; /**< description of what the task is about. */
 	char priority; /**< priority of the task. */
     bool complete; /**< completion status */
@@ -21,7 +22,7 @@ typedef struct task_t{
  *
  * \return A new Task instance.
  */
-Task* task_new();
+Task* task_new(int linenumber);
 
 /** Free a task.
  *
@@ -87,5 +88,5 @@ int task_has_context(Task* t, char* context);
 
 char* task_dump(Task* t);
 
-void task_print(Task* t);
+void task_show(Task* t);
 #endif
