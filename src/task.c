@@ -17,9 +17,9 @@
 #include "task.h"  
 
 // Make a new task. 
-Task* task_new(int linenumber){
+Task* task_new(){
 	Task* t = (Task*)malloc(sizeof(Task));
-    t->linenumber = linenumber;
+    t->linenumber = 0;
 	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
 	t->priority = ' ';
@@ -60,6 +60,7 @@ void task_set_complete(Task* task, bool status){
     task->complete = status;
 }
 
+void task_set_lineno(Task* task, int lineno){ task->linenumber = lineno; }
 void task_show(Task* t){
     char* dumped = task_dump(t);
     printf("%d: %s\n", t->linenumber, dumped);

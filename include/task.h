@@ -22,7 +22,7 @@ typedef struct task_t{
  *
  * \return A new Task instance.
  */
-Task* task_new(int linenumber);
+Task* task_new();
 
 /** Free a task.
  *
@@ -57,6 +57,8 @@ int task_append(Task* t, const char* string);
 /** Set the completion status of the task.
  */
 void task_set_complete(Task* task, bool status);
+
+void task_set_lineno(Task* task, int lineno);
 
 /** Search if the task has a keyword in the description.
  */
