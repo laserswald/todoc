@@ -65,7 +65,6 @@ void tlist_search_test(){
         sp_assert(t, "Task is nonexistent.");
         sp_assert(strstr(t->description, "notfirst") != NULL, "Task was found with no keyword");
     } 
-
     tasklist_free(list);
 }
 

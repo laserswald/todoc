@@ -7,26 +7,48 @@
 #include "dbg.h"
 
 static List* list = NULL;
-char* first = "one";
-char* second = "two";
-char* third = "three";
-char* testarray[] = {"two", "one", "three"};
+char* first = "a";
+char* second = "b";
+char* third = "c";
+char* testarray[] = {"b", "a", "c"};
+
+void assertlistvals(List* l, char* vals[]){
+    ListNode* ln = l->head;
+    int i = 0;
+    for ( ; ln; i++, ln=ln->next){
+        sp_streql(vals[i], (char*)ln->data, "Lists are unequal.");
+    }  
+}
 
 void list_alloc_test(){
     list = List_new();
     sp_assert(list != NULL, "List is null.");
+    sp_assert(list->head == NULL, "List does not nullify head pointer");
+    sp_assert(list->tail == NULL, "List does not nullify tail pointer");
+    sp_assert(list->length == 0, "List length is not zero"); 
 }
 
 void add_get_test(){
-
-    List_add(list, first);
+    List_append(list, first);
     char* f = List_get(list, 0);
     sp_assert(f == first, "Stored data is not equal to non-stored data");
+}
 
+void push_pop_test(){
+    // Test: pop normal use
+    char* popped = List_pop(list);
+    sp_streql(popped, first, "Normal pop use not equal");
+    // Test: pop on blank list
+    popped = List_pop(list); 
+    sp_assert(popped == NULL, "Pop returned something. That's strange.");
+    // Test: push on blank list
+    List_push(list, first);
+    sp_assert(list->head->data == first, "Pushing did not happen!");
+    // Test: push on no list or
 }
 
 void remove_test(void){
-    List_add(list, second);
+    List_append(list, second);
     List_remove(list, 0);
     char *thingy = List_get(list, 0);
     sp_assert(thingy == second, "Removal did not happen.");    
@@ -39,9 +61,32 @@ void applytestfn(void* v){
 }
 
 void do_test(void){
-    List_add(list, first);
-    List_add(list, third);
+    List_append(list, first);
+    List_append(list, third);
     List_do(list, &applytestfn); 
+}
+
+int stringcmp(void* a, void* b){
+    char* as = a;
+    char* bs = b;
+    return strcmp(as, bs);
+}
+
+void list_sort_test(void){
+    List_push(list, "d");
+    List_push(list, "e");
+    ListNode* i = list->head; 
+    for (; i!=NULL; i=i->next)
+        debug("list item: %s", (char*)(i->data));
+    List* sorted = List_sort(list, &stringcmp);
+    debug("Sorting the list");
+    i = sorted->head;
+    for (; i!=NULL; i=i->next)
+        debug("list item: %s", (char*)(i->data));
+    char* sortedarray[] = {"a", "b", "c", "d", "e"};
+    assertlistvals(sorted, sortedarray); 
+    List_free(sorted);
+
 }
 
 void list_free_test(){
@@ -52,6 +97,9 @@ void linkedlist_fixture()
 {
     sp_run_test(list_alloc_test);
     sp_run_test(add_get_test);
+    sp_run_test(push_pop_test);
     sp_run_test(remove_test);
+    sp_run_test(do_test);
+    sp_run_test(list_sort_test);
     sp_run_test(list_free_test);
 }

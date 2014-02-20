@@ -3,7 +3,8 @@
 # by Ben Davenport-Ray
 
 BINNAME=todoc
-VERSION=0.2.5
+# Major, minor, build number
+VERSION=0.3
 
 CC=gcc
 
@@ -32,8 +33,8 @@ OBJDIR=obj
 OBJS:=$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(OBJECT))
 LIBOBJS:=$(filter-out obj/todo.o,$(OBJS))
 
-CFLAGS= -Wall -I$(INCLUDE) -g 
-LDFLAGS= -g -lm -L. -ltodoc #removed -static flag so including math.h would work in task.c
+CFLAGS= -std=c99 -Wall -I$(INCLUDE) -g 
+LDFLAGS= -g -lm -L. -ltodoc 
 LFLAGS= -shared -Wl,-soname,$(SONAME)
 
 TESTDIR=test
@@ -74,10 +75,16 @@ distexec:
 	$(ZIP) $(PKGNAME)-win32.zip README.md $(EXECUTABLE)
 
 check: $(TESTPRG)
-	./$(TESTPRG)
+	exec ./$(TESTPRG)
 
 setup:
 	mkdir -p $(BINDIR)
 	mkdir -p $(OBJDIR)
 
-.PHONY: all build rebuild clean dist distexec check install setup
+install: $(EXECUTABLE)
+	install $(EXECUTABLE) /usr/bin
+
+uninstall:
+	rm /usr/bin/$(EXECUTABLE)
+
+.PHONY: all build rebuild clean dist distexec check install uninstall setup

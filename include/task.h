@@ -6,14 +6,16 @@
 #ifndef TASK
 #define TASK
 
+#include "date.h"
 #include <stdbool.h>
 
 /** A structure storing information about tasks. */
 typedef struct task_t{
+    int linenumber; /** The line number in the file. */
 	char* description; /**< description of what the task is about. */
 	char priority; /**< priority of the task. */
     bool complete; /**< completion status */
-	int datestamp; /**< completion date */ 
+	date* datestamp; /**< completion date */ 
 }Task;
 
 /** Allocate a new Task.
@@ -56,6 +58,8 @@ int task_append(Task* t, const char* string);
  */
 void task_set_complete(Task* task, bool status);
 
+void task_set_lineno(Task* task, int lineno);
+
 /** Search if the task has a keyword in the description.
  */
 bool task_has_keyword(Task* t, const char* string);
@@ -86,5 +90,9 @@ int task_has_context(Task* t, char* context);
 
 char* task_dump(Task* t);
 
-void task_print(Task* t);
+void task_show(Task* t);
+
+// Compares the tasks together. 
+int task_default_compare(void* a, void* b);
+
 #endif

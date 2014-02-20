@@ -1,5 +1,7 @@
 #define _GNU_SOURCE // For asprintf()
 
+#include <math.h> //for parsedate(), task_dump()
+#include <regex.h> //gnu's regex.h
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -11,16 +13,18 @@
 
 #include "dbg.h"
 #include "str.h"  //from libstr library
+#include "date.h"
 #include "task.h"  
 
 // Make a new task. 
 Task* task_new(){
-    Task* t = (Task*)malloc(sizeof(Task));
-
-    // Set the description to a newly allocated space in memory with nothing in it.
+	Task* t = (Task*)malloc(sizeof(Task));
+    t->linenumber = 0;
+	// Set the description to a newly allocated space in memory with nothing in it.
 	t->description = strdup("");
-    t->priority = ' ';
-    t->complete = false;
+	t->priority = ' ';
+	t->complete = false;
+	t->datestamp = NULL;
 	return t;
 }
 
@@ -35,8 +39,8 @@ void task_set_string(Task* t, const char* string){
     t->description = strdup(string);
 }
 
+// Appends the string to the task.
 int task_append(Task* t, const char* string){
-
     // If it's a null, return true, there's an error.
 	if (t == NULL) return 1;
     if (!t->description) t->description = strdup(string);    
@@ -56,6 +60,12 @@ void task_set_complete(Task* task, bool status){
     task->complete = status;
 }
 
+void task_set_lineno(Task* task, int lineno){ task->linenumber = lineno; }
+void task_show(Task* t){
+    char* dumped = task_dump(t);
+    printf("%d: %s\n", t->linenumber, dumped);
+}
+
 /** Dumps out the current task's data in Todo.txt format.*/
 char* task_dump(Task* t){
 	// Sanity checks.
@@ -64,16 +74,17 @@ char* task_dump(Task* t){
     if (strcmp(t->description, "") == 0) return NULL;
     
     char* returnString;
-    asprintf(&returnString, "%s", t->description);
-    
+    int err = asprintf(&returnString, "%s", t->description);
+    check(err != 0, "Asprintf cannot load description of task");  
+
     // Build the completion part
     if (t->complete){
         // TODO: Add the completion date.  
         //char* date =  get_date();
         check(asprintf(&returnString, "x %s", returnString) != -1, "Asprintf died.");      
     } 
-
-    // return the string.
+    
+   // return the string.
 	return returnString;
 error:
     free(returnString);
@@ -81,20 +92,28 @@ error:
 }
 
 // TODO: Make this make more sense and move it to another file
-//helper function for task_parse()
 //converts from form "YYYY-MM-DD" to DDMMYYYY as an int 
-int parsedate(char* expr){
+date* parsedate(char* expr){
 	//pull out the characters in form DDMMYYYY form
+    
+    /* OLD CODE
 	char tmpform[9];
 	strsub(expr,8,9,tmpform);
 	strsub(expr,5,6,tmpform+2);
 	strsub(expr,0,3,tmpform+4);
 	tmpform[8] = '\0';
-
 	//the "-48" is to convert from ascii to int
 	return atoi(tmpform);
+    */
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    sscanf(expr, "%d-%d-%d", &year, &month, &day);
+    date* d = date_new(year, month, day);
+    return d;
 }
 
+//Parse a string into a Task.
 int task_parse(Task* task, char* str){
 	//sanity checks
 	if(!task || !str) return -1;	
@@ -173,4 +192,20 @@ bool task_has_keyword(Task* t, const char* keyword){
 	} else {
 	    return true;
     }
+}
+
+int compare_completion(Task* a, Task* b){
+    if (a->complete && !b->complete) return 1;
+    if (!a->complete && b->complete) return -1;
+    return 0; 
+}
+
+int task_default_compare(void* a, void* b){
+    Task* ta = a;
+    Task* tb = b;
+    // Move all the complete tasks to the bottom.
+    int complete = compare_completion(a,b); 
+    if (complete != 0) return complete;
+    
+    return strcmp(ta->description, tb->description);  
 }

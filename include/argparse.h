@@ -24,6 +24,6 @@ typedef struct ArgList{
 ArgList* ArgList_make(int argc, char** argv);
 
 // Delete the list of arguments.
-int ArgList_free(ArgList* list);
+void ArgList_free(ArgList* list);
 
 #endif // Argparse

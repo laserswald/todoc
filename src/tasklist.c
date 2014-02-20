@@ -21,9 +21,13 @@ void destroytask(void* item){
 }
 
 // Destroy the given tasklist.
-void tasklist_free(Tasklist* list){
+void tasklist_destroy(Tasklist* list){
     if (list == NULL) return;
     List_do(list->list, &destroytask);
+    tasklist_free(list);
+}
+
+void tasklist_free(Tasklist* list){
     List_free(list->list);
     free(list);
 }
@@ -34,7 +38,7 @@ int tasklist_append(Tasklist* this, Task* t){
         // Make sure it's heard.
         return 1;
     }
-    List_add(this->list, t);
+    List_append(this->list, t);
     return 0;
 }
 
@@ -49,7 +53,7 @@ Task* tasklist_remove(Tasklist* list, int index){
     return ( (Task*)List_remove(list->list, index) );
 }
 
-
+// TODO: Double free around here.
 // Construct a tasklist of tasks that match the filter.
 Tasklist* tasklist_search(Tasklist* list, char* filter){
 
@@ -68,14 +72,14 @@ Tasklist* tasklist_search(Tasklist* list, char* filter){
 
 // Print out a tasklist to the console.
 int tasklist_display(Tasklist* list){
-
+    List* sorted = List_sort(list->list, &task_default_compare);
     int count = 0;
     void print_task(void* item){
         Task* t = (Task*)item;
-        printf("%d: %s\n", count, t->description);
+        task_show(t);
         count ++;
     }
-    List_do(list->list, &print_task);
+    List_do(sorted, &print_task);
     return count;
 }
 
@@ -96,8 +100,9 @@ int tasklist_read(Tasklist *list, FILE* f){
 
     // Go through the file one line at a time.
     char buffer[256];
+    int lineno = 0;
     while (fgets(buffer, 255, f) != NULL){
-        
+        lineno ++; 
         // Remove the ending newline.
         char* start = buffer;
         int newline = strcspn(buffer, "\n");
@@ -105,7 +110,8 @@ int tasklist_read(Tasklist *list, FILE* f){
 
         // Make a task to hold the line.
         Task* temp = task_new();
-        task_append(temp, buffer);
+        task_set_lineno(temp, lineno);
+        task_parse(temp, buffer);
 
         // Add it to the list.
         tasklist_append(list, temp);
