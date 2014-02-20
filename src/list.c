@@ -184,12 +184,12 @@ void* List_pop(List* list){
     //TODO: Make sure the list is fine
     check(list, "No list.");
     // TODO: make sure the head is okay
-    ListNode* head = list->head;
-    if (head == NULL) goto error;
-    list->head = list->head->next;
+    ListNode* prevHead = list->head;
+    if (prevHead == NULL) goto error;
+    void* data = prevHead->data;
+    list->head = prevHead->next;
     if (list->head)
         list->head->prev = NULL;
-    void* data = head->data;
     list->length = list->length - 1;
     return data;
 error:
@@ -209,17 +209,20 @@ List* merge(List* l, List* r, int (*cmp)(void*, void*)){
         rval = List_pop(r);
         if (lval == NULL && rval == NULL) {
             debug("Lists do not have accurate lengths; continuing.");
-            break;
         } else if (lval == NULL){
             List_append(ret, rval);
         } else if (rval == NULL){
             List_append(ret, lval);
         } else {
-            int bigger = cmp(lval, rval);
-            if (bigger <= 0){
+            // 
+            int comparison = cmp(lval, rval);
+            if (comparison < 0){
                 List_append(ret, lval);
+                List_push(r, rval);
+            } else {
+                List_append(ret, rval);
+                List_push(l, lval);
             }
-            else List_append(ret, rval);
         }
     }
     return ret;
@@ -242,8 +245,8 @@ List* List_sort(List* list, int (*cmp)(void*, void*)){
         i++;
         ln = ln->next;
     }
-    List_sort(left, cmp);
-    List_sort(right, cmp);
+    left = List_sort(left, cmp);
+    right = List_sort(right, cmp);
     return merge(left, right, cmp);
 }
 

@@ -195,8 +195,8 @@ bool task_has_keyword(Task* t, const char* keyword){
 }
 
 int compare_completion(Task* a, Task* b){
-    if (a->complete && !b->complete) return -1;
-    if (!a->complete && b->complete) return 1;
+    if (a->complete && !b->complete) return 1;
+    if (!a->complete && b->complete) return -1;
     return 0; 
 }
 

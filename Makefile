@@ -4,7 +4,7 @@
 
 BINNAME=todoc
 # Major, minor, build number
-VERSION=0.2.6
+VERSION=0.3
 
 CC=gcc
 

@@ -1,4 +1,0 @@
-(A) task one
-(B) 2013-12-22 task two
-2013-12-22 task three
-x (C) task four

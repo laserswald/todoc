@@ -111,7 +111,7 @@ int tasklist_read(Tasklist *list, FILE* f){
         // Make a task to hold the line.
         Task* temp = task_new();
         task_set_lineno(temp, lineno);
-        task_append(temp, buffer);
+        task_parse(temp, buffer);
 
         // Add it to the list.
         tasklist_append(list, temp);

@@ -7,10 +7,10 @@
 #include "dbg.h"
 
 static List* list = NULL;
-char* first = "one";
-char* second = "two";
-char* third = "three";
-char* testarray[] = {"two", "one", "three"};
+char* first = "a";
+char* second = "b";
+char* third = "c";
+char* testarray[] = {"b", "a", "c"};
 
 void assertlistvals(List* l, char* vals[]){
     ListNode* ln = l->head;
@@ -73,10 +73,20 @@ int stringcmp(void* a, void* b){
 }
 
 void list_sort_test(void){
+    List_push(list, "d");
+    List_push(list, "e");
+    ListNode* i = list->head; 
+    for (; i!=NULL; i=i->next)
+        debug("list item: %s", (char*)(i->data));
     List* sorted = List_sort(list, &stringcmp);
-    char* sortedarray[] = {"one", "three", "two"};
+    debug("Sorting the list");
+    i = sorted->head;
+    for (; i!=NULL; i=i->next)
+        debug("list item: %s", (char*)(i->data));
+    char* sortedarray[] = {"a", "b", "c", "d", "e"};
     assertlistvals(sorted, sortedarray); 
     List_free(sorted);
+
 }
 
 void list_free_test(){
