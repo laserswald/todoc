@@ -2,7 +2,7 @@
 //
 
 #ifndef __LLIST__
-#define _LLIST
+#define __LLIST__
 #include "dbg.h"
 #include <stdbool.h>
 
@@ -19,7 +19,6 @@ struct llist {
 };
 typedef struct llist List;
 
-
 List* List_new();
 
 int List_free(List* this);
@@ -31,17 +30,26 @@ int List_free(List* this);
  * @param: thingy a void pointer to the item to add.
  * returns 0 if everything went correctly; if not 0 then something goofed.
  */
-int List_add(List* list, void* thingy);
+int List_append(List* list, void* thingy);
 
-// Removes an element from a list.
-void* List_remove(List* list, int index);
+// Adds an item from the back of the list.
+void* List_retrieve(List* list);
 
+// Removes the first element from the list.
 void* List_pop(List* list);
 
-List* List_filter(List* list, bool (*function)(void*));
+// Adds to the front of the list.
+int List_push(List* list, void* item);
 
 // Returns a pointer to a list value.
 void* List_get(List* list, int index);
+
+// Removes an arbitrary element from a list.
+void* List_remove(List* list, int index);
+
+List* List_sort(List* list, int (*cmp)(void*, void*));
+
+// Want functional style? Why not?
 
 // Applies a function over a list.
 int List_do(List* list, void (*function)(void*));
@@ -49,4 +57,6 @@ int List_do(List* list, void (*function)(void*));
 // Runs the function over the list, returning a changed list.
 List* List_map(List* list, void* (*function)(void*));
 
+// Returns a new list that matches the function.
+List* List_filter(List* list, bool (*function)(void*));
 #endif//LLIST
