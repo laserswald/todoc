@@ -39,11 +39,11 @@ int add_task(char* filename, char* string){
     }
     
     printf("Added: %s\n", string);
-    tasklist_free(list);
+    tasklist_destroy(list);
     return 0;
 
 error:
-    tasklist_free(list);
+    tasklist_destroy(list);
     return 1;
 }
 
@@ -66,7 +66,7 @@ int list_tasks(char* filename){
     tasklist_display(list);
     // TODO: Display the amount of tasks.
     printf("---\n");
-    tasklist_free(list);
+    tasklist_destroy(list);
     return 0;
 }
 
@@ -93,8 +93,9 @@ void list_tasks_matching(char* filename, char* string){
         printf("Number of matches: %d.\n", count);
     }
     fclose(file);
-    tasklist_free(list);
+    // Make sure we don't destroy the data.
     tasklist_free(matches);
+    tasklist_destroy(list);
 }
 
 // Removes a task given the file and the index.
@@ -106,19 +107,22 @@ int remove_task(char* filename, int number){
         errno = 0;
         goto error;
     }
+
     // Open up the tasklist.
     Tasklist* list = tasklist_new();
     if (tasklist_read(list, file) != 0){
         puts("ERROR: could not read tasklist.");
         goto error;
     }
+
     fclose(file);
     fopen(filename, "w");
-    Task* t = tasklist_get(list, number);
+    Task* t = tasklist_get(list, number-1);
     if (t == NULL){
         puts("There is no task with that number.");
         goto error;
     }
+
     printf("Are you sure you want to remove %d: %s? (y/n)", number, task_dump(t));
     char answer[5];
     char* ans = answer;
