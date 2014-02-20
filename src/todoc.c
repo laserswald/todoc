@@ -128,7 +128,7 @@ int remove_task(char* filename, int number){
     char* ans = answer;
     fgets(ans, 5, stdin);
     if (strcmp(answer, "y\n") == 0){
-        tasklist_remove(list, number);
+        tasklist_remove(list, number-1);
         if (tasklist_dump(list, file) != 0){
             puts("ERROR: could not write tasklist.");
         }
