@@ -91,4 +91,8 @@ int task_has_context(Task* t, char* context);
 char* task_dump(Task* t);
 
 void task_show(Task* t);
+
+// Compares the tasks together. 
+int task_default_compare(void* a, void* b);
+
 #endif

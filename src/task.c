@@ -193,3 +193,19 @@ bool task_has_keyword(Task* t, const char* keyword){
 	    return true;
     }
 }
+
+int compare_completion(Task* a, Task* b){
+    if (a->complete && !b->complete) return -1;
+    if (!a->complete && b->complete) return 1;
+    return 0; 
+}
+
+int task_default_compare(void* a, void* b){
+    Task* ta = a;
+    Task* tb = b;
+    // Move all the complete tasks to the bottom.
+    int complete = compare_completion(a,b); 
+    if (complete != 0) return complete;
+    
+    return strcmp(ta->description, tb->description);  
+}
