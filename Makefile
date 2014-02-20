@@ -33,8 +33,8 @@ OBJDIR=obj
 OBJS:=$(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(OBJECT))
 LIBOBJS:=$(filter-out obj/todo.o,$(OBJS))
 
-CFLAGS= -Wall -I$(INCLUDE) -g 
-LDFLAGS= -g -lm -L. -ltodoc
+CFLAGS= -std=c99 -Wall -I$(INCLUDE) -g 
+LDFLAGS= -g -lm -L. -ltodoc 
 LFLAGS= -shared -Wl,-soname,$(SONAME)
 
 TESTDIR=test
