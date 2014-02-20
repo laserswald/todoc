@@ -21,9 +21,13 @@ void destroytask(void* item){
 }
 
 // Destroy the given tasklist.
-void tasklist_free(Tasklist* list){
+void tasklist_destroy(Tasklist* list){
     if (list == NULL) return;
     List_do(list->list, &destroytask);
+    tasklist_free(list);
+}
+
+void tasklist_free(Tasklist* list){
     List_free(list->list);
     free(list);
 }
@@ -34,13 +38,13 @@ int tasklist_append(Tasklist* this, Task* t){
         // Make sure it's heard.
         return 1;
     }
-    List_add(this->list, t);
+    List_append(this->list, t);
     return 0;
 }
 
 // Get the task at the index.
 Task* tasklist_get(Tasklist* list, int index){
-    Task* t = (Task*)List_get(list->list, index-1);
+    Task* t = (Task*)List_get(list->list, index);
     return t;
 }
 
@@ -68,14 +72,14 @@ Tasklist* tasklist_search(Tasklist* list, char* filter){
 
 // Print out a tasklist to the console.
 int tasklist_display(Tasklist* list){
-
+    List* sorted = List_sort(list->list, &task_default_compare);
     int count = 0;
     void print_task(void* item){
         Task* t = (Task*)item;
         task_show(t);
         count ++;
     }
-    List_do(list->list, &print_task);
+    List_do(sorted, &print_task);
     return count;
 }
 

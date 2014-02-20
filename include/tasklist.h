@@ -11,6 +11,7 @@ typedef struct tasklist_t {
 
 Tasklist* tasklist_new();
 void tasklist_free(Tasklist *list);
+void tasklist_destroy(Tasklist *list);
 
 int tasklist_read(Tasklist *list, FILE* file);
 int tasklist_dump(Tasklist *list, FILE* file);
