@@ -1,0 +1,6 @@
+include_rules
+CFLAGS += -I../cskel
+
+:foreach *.c |> !cc |> %B.o
+:*.o ../cskel/libcskel.la |> !a |> libcore.la 
+

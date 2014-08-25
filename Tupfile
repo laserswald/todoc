@@ -1,0 +1,5 @@
+include_rules
+CFLAGS += -I./cskel
+CFLAGS += -I./core
+: foreach *.c |> !cc |> todoc.o
+: *.o core/libcore.la cskel/libcskel.la |> gcc $(CFLAGS) -o %o %f |> todoc
