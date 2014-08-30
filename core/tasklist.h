@@ -3,7 +3,8 @@
 
 #include "stdio.h"
 #include "task.h"
-#include "list.h"
+#include "structures/list.h"
+
 typedef struct tasklist_t {
     List* list;
 }Tasklist;

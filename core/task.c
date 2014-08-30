@@ -11,8 +11,9 @@
 #include <math.h> //for parsedate()
 #include <regex.h> //gnu's regex.h
 
-#include "dbg.h"
-#include "str.h"  //from libstr library
+#include "util/dbg.h"
+//#include "str.h"  //from libstr library
+#include "bstrlib/bstrlib.h"
 #include "date.h"
 #include "task.h"  
 
@@ -155,6 +156,7 @@ int task_parse(Task* task, char* str){
 	
 		//depending on i set the values of the task
 		descstrt = end;	
+        bstring b;
 		switch(i)
 		{
 			case 1: 
@@ -164,8 +166,15 @@ int task_parse(Task* task, char* str){
 				task->priority = *(str+strt+1);
 				break;
 			case 3: 
-				task->datestamp = parsedate(strsub(str,strt,end,buff));
+                // Using BString's substring function instead of Noah's homemade one
+                b = bfromcstr(str);
+                bstring sub = bmidstr(b, strt, end);
+				task->datestamp = parsedate(bstr2cstr(sub, ';'));
+                bdestroy(sub);
+                bdestroy(b);
 				break;
+            default:
+                break;
 		}
 	}
     
