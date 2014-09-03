@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "task.h"
 #include "tasklist.h"
-#include "dbg.h"
+#include "util/dbg.h"
 
 // Make a new tasklist.
 Tasklist* tasklist_new(){

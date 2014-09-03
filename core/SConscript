@@ -1,0 +1,2 @@
+env = Environment(CPPPATH=['../cskel'])
+env.Library('core', Glob('*.c'))

@@ -1,6 +1,8 @@
 include_rules
 CFLAGS += -I../cskel
+CFLAGS += -I../cskel/structures
+CFLAGS += -I../cskel/util
 
 :foreach *.c |> !cc |> %B.o
-:*.o ../cskel/libcskel.la |> !a |> libcore.la 
+:*.o |> !a |> libtodoc.a 
 

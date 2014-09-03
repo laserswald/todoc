@@ -31,7 +31,7 @@ Task* task_new(){
 
 // Free a task.
 void task_free(Task* task){
-    free(task->description);
+    bcstrfree(task->description);
     free(task);
 }
 
@@ -180,12 +180,13 @@ int task_parse(Task* task, char* str){
     
     free(matches);
 
+    bstring in = bfromcstr(str);
     //get the description which starts from the last valid end index
-	char* desc = malloc(sizeof(char)*(strlen(str)-descstrt+1));
-	strsub(str,descstrt,strlen(str)-1,desc);
+	// char* desc = malloc(sizeof(char)*(strlen(str)-descstrt+1));
+    bstring desc = bmidstr(in, descstrt+1, blength(in));
 
 	if (task->description) free(task->description); //get rid of the old description if it exists
-	task->description = desc;
+	task->description = bstr2cstr(desc, ' ');
 
 	return 0;
 
