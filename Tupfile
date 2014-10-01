@@ -1,5 +1,0 @@
-include_rules
-CFLAGS += -I./cskel
-CFLAGS += -I./core
-: foreach *.c |> !cc |> 
-: *.o core/libtodoc.a cskel/libcskel.a |> gcc $(CFLAGS) -o %o %f |> todoc

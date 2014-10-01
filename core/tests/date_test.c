@@ -10,6 +10,7 @@ sp_test(date_mem_test){
     sp_assert(birthday->month == 0, "Birthday month is wrong");
 
     date_free(birthday);
+    return NULL;
 }
 
 sp_test(date_compare_test){
@@ -18,10 +19,12 @@ sp_test(date_compare_test){
     sp_assert(date_cmp(new_mill, some_date) < 0, "Dates not ordered correctly");
 
     date_free(new_mill);    
+    return NULL;
 }
 
 
 sp_test(date_suite){
     sp_run_test(date_mem_test);
     sp_run_test(date_compare_test);
+    return NULL;
 }

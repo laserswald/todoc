@@ -20,6 +20,7 @@ sp_test(append_test){
     // Make sure that the error is returned.
     sp_assert(error != 0, "Error code was not returned.");
     task_free(task);
+    return NULL;
 }
 
 sp_test(dump_test){
@@ -30,6 +31,7 @@ sp_test(dump_test){
     sp_assert(strcmp("x (A) 2013-09-25 Testing task.", dump) == 0, 
                         "Dumped task is not the same as given task information.");
     task_free(task);
+    return NULL;
 }
 
 sp_test(keyword_test){
@@ -38,6 +40,7 @@ sp_test(keyword_test){
     int has = task_has_keyword(task, "search");
     sp_assert(has != false, "Search did not find the word.");
     task_free(task);
+    return NULL;
 }
 
 sp_test(complete_test){
@@ -48,6 +51,7 @@ sp_test(complete_test){
     sp_assert(strcmp(task_dump(task), "x Testing completion") == 0, 
             "Task completion did not work");
     task_free(task);
+    return NULL;
 }
 
 sp_test(parse_test){
@@ -127,6 +131,7 @@ sp_test(parse_test){
 	for (i = 0; i < tsknum; i++)
 		task_free(task[i]);
 
+    return NULL;
 }
 
 sp_test(task_compare_test){
@@ -136,13 +141,15 @@ sp_test(task_compare_test){
     task_set_complete(not_done, false);
     int comp = task_default_compare(done, not_done);
     sp_assert(comp > 0, "Comparison of done vs not done inaccurate");
+    return NULL;
 }
 
-sp_test(task_fixture){
+sp_suite(task_fixture){
     sp_run_test(append_test);
     sp_run_test(dump_test);
     sp_run_test(keyword_test);
     sp_run_test(complete_test);
     sp_run_test(task_compare_test);
 //    sp_run_test(parse_test);
+    return NULL;
 }

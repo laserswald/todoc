@@ -44,6 +44,8 @@ sp_test(tlist_append_test){
     sp_streql(segundo->description, "A second thing.", "Second task is not correct.");
 
     tasklist_free(list);
+
+    return NULL;
 }
 
 sp_test(tlist_get_test){
@@ -51,6 +53,7 @@ sp_test(tlist_get_test){
     Task* secondItem = tasklist_get(list, 1);
     sp_streql(task_dump(secondItem), "This is the second task. #notfirst", "task gotten was not the right one.");
     tasklist_free(list);
+    return NULL;
 }
 
 sp_test(tlist_search_test){
@@ -66,6 +69,7 @@ sp_test(tlist_search_test){
         sp_assert(strstr(t->description, "notfirst") != NULL, "Task was found with no keyword");
     } 
     tasklist_free(list);
+    return NULL;
 }
 
 sp_test(tlist_remove_test){
@@ -79,16 +83,19 @@ sp_test(tlist_remove_test){
     task = tasklist_remove(list, 0);
     debug("Task info: '%s'", task->description);
     sp_streql("This is the first task. #first", task->description, "First task no longer exists.");
+    return NULL;
 
 }
 
 sp_test(tlist_load_test){
     Tasklist *list = tasklist_new();
-    FILE* f = fopen("test/testtodo.txt", "r");
+    FILE* f = fopen("core/tests/testtodo.txt", "r");
     sp_assert(f, "File does not exist");
     tasklist_read(list, f);
     Task* gotten = tasklist_get(list, 0);
+    debug("Aquired task: '%s'", gotten->description);
     sp_streql(gotten->description, "A test task in a file.", "Task was not read correctly.");
+    return NULL;
 }
 
 sp_test(tasklist_fixture){
@@ -97,4 +104,5 @@ sp_test(tasklist_fixture){
     sp_run_test(tlist_remove_test);
     sp_run_test(tlist_search_test);
     sp_run_test(tlist_load_test);
+    return NULL;
 }

@@ -127,8 +127,8 @@ int task_parse(Task* task, char* str){
 	size_t descstrt = 0; //holds the index of the start of the description, default: beginning of 0
 	
 	//regex string for parsing 
-	//       complete?>|priority?_--->|date?-------______---------------->|desc----->|
-	char* regx = "^(x )?(\\([A-Z]\\) )?([0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2} )?([^\n]*)$";
+	//       complete?>|priority?_->|date?-------______---------------->|desc----->|
+	char* regx = "^(x )?(?:\(([A-Z])\))?([0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2} )?([^\n]*)$";
 
 	//compile the regex struct
 	int compstat = regcomp(&regexpr,regx,REG_EXTENDED);

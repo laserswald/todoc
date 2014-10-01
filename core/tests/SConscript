@@ -1,1 +1,4 @@
-Program('todoc_test', Glob('*.c'), LIBS=['core', 'cskel'], LIBPATH=['..','../../cskel'], CPPPATH=['..','../../cskel']);
+Import('env')
+testprg = env.Program('todoc_test', Glob('*.c'), LIBS=['core', 'cskel'], LIBPATH=['..','../../cskel'], CPPPATH=['..','../../cskel'])
+utest = env.AddPostAction(testprg, testprg[0].path)
+env.AlwaysBuild(utest)
