@@ -1,6 +1,6 @@
 #include "task.h"
 #include "tasklist.h"
-#include "speedunit.h"
+#include "util/speedunit.h"
 #include <string.h>
 
 Tasklist* make_three_item_list(){
@@ -26,7 +26,7 @@ Tasklist* make_single_item_list(){
     return list;
 }
 
-void tlist_append_test(){
+sp_test(tlist_append_test){
     // Basic setup.
     Tasklist* list = make_single_item_list();
     /* Is the task in the correct spot? */
@@ -46,14 +46,14 @@ void tlist_append_test(){
     tasklist_free(list);
 }
 
-void tlist_get_test(){
+sp_test(tlist_get_test){
     Tasklist* list = make_three_item_list();
     Task* secondItem = tasklist_get(list, 1);
     sp_streql(task_dump(secondItem), "This is the second task. #notfirst", "task gotten was not the right one.");
     tasklist_free(list);
 }
 
-void tlist_search_test(){
+sp_test(tlist_search_test){
     Tasklist* list = make_three_item_list();
     Tasklist* notfirst = tasklist_search(list, "notfirst");
     sp_assert(notfirst != NULL, "Task list did not find anything.");
@@ -68,7 +68,7 @@ void tlist_search_test(){
     tasklist_free(list);
 }
 
-void tlist_remove_test(){
+sp_test(tlist_remove_test){
     Tasklist* list = make_three_item_list();
     Task* task = tasklist_remove(list, 1);
     sp_streql("This is the second task. #notfirst", task->description,
@@ -82,7 +82,7 @@ void tlist_remove_test(){
 
 }
 
-void tlist_load_test(){
+sp_test(tlist_load_test){
     Tasklist *list = tasklist_new();
     FILE* f = fopen("test/testtodo.txt", "r");
     sp_assert(f, "File does not exist");
@@ -91,7 +91,7 @@ void tlist_load_test(){
     sp_streql(gotten->description, "A test task in a file.", "Task was not read correctly.");
 }
 
-void tasklist_fixture(){
+sp_test(tasklist_fixture){
     sp_run_test(tlist_append_test);
     sp_run_test(tlist_get_test);
     sp_run_test(tlist_remove_test);

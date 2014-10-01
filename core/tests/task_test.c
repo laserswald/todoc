@@ -1,12 +1,12 @@
 #include <stdbool.h>
 #include "task.h"
-#include "speedunit.h"
-#include "dbg.h"
+#include "util/speedunit.h"
+#include "util/dbg.h"
 
-void task_setup(){
+sp_test(task_setup){
 }
 
-void append_test(){
+sp_test(append_test){
     Task* task = NULL;
     task = task_new();
     
@@ -22,7 +22,7 @@ void append_test(){
     task_free(task);
 }
 
-void dump_test(){
+sp_test(dump_test){
     Task *task = task_new();
     task_append(task, "x (A) 2013-09-25 Testing task.");
     char* dump = (char*)task_dump(task);
@@ -32,7 +32,7 @@ void dump_test(){
     task_free(task);
 }
 
-void keyword_test(){
+sp_test(keyword_test){
     Task *task = task_new();
     task_append(task, "Testing search.");
     int has = task_has_keyword(task, "search");
@@ -40,7 +40,7 @@ void keyword_test(){
     task_free(task);
 }
 
-void complete_test(){
+sp_test(complete_test){
     Task * task = task_new();
     task_append(task, "Testing completion");
     task_set_complete(task, true);
@@ -50,7 +50,7 @@ void complete_test(){
     task_free(task);
 }
 
-void parse_test(){
+sp_test(parse_test){
 	//set up the vars
 	int tsknum = 6;
 	Task* task[tsknum];
@@ -129,7 +129,7 @@ void parse_test(){
 
 }
 
-void task_compare_test(){
+sp_test(task_compare_test){
     Task* done = task_new();
     Task* not_done = task_new();
     task_set_complete(done, true);
@@ -138,7 +138,7 @@ void task_compare_test(){
     sp_assert(comp > 0, "Comparison of done vs not done inaccurate");
 }
 
-void task_fixture(){
+sp_test(task_fixture){
     sp_run_test(append_test);
     sp_run_test(dump_test);
     sp_run_test(keyword_test);

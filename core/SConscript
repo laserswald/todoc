@@ -1,2 +1,4 @@
 env = Environment(CPPPATH=['../cskel'])
-env.Library('core', Glob('*.c'))
+todoc_lib=env.Library('core', Glob('*.c'))
+SConscript('tests/SConscript')
+

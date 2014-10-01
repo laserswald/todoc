@@ -1,7 +1,7 @@
 #include "date.h"
-#include "speedunit.h"
+#include "util/speedunit.h"
 
-void date_mem_test(){
+sp_test(date_mem_test){
     date* birthday = date_new(1994, 0, 21);
     sp_assert(birthday, "Birthday is null");
 
@@ -12,7 +12,7 @@ void date_mem_test(){
     date_free(birthday);
 }
 
-void date_compare_test(){
+sp_test(date_compare_test){
     date* new_mill = date_new(2000, 0, 1); 
     date* some_date = date_new(2013, 9, 12);
     sp_assert(date_cmp(new_mill, some_date) < 0, "Dates not ordered correctly");
@@ -21,7 +21,7 @@ void date_compare_test(){
 }
 
 
-void date_suite(){
+sp_test(date_suite){
     sp_run_test(date_mem_test);
     sp_run_test(date_compare_test);
 }
