@@ -17,6 +17,7 @@
 #include "date.h"
 #include "task.h"  
 
+
 // Make a new task. 
 Task* task_new(){
 	Task* t = (Task*)malloc(sizeof(Task));
@@ -114,85 +115,44 @@ date* parsedate(char* expr){
     return d;
 }
 
+static char extract_priority(bstring taskstr){
+    bstring prio = bmidstr(taskstr, 0, 4);
+    if (prio->data[0] == '(' && 
+        prio->data[2] == ')' &&
+        prio->data[3] == ' ' &&
+        isupper(prio->data[1])){ 
+        return prio->data[1];
+    } else {
+        return '\0';
+    }
+    bdestroy(prio);
+}
+
 //Parse a string into a Task.
 int task_parse(Task* task, char* str){
 	//sanity checks
-	if(!task || !str) return -1;	
-	if(strcmp(str,"") == 0) return -1;
+    check(task, "Task was not given.");
+    check(str, "String is null.");
 
-	//define variables
-	size_t nmatches; ///<number of regex substrings
-	regex_t regexpr; // struct to hold compiled regex (man regex.h)
-	char buff[11]; // a large buffer to use with str.sub
-	size_t descstrt = 0; //holds the index of the start of the description, default: beginning of 0
-	
-	//regex string for parsing 
-	//       complete?>|priority?_->|date?-------______---------------->|desc----->|
-	char* regx = "^(x )?(?:\(([A-Z])\))?([0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2} )?([^\n]*)$";
-
-	//compile the regex struct
-	int compstat = regcomp(&regexpr,regx,REG_EXTENDED);
-    check(compstat == 0, "Regex could not compile: status is %d", compstat);
-	nmatches = regexpr.re_nsub;
-
-	regmatch_t *matches = calloc(sizeof(regmatch_t), nmatches);
-
-	//execute the regex tree
-	check(regexec(&regexpr,str,nmatches,matches,0) != REG_NOMATCH, "Regex did not match this string.");
-
-	//grab the data matched and store it in the Task
-	int i;
-	for (i = 1; i < nmatches; i++)
-	{
-		//for each valid index grab substring using the index given by matches[]
-		/* map i =
- 		 * 1 - complete?
- 		 * 2 - priority?
- 		 * 3 - date? 
- 		 */
-		int strt = matches[i].rm_so;
-		int end  = matches[i].rm_eo;
-		if(strt == -1 || end == -1) continue;
-	
-		//depending on i set the values of the task
-		descstrt = end;	
-        bstring b;
-		switch(i)
-		{
-			case 1: 
-				task->complete = true;
-				break;
-			case 2: 
-				task->priority = *(str+strt+1);
-				break;
-			case 3: 
-                // Using BString's substring function instead of Noah's homemade one
-                b = bfromcstr(str);
-                bstring sub = bmidstr(b, strt, end);
-				task->datestamp = parsedate(bstr2cstr(sub, ';'));
-                bdestroy(sub);
-                bdestroy(b);
-				break;
-            default:
-                break;
-		}
-	}
-    
-    free(matches);
-
-    bstring in = bfromcstr(str);
-    //get the description which starts from the last valid end index
-	// char* desc = malloc(sizeof(char)*(strlen(str)-descstrt+1));
-    bstring desc = bmidstr(in, descstrt+1, blength(in));
-
-	if (task->description) free(task->description); //get rid of the old description if it exists
-	task->description = bstr2cstr(desc, ' ');
-
-	return 0;
+    bstring s = bfromcstr(str);
+    bstring desc; 
+     
+    char p = extract_priority(s);  
+    // Check and make sure the priority is the correct format.
+    if (p != '\0'){
+        desc = bmidstr(s, 4, s->slen);
+    } else {
+        desc = s;
+    }
+    task->priority = p;
+     
+    task->description = bstr2cstr(desc, ' ');  
+    bdestroy(s);
+    bdestroy(desc);
+    return 0;
 
 error:
-    free(matches);
-    return -1;
+    return 1;
 }
 
 // Returns true if the search finds something; false otherwise.
@@ -218,4 +178,9 @@ int task_default_compare(void* a, void* b){
     if (complete != 0) return complete;
     
     return strcmp(ta->description, tb->description);  
+}
+
+void task_clear(Task* t){
+    t->description = NULL;
+    t->priority = '\0';
 }

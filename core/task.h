@@ -92,6 +92,8 @@ char* task_dump(Task* t);
 
 void task_show(Task* t);
 
+void task_clear(Task* t);
+
 // Compares the tasks together. 
 int task_default_compare(void* a, void* b);
 
