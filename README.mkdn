@@ -5,13 +5,10 @@
 ## Basic use:
 
 * Add a task with `todoc add "Herp a derp"` or `todoc -a "Herp a derp"`
-
 * Remove a task with `todoc rm 1` or `todoc -r 1`
-
 * Complete a task with `todoc do 1` or `todoc -d 1`
-
+* Uncomplete a task with `todoc undo 1` or `todoc -u 1`
 * Search for a task with `todoc search "Search string"` or `todoc -s "Search string"`. 
-
 * List all your tasks with `todoc ls` or `todoc -l`
 
 Todoc also has flags for specifying what file to use (`-f FILENAME`) and the verbosity (`-v`).

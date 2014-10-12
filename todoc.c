@@ -184,6 +184,7 @@ void print_help(){
          "Commands:\n"
          " -a|add 'task'\t\tadds the task to the list\n"
          " -d|do index\t\tmarks the task at the index as done\n"
+         " -u|undo index\t\tmarks the task at the index as incomplete\n"
          " -r|remove index\tremoves the task at the index\n"
          " -s|search 'query'\tsearches for the text in the tasklist\n"
          " -l|list\t\tshows all the tasks\n");
