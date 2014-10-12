@@ -1,7 +1,11 @@
+
 #include <stdbool.h>
-#include "task.h"
+
 #include "util/speedunit.h"
 #include "util/dbg.h"
+
+#include "task.h"
+#include "date.h"
 
 sp_test(append_test){
     Task* task = NULL;
@@ -85,6 +89,22 @@ sp_test(parse_test){
         i++;
         current = horriblydeformed[i];
     }while (current != 0);
+    
+    /** Completion testing.
+     * Tasks are only complete if they begin with 'x '.
+     */
+    char *legit_complete = "x I'm complete!";
+    task_clear(t);
+    task_parse(t, legit_complete);
+    sp_assert(t->complete == true, "Parser test for completion failed");
+    sp_streql(t->description, "I'm complete!", "complete marker was not removed");
+
+    /// Date testing.
+    task_clear(t);
+    char *t_with_start_date = "2014-10-12 This task has a start date.";
+    task_parse(t, t_with_start_date);
+    date *d = date_new(2014, 10, 12);
+    sp_assert(date_cmp(t->date_started, d) == 0, "Created date is not correct");
 
     return NULL;
 }

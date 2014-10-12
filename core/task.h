@@ -15,7 +15,8 @@ typedef struct task_t{
 	char* description; /**< description of what the task is about. */
 	char priority; /**< priority of the task. */
     bool complete; /**< completion status */
-	date* datestamp; /**< completion date */ 
+	date* date_completed; /**< completion date */ 
+    date* date_started;
 }Task;
 
 /** Allocate a new Task.

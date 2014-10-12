@@ -21,12 +21,7 @@
 // Make a new task. 
 Task* task_new(){
 	Task* t = (Task*)malloc(sizeof(Task));
-    t->linenumber = 0;
-	// Set the description to a newly allocated space in memory with nothing in it.
-	t->description = strdup("");
-	t->priority = ' ';
-	t->complete = false;
-	t->datestamp = NULL;
+    task_clear(t);
 	return t;
 }
 
@@ -46,7 +41,7 @@ int task_append(Task* t, const char* string){
     // If it's a null, return true, there's an error.
 	if (t == NULL) return 1;
     if (!t->description) t->description = strdup(string);    
-    asprintf(&(t->description), "%s%s", t->description, string);  
+    else asprintf(&(t->description), "%s%s", t->description, string);  
     // No error, so return false.
     return 0;
 }
@@ -93,20 +88,8 @@ error:
     return NULL;
 }
 
-// TODO: Make this make more sense and move it to another file
 //converts from form "YYYY-MM-DD" to DDMMYYYY as an int 
 date* parsedate(char* expr){
-	//pull out the characters in form DDMMYYYY form
-    
-    /* OLD CODE
-	char tmpform[9];
-	strsub(expr,8,9,tmpform);
-	strsub(expr,5,6,tmpform+2);
-	strsub(expr,0,3,tmpform+4);
-	tmpform[8] = '\0';
-	//the "-48" is to convert from ascii to int
-	return atoi(tmpform);
-    */
     int year = 0;
     int month = 0;
     int day = 0;
@@ -128,6 +111,20 @@ static char extract_priority(bstring taskstr){
     bdestroy(prio);
 }
 
+static bool extract_complete(bstring taskstr){
+    if (taskstr->data[0] == 'x')
+        return true;
+    else return false;
+}
+
+static bstring remove_part(bool b, bstring s, size_t len){
+    bstring ret;
+    if (b){
+        ret = bmidstr(s, len, s->slen);
+    } else ret = s;
+    return ret;
+}
+
 //Parse a string into a Task.
 int task_parse(Task* task, char* str){
 	//sanity checks
@@ -135,20 +132,22 @@ int task_parse(Task* task, char* str){
     check(str, "String is null.");
 
     bstring s = bfromcstr(str);
-    bstring desc; 
-     
-    char p = extract_priority(s);  
-    // Check and make sure the priority is the correct format.
-    if (p != '\0'){
-        desc = bmidstr(s, 4, s->slen);
-    } else {
-        desc = s;
+
+    task->complete = extract_complete(s);
+    s = remove_part(task->complete, s, 2);
+
+    if (isdigit(s->data[0])){
+        bstring datestr = bmidstr(s, 0, 11);
+        task->date_started = parsedate(bstr2cstr(datestr, ' '));
+        s = remove_part(true, s, 11);
     }
-    task->priority = p;
-     
-    task->description = bstr2cstr(desc, ' ');  
+
+    task->priority = extract_priority(s);  
+    bool x = (task->priority != '\0');
+    s = remove_part(x, s, 4);
+    
+    task->description = bstr2cstr(s, ' ');  
     bdestroy(s);
-    bdestroy(desc);
     return 0;
 
 error:
@@ -181,6 +180,11 @@ int task_default_compare(void* a, void* b){
 }
 
 void task_clear(Task* t){
-    t->description = NULL;
-    t->priority = '\0';
+    t->linenumber = 0;
+	// Set the description to a newly allocated space in memory with nothing in it.
+	t->description = NULL;
+	t->priority = ' ';
+	t->complete = false;
+	t->date_started = NULL;
+    t->date_completed = NULL;
 }
