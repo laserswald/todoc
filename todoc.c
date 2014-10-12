@@ -8,8 +8,8 @@
 #include "tasklist.h"
 
 #define VERSION_MAJOR 0
-#define VERSION_MINOR 3
-#define VERSION_BUILD 2
+#define VERSION_MINOR 2
+#define VERSION_BUILD 3
 
 int add_task(char* filename, char* string){
     Tasklist* list = tasklist_new();
@@ -145,18 +145,24 @@ int remove_task(char* filename, int number){
 /** Complete a task.
  *
  */
-void complete_task(char* filename, int number)
+void set_complete_task(char* filename, int number, bool comp)
 {    
     Tasklist* list = tasklist_new();
     FILE* file = fopen(filename, "r");
     tasklist_read(list, file);
     fclose(file);
+
     Task* task = tasklist_get(list, number-1);
-    task_set_complete(task, true);
+    task_set_complete(task, comp);
+
     file = fopen(filename, "w");
     tasklist_dump(list, file);
     fclose(file);
-    printf("Marked task '%s' (%d) as done.", task->description, number);
+    if (comp == true){
+        printf("Marked task '%s' (%d) as complete.", task->description, number);
+    } else {
+        printf("Marked task '%s' (%d) as incomplete.", task->description, number); 
+    }
     tasklist_free(list);
 }
 
@@ -231,7 +237,15 @@ int main(int argc, char* argv[]){
         // Complete a task.
         if (strings_equal(argv[i], "do", "-d")){
             int index = atoi(argv[i+1]);
-            complete_task(taskfilename, index);
+            set_complete_task(taskfilename, index, true);
+            i++;
+            continue;
+        }
+
+        // Uncomplete a task.
+        if (strings_equal(argv[i], "undo", "-u")){
+            int index = atoi(argv[i+1]);
+            set_complete_task(taskfilename, index, false);
             i++;
             continue;
         }
