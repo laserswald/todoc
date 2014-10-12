@@ -1,10 +1,11 @@
+
 #include <stdbool.h>
-#include "task.h"
+
 #include "util/speedunit.h"
 #include "util/dbg.h"
 
-sp_test(task_setup){
-}
+#include "task.h"
+#include "date.h"
 
 sp_test(append_test){
     Task* task = NULL;
@@ -55,82 +56,70 @@ sp_test(complete_test){
 }
 
 sp_test(parse_test){
-	//set up the vars
-	int tsknum = 6;
-	Task* task[tsknum];
-	int i;
-	for (i = 0; i < tsknum; i++)
-		task[i] = task_new();
+    // Stupid proof!
+    sp_assert(task_parse(NULL, "whoops") == 1, "Task is blank and did not fail");
+    Task* t = task_new();
+    sp_assert(task_parse(t, NULL) == 1, "Parsed text is null and did not fail");
     
-    //set of test tasks
-    char* testTasks[] = {
-        "x task with nothing",
-	    "(A) task with prio only",
-        "2013-03-02 task with date only",
-        "(B) 2013-03-02 task with date and prio",
-        "x (C) 2013-03-02 complete task"
-    };
+    // Time to actually test parsing.
+    char* wellformed = "This is a simple task with nothing on it.";
+    task_parse(t, wellformed);
+    debug("well formed task: %s", t->description);
+    sp_streql(t->description, wellformed, "Basic description did not pass");
+    
+    // Priority testing. Priority is always the first 4 characters, 
+    // like this:
+    // '(A) '
+    // "A" can be any uppercase char from A to Z.
+    char* wellformedwithprio = "(A) a well formed task with priority.";
+    char* wfwpminusprio = "a well formed task with priority.";
+    task_clear(t);
+    task_parse(t, wellformedwithprio);
+    debug("task: '%s'", t->description);
+    sp_streql(t->description, wfwpminusprio, 
+            "Description with priority did not pass");
 
-	//test valid task_parse calls
-    for (i = 0; i < tsknum-1; i++) {
-        task_parse(task[i], testTasks[i]);
-    }
-	//test invalid task_parse calls
-	sp_assert(task_parse(task[5], "invalid task (D) form 2013-03-02"), "task_parse failed for invalid task format");
-	sp_assert((task_parse(NULL,"a null task string") == 0), "task_parse does not fail with NULL task");
-	sp_assert(task_parse(task[0],"") == 0, "task_parse does not fail with empty string");
-	sp_assert(task_parse(task[0], NULL) == 0, "task_parse does not fail with NULL string");
+    char* horriblydeformed[] = {"(A )", "(a) ", "(A)task", NULL};
+    int i = 0;
+    char* current = horriblydeformed[0];
+    do {
+        task_parse(t, current);
+        sp_streql(t->description, current, 
+                "Parser accepted obviously bad priority input");
+        i++;
+        current = horriblydeformed[i];
+    }while (current != 0);
+    
+    /** Completion testing.
+     * Tasks are only complete if they begin with 'x '.
+     */
+    char *legit_complete = "x I'm complete!";
+    task_clear(t);
+    task_parse(t, legit_complete);
+    sp_assert(t->complete == true, "Parser test for completion failed");
+    sp_streql(t->description, "I'm complete!", "complete marker was not removed");
 
-	//check for valid returns	
-	
-	//uncomment to print out actual values for further debugging
-/*
- * 	for (i = 0; i < tsknum; i++)
- * 	{
- * 		Task* tsk = task[i];
- * 		if(!tsk) 
- * 		{
- * 			printf("\nTask[%i] failed to parse\n",i);
- * 			continue;
- * 		}
- * 		printf("\nTask[%i]\n-----------\n",i);
- * 		printf("descript: %s\n", tsk->description);
- * 		printf("prio: %c\n", tsk->priority);
- * 		printf("complete: %i\n", tsk->complete);
- * 		printf("datestamp: %i\n", tsk->datestamp);
- * 	}
- * 
- *  */
+    /// Date testing.
+    task_clear(t);
+    char *t_with_start_date = "2014-10-12 This task has a start date.";
+    task_parse(t, t_with_start_date);
+    date *d = date_new(2014, 10, 12);
+    sp_assert(date_cmp(t->date_started, d) == 0, "Created date is not correct");
 
-	for (i = 0; i < tsknum; i++)
-	{
-		Task* tsk = task[i];
-		char* output = task_dump(tsk);
-		switch(i)
-		{
-			case 0: 
-				sp_streql(output, testTasks[i], "task_parse fails with simple task");
-				break;
-			case 1: 
-				sp_streql(output, testTasks[i], "task_parse fails with task containing priority only");
-				break;
-			case 2: 
-				sp_streql(output, testTasks[i], "task_parse fails with task containing date only");
-				break;
-			case 3: 
-				sp_streql(output, testTasks[i], "task_parse fails with task containing prio and date");
-				break;
-			case 4: 
-				sp_streql(output, testTasks[i], "task_parse fails with complete task with prio and date");
-				break;
-            default:
-                debug("Case not given...");
-		}
-	}
+    
+    task_clear(t);
+    char *t_with_completion_date = "x 2014-10-12 This task has a completion date.";
+    task_parse(t, t_with_completion_date);
+    sp_assert(date_cmp(t->date_completed, d) == 0, "Created date is not correct");
 
-	for (i = 0; i < tsknum; i++)
-		task_free(task[i]);
-
+    task_clear(t);
+    char *t_with_completion_and_start_date = "x 2014-10-12 2014-08-11 This task has a completion date";
+    date *ds = date_new(2014, 8, 11);
+    task_parse(t, t_with_completion_and_start_date);
+    sp_assert(date_cmp(t->date_completed, d) == 0, "Created date is not correct");
+    sp_assert(date_cmp(t->date_started, ds) == 0, "Created date is not correct");
+    
+    task_free(t);
     return NULL;
 }
 
@@ -150,6 +139,6 @@ sp_suite(task_fixture){
     sp_run_test(keyword_test);
     sp_run_test(complete_test);
     sp_run_test(task_compare_test);
-//    sp_run_test(parse_test);
+    sp_run_test(parse_test);
     return NULL;
 }

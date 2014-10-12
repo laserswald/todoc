@@ -53,7 +53,6 @@ Task* tasklist_remove(Tasklist* list, int index){
     return ( (Task*)List_remove(list->list, index) );
 }
 
-// TODO: Double free around here.
 // Construct a tasklist of tasks that match the filter.
 Tasklist* tasklist_search(Tasklist* list, char* filter){
 

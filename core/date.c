@@ -16,6 +16,8 @@ int date_free(date* d){
 }
 
 int date_cmp(date* a, date* b){
+    if (!a) return -1;
+    if (!b) return 1;
     // See, we COULD do it with memcmp() but this is more modular, though more verbose.
     if (a->year == b->year){
         if (a->month == b->month){

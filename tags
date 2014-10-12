@@ -4,196 +4,499 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-ArgElement	include/argparse.h	/^typedef struct ArgElement {$/;"	s
-ArgElement	include/argparse.h	/^}ArgElement;$/;"	t	typeref:struct:ArgElement
-ArgList	include/argparse.h	/^typedef struct ArgList{$/;"	s
-ArgList	include/argparse.h	/^}ArgList;$/;"	t	typeref:struct:ArgList
-ArgList_free	include/argparse.h	/^int ArgList_free(ArgList* list);$/;"	p	signature:(ArgList* list)
-ArgList_make	include/argparse.h	/^ArgList* ArgList_make(int argc, char** argv);$/;"	p	signature:(int argc, char** argv)
-ArgList_make	src/argparse.c	/^ArgList *ArgList_make(int argc, char** argv){$/;"	f	signature:(int argc, char** argv)
-Argument	include/argparse.h	/^typedef struct Argument {$/;"	s
-Argument	include/argparse.h	/^}Argument;$/;"	t	typeref:struct:Argument
-BINDIR	Makefile	/^BINDIR=bin$/;"	m
-BINNAME	Makefile	/^BINNAME=todoc$/;"	m
-CC	Makefile	/^CC=gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS= -Wall -I$(INCLUDE) -g $/;"	m
-CONFIG_H	include/config.h	2;"	d
-DYNLIB	Makefile	/^DYNLIB=$(BINNAME).dll$/;"	m
-EXECUTABLE	Makefile	/^EXECUTABLE=$(BINNAME)$/;"	m
-INCLUDE	Makefile	/^INCLUDE=include$/;"	m
-LDFLAGS	Makefile	/^LDFLAGS= -static -L. -ltodoc$/;"	m
-LFLAGS	Makefile	/^LFLAGS= -shared -Wl,-soname,$(SONAME)$/;"	m
-LIBNAME	Makefile	/^LIBNAME=lib$(BINNAME)$/;"	m
-LIBOBJS	Makefile	/^LIBOBJS:=$(filter-out obj\/todo.o,$(OBJS))$/;"	m
-List	include/list.h	/^typedef struct llist List;$/;"	t	typeref:struct:llist
-ListNode	include/list.h	/^}ListNode;$/;"	t	typeref:struct:listelem
-List_add	include/list.h	/^int List_add(List* list, void* thingy);$/;"	p	signature:(List* list, void* thingy)
-List_add	src/list.c	/^int List_add(List* l, void* item){$/;"	f	signature:(List* l, void* item)
-List_do	include/list.h	/^int List_do(List* list, void (*function)(void*));$/;"	p	signature:(List* list, void (*function)(void*))
-List_do	src/list.c	/^int List_do(List* list, void (*function)(void*)){$/;"	f	signature:(List* list, void (*function)(void*))
-List_filter	include/list.h	/^List* List_filter(List* list, bool (*function)(void*));$/;"	p	signature:(List* list, bool (*function)(void*))
-List_filter	src/list.c	/^List* List_filter(List* list, bool (*fun)(void*)){$/;"	f	signature:(List* list, bool (*fun)(void*))
-List_free	include/list.h	/^int List_free(List* this);$/;"	p	signature:(List* this)
-List_free	src/list.c	/^int List_free(List* list)$/;"	f	signature:(List* list)
-List_get	include/list.h	/^void* List_get(List* list, int index);$/;"	p	signature:(List* list, int index)
-List_get	src/list.c	/^void* List_get(List* l, int index){$/;"	f	signature:(List* l, int index)
-List_map	include/list.h	/^List* List_map(List* list, void* (*function)(void*));$/;"	p	signature:(List* list, void* (*function)(void*))
-List_map	src/list.c	/^List* List_map(List* list, void* (*function)(void*)){$/;"	f	signature:(List* list, void* (*function)(void*))
-List_new	include/list.h	/^List* List_new();$/;"	p	signature:()
-List_new	src/list.c	/^List* List_new(){$/;"	f
-List_pop	include/list.h	/^void* List_pop(List* list);$/;"	p	signature:(List* list)
-List_remove	include/list.h	/^void* List_remove(List* list, int index);$/;"	p	signature:(List* list, int index)
-List_remove	src/list.c	/^void* List_remove(List* l, int index){$/;"	f	signature:(List* l, int index)
-MODULES	Makefile	/^MODULES=$/;"	m
-OBJDIR	Makefile	/^OBJDIR=obj$/;"	m
-OBJECT	Makefile	/^OBJECT=$(SRCS:.c=.o)$/;"	m
-OBJS	Makefile	/^OBJS:=$(patsubst $(SRCDIR)\/%,$(OBJDIR)\/%,$(OBJECT))$/;"	m
-PKGNAME	Makefile	/^PKGNAME=$(BINNAME)-$(VERSION)$/;"	m
-SONAME	Makefile	/^SONAME=$(LIBNAME).so.$(VERSION)$/;"	m
-SOURCE	Makefile	/^SOURCE=*.c$/;"	m
-SRCDIR	Makefile	/^SRCDIR=src$/;"	m
-SRCS	Makefile	/^SRCS:=$(wildcard $(SRCDIR)\/$(SOURCE))$/;"	m
-STATLIB	Makefile	/^STATLIB=$(LIBNAME).a$/;"	m
-TASK	include/task.h	8;"	d
-TASKLIST	include/tasklist.h	2;"	d
-TASK_SORT	include/task_sort.h	2;"	d
-TESTDIR	Makefile	/^TESTDIR=test$/;"	m
-TESTFLAGS	Makefile	/^TESTFLAGS=$/;"	m
-TESTPRG	Makefile	/^TESTPRG=$(BINNAME)_test$/;"	m
-TESTSRC	Makefile	/^TESTSRC:=$(wildcard $(TESTDIR)\/$(SOURCE))$/;"	m
-Task	include/task.h	/^}Task;$/;"	t	typeref:struct:task_t
-Tasklist	include/tasklist.h	/^}Tasklist;$/;"	t	typeref:struct:tasklist_t
-VERSION	Makefile	/^VERSION=0.2.5$/;"	m
-_LLIST	include/list.h	5;"	d
-__ARGPARSE__	include/argparse.h	4;"	d
-__SPEEDUNIT	test/speedunit.h	15;"	d
-__dbg_h__	include/dbg.h	4;"	d
-add_get_test	test/list_test.c	/^void add_get_test(){$/;"	f
-add_task	src/todoc.c	/^int add_task(char* filename, char* string){$/;"	f	signature:(char* filename, char* string)
-alphaSort	include/task_sort.h	/^int alphaSort(char* a, char* b);$/;"	p	signature:(char* a, char* b)
-append_test	test/task_test.c	/^void append_test(){$/;"	f
-applytestfn	test/list_test.c	/^void applytestfn(void* v){$/;"	f	signature:(void* v)
-arg	include/argparse.h	/^    Argument *arg;$/;"	m	struct:ArgElement	access:public
-arglist_add	src/argparse.c	/^int arglist_add(ArgList* l, Argument* a){$/;"	f	signature:(ArgList* l, Argument* a)
-argparse_fixture	test/argparse_test.c	/^void argparse_fixture(){$/;"	f
-check	include/dbg.h	29;"	d
-check_debug	include/dbg.h	38;"	d
-check_mem	include/dbg.h	35;"	d
-clean_errno	include/dbg.h	19;"	d
-complete	include/task.h	/^    bool complete;    $/;"	m	struct:task_t	access:public
-complete_task	src/todoc.c	/^void complete_task(char* filename, int number)$/;"	f	signature:(char* filename, int number)
-complete_test	test/task_test.c	/^void complete_test(){$/;"	f
-data	include/list.h	/^    void* data;$/;"	m	struct:listelem	access:public
-debug	include/dbg.h	13;"	d
-debug	include/dbg.h	15;"	d
-description	include/task.h	/^	char* description;$/;"	m	struct:task_t	access:public
-destroy_element	src/list.c	/^int destroy_element(ListNode* target){$/;"	f	signature:(ListNode* target)
-destroytask	src/tasklist.c	/^void destroytask(void* item){$/;"	f	signature:(void* item)
-do_test	test/list_test.c	/^void do_test(void){$/;"	f	signature:(void)
-dump_test	test/task_test.c	/^void dump_test(){$/;"	f
-first	test/list_test.c	/^char* first = "one";$/;"	v
-free_argelems	src/argparse.c	/^void free_argelems(ArgElement *element){$/;"	f	signature:(ArgElement *element)
-free_arglist	src/argparse.c	/^void free_arglist(ArgList *list){$/;"	f	signature:(ArgList *list)
-free_argument	src/argparse.c	/^void free_argument(Argument *arg){$/;"	f	signature:(Argument *arg)
-get_priority	src/task.c	/^char get_priority(Task* task){$/;"	f	signature:(Task* task)
-head	include/argparse.h	/^    struct ArgElement *head;$/;"	m	struct:ArgList	typeref:struct:ArgList::ArgElement	access:public
-head	include/list.h	/^    ListNode* head;$/;"	m	struct:llist	access:public
-keyword_test	test/task_test.c	/^void keyword_test(){$/;"	f
-length	include/argparse.h	/^    int length;$/;"	m	struct:ArgList	access:public
-length	include/list.h	/^    int length;$/;"	m	struct:llist	access:public
-linkedlist_fixture	test/list_test.c	/^void linkedlist_fixture()$/;"	f
-list	include/tasklist.h	/^    List* list;$/;"	m	struct:tasklist_t	access:public
-list_alloc_test	test/list_test.c	/^void list_alloc_test(){$/;"	f
-list_free_test	test/list_test.c	/^void list_free_test(){$/;"	f
-list_tasks	src/todoc.c	/^int list_tasks(char* filename){$/;"	f	signature:(char* filename)
-list_tasks_matching	src/todoc.c	/^void list_tasks_matching(char* filename, char* string){$/;"	f	signature:(char* filename, char* string)
-listelem	include/list.h	/^typedef struct listelem{$/;"	s
-llist	include/list.h	/^struct llist {$/;"	s
-load_configuration	include/config.h	/^void load_configuration();$/;"	p	signature:()
-load_configuration	src/config.c	/^void load_configuration(){$/;"	f
-log_err	include/dbg.h	22;"	d
-log_info	include/dbg.h	26;"	d
-log_warn	include/dbg.h	24;"	d
-main	src/todoc.c	/^int main(int argc, char* argv[]){$/;"	f	signature:(int argc, char* argv[])
-main	test/todo_test.c	/^int main(int argc, char** argv){$/;"	f	signature:(int argc, char** argv)
-make_single_item_list	test/tasklist_test.c	/^Tasklist* make_single_item_list(){$/;"	f
-make_three_item_list	test/tasklist_test.c	/^Tasklist* make_three_item_list(){$/;"	f
-name	include/argparse.h	/^    char *name;$/;"	m	struct:Argument	access:public
-new_argelem	src/argparse.c	/^ArgElement* new_argelem(Argument* arg){$/;"	f	signature:(Argument* arg)
-new_argument	src/argparse.c	/^Argument* new_argument(){$/;"	f
-next	include/argparse.h	/^    struct ArgElement *next;$/;"	m	struct:ArgElement	typeref:struct:ArgElement::ArgElement	access:public
-next	include/list.h	/^    struct listelem* next;$/;"	m	struct:listelem	typeref:struct:listelem::listelem	access:public
-no_args	test/argparse_test.c	/^void no_args(){$/;"	f
-option	include/argparse.h	/^    char *option;$/;"	m	struct:Argument	access:public
-parse_test	test/task_test.c	/^void parse_test(){$/;"	f
-prev	include/list.h	/^    struct listelem* prev;$/;"	m	struct:listelem	typeref:struct:listelem::listelem	access:public
-print_help	src/todoc.c	/^void print_help(){$/;"	f
-print_short_help	src/todoc.c	/^void print_short_help(){ $/;"	f
-print_version	src/todoc.c	/^void print_version(){$/;"	f
-priority	include/task.h	/^	char priority;$/;"	m	struct:task_t	access:public
-prioritySort	include/task_sort.h	/^int prioritySort(char* a, char* b);$/;"	p	signature:(char* a, char* b)
-remove_task	src/todoc.c	/^int remove_task(char* filename, int number){$/;"	f	signature:(char* filename, int number)
-remove_test	test/list_test.c	/^void remove_test(void){$/;"	f	signature:(void)
-second	test/list_test.c	/^char* second = "two";$/;"	v
-sentinel	include/dbg.h	32;"	d
-slide	src/list.c	/^ListNode* slide(ListNode* sl, int howmuch){$/;"	f	signature:(ListNode* sl, int howmuch)
-sp_assert	test/speedunit.h	26;"	d
-sp_pfail	test/speedunit.h	24;"	d
-sp_run_suite	test/speedunit.h	35;"	d
-sp_run_test	test/speedunit.h	32;"	d
-sp_streql	test/speedunit.h	28;"	d
-sp_suite_start	test/speedunit.h	30;"	d
-strings_equal	src/todoc.c	/^bool strings_equal(char* subject, char* first, char* sec){$/;"	f	signature:(char* subject, char* first, char* sec)
-tail	include/list.h	/^    ListNode* tail;$/;"	m	struct:llist	access:public
-task_append	include/task.h	/^int task_append(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
-task_append	src/task.c	/^int task_append(Task* t, char* string){$/;"	f	signature:(Task* t, char* string)
-task_complete	include/task.h	/^void task_complete(Task* task);$/;"	p	signature:(Task* task)
-task_complete	src/task.c	/^void task_complete(Task* task){$/;"	f	signature:(Task* task)
-task_dump	include/task.h	/^char* task_dump(Task* t);$/;"	p	signature:(Task* t)
-task_dump	src/task.c	/^char* task_dump(Task* t){$/;"	f	signature:(Task* t)
-task_fixture	test/task_test.c	/^void task_fixture(){$/;"	f
-task_free	include/task.h	/^void task_free(Task* task);$/;"	p	signature:(Task* task)
-task_free	src/task.c	/^void task_free(Task* task){$/;"	f	signature:(Task* task)
-task_has_context	include/task.h	/^int task_has_context(Task* t, char* context);$/;"	p	signature:(Task* t, char* context)
-task_has_keyword	include/task.h	/^bool task_has_keyword(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
-task_has_keyword	src/task.c	/^bool task_has_keyword(Task* t, char* keyword){$/;"	f	signature:(Task* t, char* keyword)
-task_has_project	include/task.h	/^int task_has_project(Task* t, char* project);$/;"	p	signature:(Task* t, char* project)
-task_new	include/task.h	/^Task* task_new();$/;"	p	signature:()
-task_new	src/task.c	/^Task* task_new(){$/;"	f
-task_parse	include/task.h	/^void task_parse(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
-task_parse	src/task.c	/^void task_parse(Task* task, char* string){$/;"	f	signature:(Task* task, char* string)
-task_print	include/task.h	/^void task_print(Task* t);$/;"	p	signature:(Task* t)
-task_set_string	include/task.h	/^void task_set_string(Task* t, char* string);$/;"	p	signature:(Task* t, char* string)
-task_set_string	src/task.c	/^void task_set_string(Task* t, char* string){$/;"	f	signature:(Task* t, char* string)
-task_setup	test/task_test.c	/^void task_setup(){$/;"	f
-task_t	include/task.h	/^typedef struct task_t{$/;"	s
-tasklist_append	include/tasklist.h	/^int tasklist_append(Tasklist *list, Task *task);$/;"	p	signature:(Tasklist *list, Task *task)
-tasklist_append	src/tasklist.c	/^int tasklist_append(Tasklist* this, Task* t){$/;"	f	signature:(Tasklist* this, Task* t)
-tasklist_display	include/tasklist.h	/^int tasklist_display(Tasklist *list);$/;"	p	signature:(Tasklist *list)
-tasklist_display	src/tasklist.c	/^int tasklist_display(Tasklist* list){$/;"	f	signature:(Tasklist* list)
-tasklist_dump	include/tasklist.h	/^int tasklist_dump(Tasklist *list, FILE* file);$/;"	p	signature:(Tasklist *list, FILE* file)
-tasklist_dump	src/tasklist.c	/^int tasklist_dump(Tasklist *list, FILE* f){$/;"	f	signature:(Tasklist *list, FILE* f)
-tasklist_fixture	test/tasklist_test.c	/^void tasklist_fixture(){$/;"	f
-tasklist_free	include/tasklist.h	/^void tasklist_free(Tasklist *list);$/;"	p	signature:(Tasklist *list)
-tasklist_free	src/tasklist.c	/^void tasklist_free(Tasklist* list){$/;"	f	signature:(Tasklist* list)
-tasklist_get	include/tasklist.h	/^Task* tasklist_get(Tasklist* list, int index);$/;"	p	signature:(Tasklist* list, int index)
-tasklist_get	src/tasklist.c	/^Task* tasklist_get(Tasklist* list, int index){$/;"	f	signature:(Tasklist* list, int index)
-tasklist_merge	include/tasklist.h	/^Tasklist* tasklist_merge(Tasklist *list, Tasklist *other);$/;"	p	signature:(Tasklist *list, Tasklist *other)
-tasklist_new	include/tasklist.h	/^Tasklist* tasklist_new();$/;"	p	signature:()
-tasklist_new	src/tasklist.c	/^Tasklist* tasklist_new(){$/;"	f
-tasklist_read	include/tasklist.h	/^int tasklist_read(Tasklist *list, FILE* file);$/;"	p	signature:(Tasklist *list, FILE* file)
-tasklist_read	src/tasklist.c	/^int tasklist_read(Tasklist *list, FILE* f){$/;"	f	signature:(Tasklist *list, FILE* f)
-tasklist_remove	include/tasklist.h	/^Task* tasklist_remove(Tasklist* list, int index);$/;"	p	signature:(Tasklist* list, int index)
-tasklist_remove	src/tasklist.c	/^Task* tasklist_remove(Tasklist* list, int index){$/;"	f	signature:(Tasklist* list, int index)
-tasklist_search	include/tasklist.h	/^Tasklist* tasklist_search(Tasklist *list, char *string);$/;"	p	signature:(Tasklist *list, char *string)
-tasklist_search	src/tasklist.c	/^Tasklist* tasklist_search(Tasklist* list, char* filter){$/;"	f	signature:(Tasklist* list, char* filter)
-tasklist_t	include/tasklist.h	/^typedef struct tasklist_t {$/;"	s
-testarray	test/list_test.c	/^char* testarray[] = {"two", "one", "three"};$/;"	v
-tests_failed	test/speedunit.h	/^int tests_failed;$/;"	v
-tests_run	test/speedunit.h	/^int tests_run;$/;"	v
-third	test/list_test.c	/^char* third = "three";$/;"	v
-tlist_append_test	test/tasklist_test.c	/^void tlist_append_test(){$/;"	f
-tlist_get_test	test/tasklist_test.c	/^void tlist_get_test(){$/;"	f
-tlist_load_test	test/tasklist_test.c	/^void tlist_load_test(){$/;"	f
-tlist_remove_test	test/tasklist_test.c	/^void tlist_remove_test(){$/;"	f
-tlist_search_test	test/tasklist_test.c	/^void tlist_search_test(){$/;"	f
+ArgElement	cskel/tools/argparse.h	/^typedef struct ArgElement {$/;"	s
+ArgElement	cskel/tools/argparse.h	/^}ArgElement;$/;"	t	typeref:struct:ArgElement
+ArgList	cskel/tools/argparse.h	/^typedef struct ArgList{$/;"	s
+ArgList	cskel/tools/argparse.h	/^}ArgList;$/;"	t	typeref:struct:ArgList
+ArgList_make	cskel/tools/argparse.c	/^ArgList *ArgList_make(int argc, char** argv){$/;"	f
+Argument	cskel/tools/argparse.h	/^typedef struct Argument {$/;"	s
+Argument	cskel/tools/argparse.h	/^}Argument;$/;"	t	typeref:struct:Argument
+BLACKBOARD_H	cskel/chalk/blackboard.h	4;"	d
+BSSSC_BUFF_LEN	cskel/bstrlib/bstrlib.c	2290;"	d	file:
+BSTRLIB_INCLUDE	cskel/bstrlib/bstrlib.h	16;"	d
+BSTRLIB_NOVSNP	cskel/bstrlib/bstrlib.c	2744;"	d	file:
+BSTRLIB_NOVSNP	cskel/bstrlib/bstrlib.h	29;"	d
+BSTR_BS_BUFF_LENGTH_GET	cskel/bstrlib/bstrlib.h	35;"	d
+BSTR_ERR	cskel/bstrlib/bstrlib.h	33;"	d
+BSTR_OK	cskel/bstrlib/bstrlib.h	34;"	d
+BS_BUFF_SZ	cskel/bstrlib/bstrlib.c	1772;"	d	file:
+CFCLEN	cskel/bstrlib/bstrlib.c	1278;"	d	file:
+CFCLEN	cskel/bstrlib/bstrlib.c	1288;"	d	file:
+DATE_H	core/date.h	3;"	d
+DArray	cskel/structures/darray.h	/^typedef struct DArray {$/;"	s
+DArray	cskel/structures/darray.h	/^}DArray;$/;"	t	typeref:struct:DArray
+DArray_check	cskel/structures/darray.c	/^int DArray_check(DArray* array){$/;"	f
+DArray_destroy	cskel/structures/darray.c	/^int DArray_destroy(DArray* array, int (*destroyfn)(void*)){$/;"	f
+DArray_expand	cskel/structures/darray.c	/^int DArray_expand(DArray* array){$/;"	f
+DArray_free	cskel/structures/darray.c	/^int DArray_free(DArray* array){$/;"	f
+DArray_get	cskel/structures/darray.c	/^void* DArray_get(DArray* array, int index){$/;"	f
+DArray_grow	cskel/structures/darray.c	/^int DArray_grow(DArray* array, int newsize){$/;"	f
+DArray_init	cskel/structures/darray.c	/^DArray* DArray_init(DArray* array, int ispace, size_t datasize){$/;"	f
+DArray_pop	cskel/structures/darray.c	/^void* DArray_pop(DArray* array){$/;"	f
+DArray_push	cskel/structures/darray.c	/^int DArray_push(DArray* array, void* item){$/;"	f
+DArray_remove	cskel/structures/darray.c	/^void* DArray_remove(DArray* array, int index){$/;"	f
+DArray_set	cskel/structures/darray.c	/^int DArray_set(DArray* array, int index, void* item){$/;"	f
+ERRORSTRUCT	cskel/util/errstruct.h	3;"	d
+INITIAL_STATIC_FIND_INDEX_COUNT	cskel/bstrlib/bstrlib.c	1552;"	d	file:
+LONG_BITS_QTY	cskel/bstrlib/bstrlib.c	1275;"	d	file:
+LONG_LOG_BITS_QTY	cskel/bstrlib/bstrlib.c	1274;"	d	file:
+LONG_TYPE	cskel/bstrlib/bstrlib.c	1276;"	d	file:
+List	cskel/structures/list.h	/^typedef struct llist List;$/;"	t	typeref:struct:llist
+ListNode	cskel/structures/list.h	/^}ListNode;$/;"	t	typeref:struct:listelem
+List_append	cskel/structures/list.c	/^int List_append(List* l, void* item){$/;"	f
+List_do	cskel/structures/list.c	/^int List_do(List* list, void (*function)(void*)){$/;"	f
+List_filter	cskel/structures/list.c	/^List* List_filter(List* list, bool (*fun)(void*)){$/;"	f
+List_free	cskel/structures/list.c	/^int List_free(List* list)$/;"	f
+List_get	cskel/structures/list.c	/^void* List_get(List* l, int index){$/;"	f
+List_map	cskel/structures/list.c	/^List* List_map(List* list, void* (*function)(void*)){$/;"	f
+List_new	cskel/structures/list.c	/^List* List_new(){$/;"	f
+List_pop	cskel/structures/list.c	/^void* List_pop(List* list){$/;"	f
+List_push	cskel/structures/list.c	/^int List_push(List* l, void* item){$/;"	f
+List_remove	cskel/structures/list.c	/^void* List_remove(List* l, int index){$/;"	f
+List_sort	cskel/structures/list.c	/^List* List_sort(List* list, int (*cmp)(void*, void*)){$/;"	f
+Maybe	cskel/util/errstruct.h	5;"	d
+Maybe_rename	cskel/util/errstruct.h	6;"	d
+SETTINGS_H	cskel/tools/config.h	4;"	d
+START_VSNBUFF	cskel/bstrlib/bstrlib.c	2756;"	d	file:
+START_VSNBUFF	cskel/bstrlib/bstrlib.c	2772;"	d	file:
+TASK	core/task.h	7;"	d
+TASKLIST	core/tasklist.h	2;"	d
+TASK_SORT	core/task_sort.h	2;"	d
+Task	core/task.h	/^}Task;$/;"	t	typeref:struct:task_t
+Tasklist	core/tasklist.h	/^}Tasklist;$/;"	t	typeref:struct:tasklist_t
+VERSION_BUILD	todoc.c	12;"	d	file:
+VERSION_MAJOR	todoc.c	10;"	d	file:
+VERSION_MINOR	todoc.c	11;"	d	file:
+_CRT_SECURE_NO_WARNINGS	cskel/bstrlib/bstrlib.c	16;"	d	file:
+_GNU_SOURCE	core/task.c	1;"	d	file:
+__ARGPARSE__	cskel/tools/argparse.h	4;"	d
+__DYN_ARRAY	cskel/structures/darray.h	2;"	d
+__LLIST__	cskel/structures/list.h	5;"	d
+__SPEEDUNIT	cskel/util/speedunit.h	16;"	d
+__dbg_h__	cskel/util/dbg.h	4;"	d
+_blackboard	cskel/chalk/blackboard.h	/^typedef struct _blackboard {$/;"	s
+_blackboard_post_t	cskel/chalk/blackboard.h	/^typedef struct _blackboard_post_t {$/;"	s
+_date	core/date.h	/^typedef struct _date {$/;"	s
+_setting	cskel/tools/config.h	/^typedef struct _setting {$/;"	s
+_settings_t	cskel/tools/config.h	/^typedef struct _settings_t {$/;"	s
+add_task	todoc.c	/^int add_task(char* filename, char* string){$/;"	f
+address	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+arg	cskel/tools/argparse.h	/^    Argument *arg;$/;"	m	struct:ArgElement
+arglist_add	cskel/tools/argparse.c	/^int arglist_add(ArgList* l, Argument* a){$/;"	f
+arr	cskel/structures/darray.h	/^	void **arr; \/\/ pointer to array in memory$/;"	m	struct:DArray
+b	cskel/bstrlib/bstrlib.c	/^	bstring b;$/;"	m	struct:genBstrList	file:
+bBlockCopy	cskel/bstrlib/bstrlib.c	67;"	d	file:
+bNgetc	cskel/bstrlib/bstrlib.h	/^typedef int (*bNgetc) (void *parm);$/;"	t
+bNread	cskel/bstrlib/bstrlib.h	/^typedef size_t (* bNread) (void *buff, size_t elsize, size_t nelem, void *parm);$/;"	t
+bStream	cskel/bstrlib/bstrlib.c	/^struct bStream {$/;"	s	file:
+balloc	cskel/bstrlib/bstrlib.c	/^int balloc (bstring b, int olen) {$/;"	f
+ballocmin	cskel/bstrlib/bstrlib.c	/^int ballocmin (bstring b, int len) {$/;"	f
+bassign	cskel/bstrlib/bstrlib.c	/^int bassign (bstring a, const_bstring b) {$/;"	f
+bassignblk	cskel/bstrlib/bstrlib.c	/^int bassignblk (bstring a, const void * s, int len) {$/;"	f
+bassigncstr	cskel/bstrlib/bstrlib.c	/^int bassigncstr (bstring a, const char * str) {$/;"	f
+bassignformat	cskel/bstrlib/bstrlib.c	/^int bassignformat (bstring b, const char * fmt, ...) {$/;"	f
+bassigngets	cskel/bstrlib/bstrlib.c	/^int bassigngets (bstring b, bNgetc getcPtr, void * parm, char terminator) {$/;"	f
+bassignmidstr	cskel/bstrlib/bstrlib.c	/^int bassignmidstr (bstring a, const_bstring b, int left, int len) {$/;"	f
+bcatblk	cskel/bstrlib/bstrlib.c	/^int bcatblk (bstring b, const void * s, int len) {$/;"	f
+bcatcstr	cskel/bstrlib/bstrlib.c	/^int bcatcstr (bstring b, const char * s) {$/;"	f
+bchar	cskel/bstrlib/bstrlib.h	203;"	d
+bchare	cskel/bstrlib/bstrlib.h	202;"	d
+bconcat	cskel/bstrlib/bstrlib.c	/^int bconcat (bstring b0, const_bstring b1) {$/;"	f
+bconchar	cskel/bstrlib/bstrlib.c	/^int bconchar (bstring b, char c) {$/;"	f
+bcstrfree	cskel/bstrlib/bstrlib.c	/^int bcstrfree (char * s) {$/;"	f
+bdata	cskel/bstrlib/bstrlib.h	201;"	d
+bdatae	cskel/bstrlib/bstrlib.h	200;"	d
+bdataofs	cskel/bstrlib/bstrlib.h	199;"	d
+bdataofse	cskel/bstrlib/bstrlib.h	198;"	d
+bdelete	cskel/bstrlib/bstrlib.c	/^int bdelete (bstring b, int pos, int len) {$/;"	f
+bdestroy	cskel/bstrlib/bstrlib.c	/^int bdestroy (bstring b) {$/;"	f
+bfindreplace	cskel/bstrlib/bstrlib.c	/^int bfindreplace (bstring b, const_bstring find, const_bstring repl, int pos) {$/;"	f
+bfindreplacecaseless	cskel/bstrlib/bstrlib.c	/^int bfindreplacecaseless (bstring b, const_bstring find, const_bstring repl, int pos) {$/;"	f
+bformat	cskel/bstrlib/bstrlib.c	/^bstring bformat (const char * fmt, ...) {$/;"	f
+bformata	cskel/bstrlib/bstrlib.c	/^int bformata (bstring b, const char * fmt, ...) {$/;"	f
+bfromcstr	cskel/bstrlib/bstrlib.c	/^bstring bfromcstr (const char * str) {$/;"	f
+bfromcstralloc	cskel/bstrlib/bstrlib.c	/^bstring bfromcstralloc (int mlen, const char * str) {$/;"	f
+bgets	cskel/bstrlib/bstrlib.c	/^bstring bgets (bNgetc getcPtr, void * parm, char terminator) {$/;"	f
+bgetsa	cskel/bstrlib/bstrlib.c	/^int bgetsa (bstring b, bNgetc getcPtr, void * parm, char terminator) {$/;"	f
+binchr	cskel/bstrlib/bstrlib.c	/^int binchr (const_bstring b0, int pos, const_bstring b1) {$/;"	f
+binchrCF	cskel/bstrlib/bstrlib.c	/^static int binchrCF (const unsigned char * data, int len, int pos, const struct charField * cf) {$/;"	f	file:
+binchrr	cskel/bstrlib/bstrlib.c	/^int binchrr (const_bstring b0, int pos, const_bstring b1) {$/;"	f
+binchrrCF	cskel/bstrlib/bstrlib.c	/^static int binchrrCF (const unsigned char * data, int pos, const struct charField * cf) {$/;"	f	file:
+binsert	cskel/bstrlib/bstrlib.c	/^int binsert (bstring b1, int pos, const_bstring b2, unsigned char fill) {$/;"	f
+binsertch	cskel/bstrlib/bstrlib.c	/^int binsertch (bstring b, int pos, int len, unsigned char fill) {$/;"	f
+binstr	cskel/bstrlib/bstrlib.c	/^int binstr (const_bstring b1, int pos, const_bstring b2) {$/;"	f
+binstrcaseless	cskel/bstrlib/bstrlib.c	/^int binstrcaseless (const_bstring b1, int pos, const_bstring b2) {$/;"	f
+binstrr	cskel/bstrlib/bstrlib.c	/^int binstrr (const_bstring b1, int pos, const_bstring b2) {$/;"	f
+binstrrcaseless	cskel/bstrlib/bstrlib.c	/^int binstrrcaseless (const_bstring b1, int pos, const_bstring b2) {$/;"	f
+biseq	cskel/bstrlib/bstrlib.c	/^int biseq (const_bstring b0, const_bstring b1) {$/;"	f
+biseqcaseless	cskel/bstrlib/bstrlib.c	/^int biseqcaseless (const_bstring b0, const_bstring b1) {$/;"	f
+biseqcstr	cskel/bstrlib/bstrlib.c	/^int biseqcstr (const_bstring b, const char * s) {$/;"	f
+biseqcstrcaseless	cskel/bstrlib/bstrlib.c	/^int biseqcstrcaseless (const_bstring b, const char * s) {$/;"	f
+bisstemeqblk	cskel/bstrlib/bstrlib.c	/^int bisstemeqblk (const_bstring b0, const void * blk, int len) {$/;"	f
+bisstemeqcaselessblk	cskel/bstrlib/bstrlib.c	/^int bisstemeqcaselessblk (const_bstring b0, const void * blk, int len) {$/;"	f
+biswriteprotected	cskel/bstrlib/bstrlib.h	298;"	d
+bjoin	cskel/bstrlib/bstrlib.c	/^bstring bjoin (const struct bstrList * bl, const_bstring sep) {$/;"	f
+bl	cskel/bstrlib/bstrlib.c	/^	struct bstrList * bl;$/;"	m	struct:genBstrList	typeref:struct:genBstrList::bstrList	file:
+blackboard	cskel/chalk/blackboard.h	/^} blackboard;$/;"	t	typeref:struct:_blackboard
+blackboard_post	cskel/chalk/blackboard.h	/^} blackboard_post;$/;"	t	typeref:struct:_blackboard_post_t
+blength	cskel/bstrlib/bstrlib.h	197;"	d
+blengthe	cskel/bstrlib/bstrlib.h	196;"	d
+blk2bstr	cskel/bstrlib/bstrlib.c	/^bstring blk2bstr (const void * blk, int len) {$/;"	f
+blk2tbstr	cskel/bstrlib/bstrlib.h	225;"	d
+bltrimws	cskel/bstrlib/bstrlib.c	/^int bltrimws (bstring b) {$/;"	f
+bmid2tbstr	cskel/bstrlib/bstrlib.h	231;"	d
+bmidstr	cskel/bstrlib/bstrlib.c	/^bstring bmidstr (const_bstring b, int left, int len) {$/;"	f
+bninchr	cskel/bstrlib/bstrlib.c	/^int bninchr (const_bstring b0, int pos, const_bstring b1) {$/;"	f
+bninchrr	cskel/bstrlib/bstrlib.c	/^int bninchrr (const_bstring b0, int pos, const_bstring b1) {$/;"	f
+bpattern	cskel/bstrlib/bstrlib.c	/^int bpattern (bstring b, int len) {$/;"	f
+bread	cskel/bstrlib/bstrlib.c	/^bstring bread (bNread readPtr, void * parm) {$/;"	f
+breada	cskel/bstrlib/bstrlib.c	/^int breada (bstring b, bNread readPtr, void * parm) {$/;"	f
+breplace	cskel/bstrlib/bstrlib.c	/^int breplace (bstring b1, int pos, int len, const_bstring b2, $/;"	f
+brtrimws	cskel/bstrlib/bstrlib.c	/^int brtrimws (bstring b) {$/;"	f
+bsStatic	cskel/bstrlib/bstrlib.h	209;"	d
+bsStatic	cskel/bstrlib/bstrlib.h	212;"	d
+bsStaticBlkParms	cskel/bstrlib/bstrlib.h	216;"	d
+bsStaticMlen	cskel/bstrlib/bstrlib.h	206;"	d
+bsbufflength	cskel/bstrlib/bstrlib.c	/^int bsbufflength (struct bStream * s, int sz) {$/;"	f
+bscb	cskel/bstrlib/bstrlib.c	/^static int bscb (void * parm, int ofs, int len) {$/;"	f	file:
+bsclose	cskel/bstrlib/bstrlib.c	/^void * bsclose (struct bStream * s) {$/;"	f
+bseof	cskel/bstrlib/bstrlib.c	/^int bseof (const struct bStream * s) {$/;"	f
+bsetstr	cskel/bstrlib/bstrlib.c	/^int bsetstr (bstring b0, int pos, const_bstring b1, unsigned char fill) {$/;"	f
+bsopen	cskel/bstrlib/bstrlib.c	/^struct bStream * bsopen (bNread readPtr, void * parm) {$/;"	f
+bspeek	cskel/bstrlib/bstrlib.c	/^int bspeek (bstring r, const struct bStream * s) {$/;"	f
+bsplit	cskel/bstrlib/bstrlib.c	/^struct bstrList * bsplit (const_bstring str, unsigned char splitChar) {$/;"	f
+bsplitcb	cskel/bstrlib/bstrlib.c	/^int bsplitcb (const_bstring str, unsigned char splitChar, int pos,$/;"	f
+bsplits	cskel/bstrlib/bstrlib.c	/^struct bstrList * bsplits (const_bstring str, const_bstring splitStr) {$/;"	f
+bsplitscb	cskel/bstrlib/bstrlib.c	/^int bsplitscb (const_bstring str, const_bstring splitStr, int pos,$/;"	f
+bsplitstr	cskel/bstrlib/bstrlib.c	/^struct bstrList * bsplitstr (const_bstring str, const_bstring splitStr) {$/;"	f
+bsplitstrcb	cskel/bstrlib/bstrlib.c	/^int bsplitstrcb (const_bstring str, const_bstring splitStr, int pos,$/;"	f
+bsread	cskel/bstrlib/bstrlib.c	/^int bsread (bstring r, struct bStream * s, int n) {$/;"	f
+bsreada	cskel/bstrlib/bstrlib.c	/^int bsreada (bstring r, struct bStream * s, int n) {$/;"	f
+bsreadln	cskel/bstrlib/bstrlib.c	/^int bsreadln (bstring r, struct bStream * s, char terminator) {$/;"	f
+bsreadlna	cskel/bstrlib/bstrlib.c	/^int bsreadlna (bstring r, struct bStream * s, char terminator) {$/;"	f
+bsreadlns	cskel/bstrlib/bstrlib.c	/^int bsreadlns (bstring r, struct bStream * s, const_bstring term) {$/;"	f
+bsreadlnsa	cskel/bstrlib/bstrlib.c	/^int bsreadlnsa (bstring r, struct bStream * s, const_bstring term) {$/;"	f
+bssplitscb	cskel/bstrlib/bstrlib.c	/^int bssplitscb (struct bStream * s, const_bstring splitStr, $/;"	f
+bssplitstrcb	cskel/bstrlib/bstrlib.c	/^int bssplitstrcb (struct bStream * s, const_bstring splitStr, $/;"	f
+bstr2cstr	cskel/bstrlib/bstrlib.c	/^char * bstr2cstr (const_bstring b, char z) {$/;"	f
+bstrList	cskel/bstrlib/bstrlib.h	/^struct bstrList {$/;"	s
+bstrListAlloc	cskel/bstrlib/bstrlib.c	/^int bstrListAlloc (struct bstrList * sl, int msz) {$/;"	f
+bstrListAllocMin	cskel/bstrlib/bstrlib.c	/^int bstrListAllocMin (struct bstrList * sl, int msz) {$/;"	f
+bstrListCreate	cskel/bstrlib/bstrlib.c	/^struct bstrList * bstrListCreate (void) {$/;"	f
+bstrListDestroy	cskel/bstrlib/bstrlib.c	/^int bstrListDestroy (struct bstrList * sl) {$/;"	f
+bstr__alloc	cskel/bstrlib/bstrlib.c	34;"	d	file:
+bstr__free	cskel/bstrlib/bstrlib.c	38;"	d	file:
+bstr__memchr	cskel/bstrlib/bstrlib.c	62;"	d	file:
+bstr__memcmp	cskel/bstrlib/bstrlib.c	58;"	d	file:
+bstr__memcpy	cskel/bstrlib/bstrlib.c	46;"	d	file:
+bstr__memmove	cskel/bstrlib/bstrlib.c	50;"	d	file:
+bstr__memset	cskel/bstrlib/bstrlib.c	54;"	d	file:
+bstr__realloc	cskel/bstrlib/bstrlib.c	42;"	d	file:
+bstrchr	cskel/bstrlib/bstrlib.h	92;"	d
+bstrchrp	cskel/bstrlib/bstrlib.c	/^int bstrchrp (const_bstring b, int c, int pos) {$/;"	f
+bstrcmp	cskel/bstrlib/bstrlib.c	/^int bstrcmp (const_bstring b0, const_bstring b1) {$/;"	f
+bstrcpy	cskel/bstrlib/bstrlib.c	/^bstring bstrcpy (const_bstring b) {$/;"	f
+bstricmp	cskel/bstrlib/bstrlib.c	/^int bstricmp (const_bstring b0, const_bstring b1) {$/;"	f
+bstring	cskel/bstrlib/bstrlib.h	/^typedef struct tagbstring * bstring;$/;"	t	typeref:struct:tagbstring
+bstrncmp	cskel/bstrlib/bstrlib.c	/^int bstrncmp (const_bstring b0, const_bstring b1, int n) {$/;"	f
+bstrnicmp	cskel/bstrlib/bstrlib.c	/^int bstrnicmp (const_bstring b0, const_bstring b1, int n) {$/;"	f
+bstrrchr	cskel/bstrlib/bstrlib.h	93;"	d
+bstrrchrp	cskel/bstrlib/bstrlib.c	/^int bstrrchrp (const_bstring b, int c, int pos) {$/;"	f
+bsunread	cskel/bstrlib/bstrlib.c	/^int bsunread (struct bStream * s, const_bstring b) {$/;"	f
+btfromblk	cskel/bstrlib/bstrlib.h	230;"	d
+btfromblkltrimws	cskel/bstrlib/bstrlib.h	255;"	d
+btfromblkrtrimws	cskel/bstrlib/bstrlib.h	267;"	d
+btfromblktrimws	cskel/bstrlib/bstrlib.h	279;"	d
+btfromcstr	cskel/bstrlib/bstrlib.h	220;"	d
+btolower	cskel/bstrlib/bstrlib.c	/^int btolower (bstring b) {$/;"	f
+btoupper	cskel/bstrlib/bstrlib.c	/^int btoupper (bstring b) {$/;"	f
+btrimws	cskel/bstrlib/bstrlib.c	/^int btrimws (bstring b) {$/;"	f
+btrunc	cskel/bstrlib/bstrlib.c	/^int btrunc (bstring b, int n) {$/;"	f
+buff	cskel/bstrlib/bstrlib.c	/^	bstring buff;		\/* Buffer for over-reads *\/$/;"	m	struct:bStream	file:
+buildCharField	cskel/bstrlib/bstrlib.c	/^static int buildCharField (struct charField * cf, const_bstring b) {$/;"	f	file:
+bvcformata	cskel/bstrlib/bstrlib.c	/^int bvcformata (bstring b, int count, const char * fmt, va_list arg) {$/;"	f
+bvformata	cskel/bstrlib/bstrlib.h	138;"	d
+bwriteallow	cskel/bstrlib/bstrlib.h	297;"	d
+bwriteprotect	cskel/bstrlib/bstrlib.h	296;"	d
+cJSON	cskel/cJSON/cJSON.h	/^typedef struct cJSON {$/;"	s
+cJSON	cskel/cJSON/cJSON.h	/^} cJSON;$/;"	t	typeref:struct:cJSON
+cJSON_AddBoolToObject	cskel/cJSON/cJSON.h	132;"	d
+cJSON_AddFalseToObject	cskel/cJSON/cJSON.h	131;"	d
+cJSON_AddItemReferenceToArray	cskel/cJSON/cJSON.c	/^void	cJSON_AddItemReferenceToArray(cJSON *array, cJSON *item)						{cJSON_AddItemToArray(array,create_reference(item));}$/;"	f
+cJSON_AddItemReferenceToObject	cskel/cJSON/cJSON.c	/^void	cJSON_AddItemReferenceToObject(cJSON *object,const char *string,cJSON *item)	{cJSON_AddItemToObject(object,string,create_reference(item));}$/;"	f
+cJSON_AddItemToArray	cskel/cJSON/cJSON.c	/^void   cJSON_AddItemToArray(cJSON *array, cJSON *item)						{cJSON *c=array->child;if (!item) return; if (!c) {array->child=item;} else {while (c && c->next) c=c->next; suffix_object(c,item);}}$/;"	f
+cJSON_AddItemToObject	cskel/cJSON/cJSON.c	/^void   cJSON_AddItemToObject(cJSON *object,const char *string,cJSON *item)	{if (!item) return; if (item->string) cJSON_free(item->string);item->string=cJSON_strdup(string);cJSON_AddItemToArray(object,item);}$/;"	f
+cJSON_AddNullToObject	cskel/cJSON/cJSON.h	129;"	d
+cJSON_AddNumberToObject	cskel/cJSON/cJSON.h	133;"	d
+cJSON_AddStringToObject	cskel/cJSON/cJSON.h	134;"	d
+cJSON_AddTrueToObject	cskel/cJSON/cJSON.h	130;"	d
+cJSON_Array	cskel/cJSON/cJSON.h	37;"	d
+cJSON_CreateArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateArray(void)					{cJSON *item=cJSON_New_Item();if(item)item->type=cJSON_Array;return item;}$/;"	f
+cJSON_CreateBool	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateBool(int b)					{cJSON *item=cJSON_New_Item();if(item)item->type=b?cJSON_True:cJSON_False;return item;}$/;"	f
+cJSON_CreateDoubleArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateDoubleArray(const double *numbers,int count)	{int i;cJSON *n=0,*p=0,*a=cJSON_CreateArray();for(i=0;a && i<count;i++){n=cJSON_CreateNumber(numbers[i]);if(!i)a->child=n;else suffix_object(p,n);p=n;}return a;}$/;"	f
+cJSON_CreateFalse	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateFalse(void)					{cJSON *item=cJSON_New_Item();if(item)item->type=cJSON_False;return item;}$/;"	f
+cJSON_CreateFloatArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateFloatArray(const float *numbers,int count)	{int i;cJSON *n=0,*p=0,*a=cJSON_CreateArray();for(i=0;a && i<count;i++){n=cJSON_CreateNumber(numbers[i]);if(!i)a->child=n;else suffix_object(p,n);p=n;}return a;}$/;"	f
+cJSON_CreateIntArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateIntArray(const int *numbers,int count)		{int i;cJSON *n=0,*p=0,*a=cJSON_CreateArray();for(i=0;a && i<count;i++){n=cJSON_CreateNumber(numbers[i]);if(!i)a->child=n;else suffix_object(p,n);p=n;}return a;}$/;"	f
+cJSON_CreateNull	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateNull(void)					{cJSON *item=cJSON_New_Item();if(item)item->type=cJSON_NULL;return item;}$/;"	f
+cJSON_CreateNumber	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateNumber(double num)			{cJSON *item=cJSON_New_Item();if(item){item->type=cJSON_Number;item->valuedouble=num;item->valueint=(int)num;}return item;}$/;"	f
+cJSON_CreateObject	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateObject(void)					{cJSON *item=cJSON_New_Item();if(item)item->type=cJSON_Object;return item;}$/;"	f
+cJSON_CreateString	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateString(const char *string)	{cJSON *item=cJSON_New_Item();if(item){item->type=cJSON_String;item->valuestring=cJSON_strdup(string);}return item;}$/;"	f
+cJSON_CreateStringArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateStringArray(const char **strings,int count)	{int i;cJSON *n=0,*p=0,*a=cJSON_CreateArray();for(i=0;a && i<count;i++){n=cJSON_CreateString(strings[i]);if(!i)a->child=n;else suffix_object(p,n);p=n;}return a;}$/;"	f
+cJSON_CreateTrue	cskel/cJSON/cJSON.c	/^cJSON *cJSON_CreateTrue(void)					{cJSON *item=cJSON_New_Item();if(item)item->type=cJSON_True;return item;}$/;"	f
+cJSON_Delete	cskel/cJSON/cJSON.c	/^void cJSON_Delete(cJSON *c)$/;"	f
+cJSON_DeleteItemFromArray	cskel/cJSON/cJSON.c	/^void   cJSON_DeleteItemFromArray(cJSON *array,int which)			{cJSON_Delete(cJSON_DetachItemFromArray(array,which));}$/;"	f
+cJSON_DeleteItemFromObject	cskel/cJSON/cJSON.c	/^void   cJSON_DeleteItemFromObject(cJSON *object,const char *string) {cJSON_Delete(cJSON_DetachItemFromObject(object,string));}$/;"	f
+cJSON_DetachItemFromArray	cskel/cJSON/cJSON.c	/^cJSON *cJSON_DetachItemFromArray(cJSON *array,int which)			{cJSON *c=array->child;while (c && which>0) c=c->next,which--;if (!c) return 0;$/;"	f
+cJSON_DetachItemFromObject	cskel/cJSON/cJSON.c	/^cJSON *cJSON_DetachItemFromObject(cJSON *object,const char *string) {int i=0;cJSON *c=object->child;while (c && cJSON_strcasecmp(c->string,string)) i++,c=c->next;if (c) return cJSON_DetachItemFromArray(object,i);return 0;}$/;"	f
+cJSON_Duplicate	cskel/cJSON/cJSON.c	/^cJSON *cJSON_Duplicate(cJSON *item,int recurse)$/;"	f
+cJSON_False	cskel/cJSON/cJSON.h	32;"	d
+cJSON_GetArrayItem	cskel/cJSON/cJSON.c	/^cJSON *cJSON_GetArrayItem(cJSON *array,int item)				{cJSON *c=array->child;  while (c && item>0) item--,c=c->next; return c;}$/;"	f
+cJSON_GetArraySize	cskel/cJSON/cJSON.c	/^int    cJSON_GetArraySize(cJSON *array)							{cJSON *c=array->child;int i=0;while(c)i++,c=c->next;return i;}$/;"	f
+cJSON_GetErrorPtr	cskel/cJSON/cJSON.c	/^const char *cJSON_GetErrorPtr(void) {return ep;}$/;"	f
+cJSON_GetObjectItem	cskel/cJSON/cJSON.c	/^cJSON *cJSON_GetObjectItem(cJSON *object,const char *string)	{cJSON *c=object->child; while (c && cJSON_strcasecmp(c->string,string)) c=c->next; return c;}$/;"	f
+cJSON_Hooks	cskel/cJSON/cJSON.h	/^typedef struct cJSON_Hooks {$/;"	s
+cJSON_Hooks	cskel/cJSON/cJSON.h	/^} cJSON_Hooks;$/;"	t	typeref:struct:cJSON_Hooks
+cJSON_InitHooks	cskel/cJSON/cJSON.c	/^void cJSON_InitHooks(cJSON_Hooks* hooks)$/;"	f
+cJSON_IsReference	cskel/cJSON/cJSON.h	40;"	d
+cJSON_Minify	cskel/cJSON/cJSON.c	/^void cJSON_Minify(char *json)$/;"	f
+cJSON_NULL	cskel/cJSON/cJSON.h	34;"	d
+cJSON_New_Item	cskel/cJSON/cJSON.c	/^static cJSON *cJSON_New_Item(void)$/;"	f	file:
+cJSON_Number	cskel/cJSON/cJSON.h	35;"	d
+cJSON_Object	cskel/cJSON/cJSON.h	38;"	d
+cJSON_Parse	cskel/cJSON/cJSON.c	/^cJSON *cJSON_Parse(const char *value) {return cJSON_ParseWithOpts(value,0,0);}$/;"	f
+cJSON_ParseWithOpts	cskel/cJSON/cJSON.c	/^cJSON *cJSON_ParseWithOpts(const char *value,const char **return_parse_end,int require_null_terminated)$/;"	f
+cJSON_Print	cskel/cJSON/cJSON.c	/^char *cJSON_Print(cJSON *item)				{return print_value(item,0,1);}$/;"	f
+cJSON_PrintUnformatted	cskel/cJSON/cJSON.c	/^char *cJSON_PrintUnformatted(cJSON *item)	{return print_value(item,0,0);}$/;"	f
+cJSON_ReplaceItemInArray	cskel/cJSON/cJSON.c	/^void   cJSON_ReplaceItemInArray(cJSON *array,int which,cJSON *newitem)		{cJSON *c=array->child;while (c && which>0) c=c->next,which--;if (!c) return;$/;"	f
+cJSON_ReplaceItemInObject	cskel/cJSON/cJSON.c	/^void   cJSON_ReplaceItemInObject(cJSON *object,const char *string,cJSON *newitem){int i=0;cJSON *c=object->child;while(c && cJSON_strcasecmp(c->string,string))i++,c=c->next;if(c){newitem->string=cJSON_strdup(string);cJSON_ReplaceItemInArray(object,i,newitem);}}$/;"	f
+cJSON_SetIntValue	cskel/cJSON/cJSON.h	137;"	d
+cJSON_String	cskel/cJSON/cJSON.h	36;"	d
+cJSON_True	cskel/cJSON/cJSON.h	33;"	d
+cJSON__h	cskel/cJSON/cJSON.h	24;"	d
+cJSON_free	cskel/cJSON/cJSON.c	/^static void (*cJSON_free)(void *ptr) = free;$/;"	v	file:
+cJSON_malloc	cskel/cJSON/cJSON.c	/^static void *(*cJSON_malloc)(size_t sz) = malloc;$/;"	v	file:
+cJSON_strcasecmp	cskel/cJSON/cJSON.c	/^static int cJSON_strcasecmp(const char *s1,const char *s2)$/;"	f	file:
+cJSON_strdup	cskel/cJSON/cJSON.c	/^static char* cJSON_strdup(const char* str)$/;"	f	file:
+charField	cskel/bstrlib/bstrlib.c	/^struct charField { LONG_TYPE content[CFCLEN]; };$/;"	s	file:
+charField	cskel/bstrlib/bstrlib.c	/^struct charField { unsigned char content[CFCLEN]; };$/;"	s	file:
+check	cskel/util/dbg.h	29;"	d
+check_debug	cskel/util/dbg.h	38;"	d
+check_mem	cskel/util/dbg.h	35;"	d
+child	cskel/cJSON/cJSON.h	/^	struct cJSON *child;		\/* An array or object item will have a child pointer pointing to a chain of the items in the array\/object. *\/$/;"	m	struct:cJSON	typeref:struct:cJSON::cJSON
+city	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+clean_errno	cskel/util/dbg.h	19;"	d
+compare_completion	core/task.c	/^int compare_completion(Task* a, Task* b){$/;"	f
+complete	core/task.h	/^    bool complete; \/**< completion status *\/$/;"	m	struct:task_t
+complete_task	todoc.c	/^void complete_task(char* filename, int number)$/;"	f
+const_bstring	cskel/bstrlib/bstrlib.h	/^typedef const struct tagbstring * const_bstring;$/;"	t	typeref:struct:tagbstring
+content	cskel/bstrlib/bstrlib.c	/^struct charField { LONG_TYPE content[CFCLEN]; };$/;"	m	struct:charField	file:
+content	cskel/bstrlib/bstrlib.c	/^struct charField { unsigned char content[CFCLEN]; };$/;"	m	struct:charField	file:
+country	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+create_objects	cskel/cJSON/tests/test.c	/^void create_objects()$/;"	f
+create_reference	cskel/cJSON/cJSON.c	/^static cJSON *create_reference(cJSON *item) {cJSON *ref=cJSON_New_Item();if (!ref) return 0;memcpy(ref,item,sizeof(cJSON));ref->string=0;ref->type|=cJSON_IsReference;ref->next=ref->prev=0;return ref;}$/;"	f	file:
+cstr2bstr	cskel/bstrlib/bstrlib.h	41;"	d
+cstr2tbstr	cskel/bstrlib/bstrlib.h	219;"	d
+data	cskel/bstrlib/bstrlib.h	/^	unsigned char * data;$/;"	m	struct:tagbstring
+data	cskel/chalk/blackboard.h	/^    DArray* data;$/;"	m	struct:_blackboard
+data	cskel/chalk/blackboard.h	/^    void* data;$/;"	m	struct:_blackboard_post_t
+data	cskel/structures/list.h	/^    void* data;$/;"	m	struct:listelem
+data_size	cskel/structures/darray.h	/^	size_t data_size; \/\/ size of data elements$/;"	m	struct:DArray
+date	core/date.h	/^} date;$/;"	t	typeref:struct:_date
+date_cmp	core/date.c	/^int date_cmp(date* a, date* b){$/;"	f
+date_free	core/date.c	/^int date_free(date* d){$/;"	f
+date_new	core/date.c	/^date* date_new(int year, int month, int day){$/;"	f
+date_suite	core/tests/todo_test.c	/^sp_suite(date_suite);$/;"	v
+datestamp	core/task.h	/^	date* datestamp; \/**< completion date *\/ $/;"	m	struct:task_t
+day	core/date.h	/^    int day;$/;"	m	struct:_date
+debug	cskel/util/dbg.h	13;"	d
+debug	cskel/util/dbg.h	15;"	d
+description	core/task.h	/^	char* description; \/**< description of what the task is about. *\/$/;"	m	struct:task_t
+destroy_element	cskel/structures/list.c	/^int destroy_element(ListNode* target){$/;"	f
+destroytask	core/tasklist.c	/^void destroytask(void* item){$/;"	f
+dofile	cskel/cJSON/tests/test.c	/^void dofile(char *filename)$/;"	f
+doit	cskel/cJSON/tests/test.c	/^void doit(char *text)$/;"	f
+downcase	cskel/bstrlib/bstrlib.c	560;"	d	file:
+entry	cskel/bstrlib/bstrlib.h	/^    bstring * entry;$/;"	m	struct:bstrList
+ep	cskel/cJSON/cJSON.c	/^static const char *ep;$/;"	v	file:
+extract_complete	core/task.c	/^static bool extract_complete(bstring taskstr){$/;"	f	file:
+extract_priority	core/task.c	/^static char extract_priority(bstring taskstr){$/;"	f	file:
+exvsnprintf	cskel/bstrlib/bstrlib.c	2750;"	d	file:
+exvsnprintf	cskel/bstrlib/bstrlib.c	2755;"	d	file:
+exvsnprintf	cskel/bstrlib/bstrlib.c	2765;"	d	file:
+findreplaceengine	cskel/bstrlib/bstrlib.c	/^static int findreplaceengine (bstring b, const_bstring find, const_bstring repl, int pos, instr_fnptr instr) {$/;"	f	file:
+firstByteMark	cskel/cJSON/cJSON.c	/^static const unsigned char firstByteMark[7] = { 0x00, 0x00, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC };$/;"	v	file:
+free_argelems	cskel/tools/argparse.c	/^void free_argelems(ArgElement *element){$/;"	f
+free_arglist	cskel/tools/argparse.c	/^void free_arglist(ArgList *list){$/;"	f
+free_argument	cskel/tools/argparse.c	/^void free_argument(Argument *arg){$/;"	f
+free_fn	cskel/cJSON/cJSON.h	/^      void (*free_fn)(void *ptr);$/;"	m	struct:cJSON_Hooks
+genBstrList	cskel/bstrlib/bstrlib.c	/^struct genBstrList {$/;"	s	file:
+get_priority	core/task.c	/^char get_priority(Task* task){$/;"	f
+head	cskel/structures/list.h	/^    ListNode* head;$/;"	m	struct:llist
+head	cskel/tools/argparse.h	/^    struct ArgElement *head;$/;"	m	struct:ArgList	typeref:struct:ArgList::ArgElement
+instr_fnptr	cskel/bstrlib/bstrlib.c	/^typedef int (*instr_fnptr) (const_bstring s1, int pos, const_bstring s2);$/;"	t	file:
+invertCharField	cskel/bstrlib/bstrlib.c	/^static void invertCharField (struct charField * cf) {$/;"	f	file:
+isEOF	cskel/bstrlib/bstrlib.c	/^	int isEOF;		\/* track file's EOF state *\/$/;"	m	struct:bStream	file:
+lat	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+length	cskel/structures/darray.h	/^	int length;	\/\/ place of the last item in the array (recorded);$/;"	m	struct:DArray
+length	cskel/structures/list.h	/^    int length;$/;"	m	struct:llist
+length	cskel/tools/argparse.h	/^    int length;$/;"	m	struct:ArgList
+linenumber	core/task.h	/^    int linenumber; \/** The line number in the file. *\/$/;"	m	struct:task_t
+list	core/tasklist.h	/^    List* list;$/;"	m	struct:tasklist_t
+list	cskel/tools/config.h	/^    DArray* list;$/;"	m	struct:_settings_t
+list_tasks	todoc.c	/^int list_tasks(char* filename){$/;"	f
+list_tasks_matching	todoc.c	/^void list_tasks_matching(char* filename, char* string){$/;"	f
+listelem	cskel/structures/list.h	/^typedef struct listelem{$/;"	s
+listnode_new	cskel/structures/list.c	/^ListNode* listnode_new(void* item){$/;"	f
+llist	cskel/structures/list.h	/^struct llist {$/;"	s
+log_err	cskel/util/dbg.h	22;"	d
+log_info	cskel/util/dbg.h	26;"	d
+log_warn	cskel/util/dbg.h	24;"	d
+lon	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+main	core/tests/todo_test.c	/^int main(int argc, char** argv){$/;"	f
+main	cskel/cJSON/tests/test.c	/^int main (int argc, const char * argv[]) {$/;"	f
+main	todoc.c	/^int main(int argc, char* argv[]){$/;"	f
+make_int_arr	cskel/structures/tests/list_test.c	/^DArray* make_int_arr(){$/;"	f
+make_single_item_list	core/tests/tasklist_test.c	/^Tasklist* make_single_item_list(){$/;"	f
+make_three_item_list	core/tests/tasklist_test.c	/^Tasklist* make_three_item_list(){$/;"	f
+malloc_fn	cskel/cJSON/cJSON.h	/^      void *(*malloc_fn)(size_t sz);$/;"	m	struct:cJSON_Hooks
+maxBuffSz	cskel/bstrlib/bstrlib.c	/^	int maxBuffSz;$/;"	m	struct:bStream	file:
+maybeify	cskel/util/errstruct.h	13;"	d
+merge	cskel/structures/list.c	/^List* merge(List* l, List* r, int (*cmp)(void*, void*)){$/;"	f
+mlen	cskel/bstrlib/bstrlib.h	/^	int mlen;$/;"	m	struct:tagbstring
+mlen	cskel/bstrlib/bstrlib.h	/^    int qty, mlen;$/;"	m	struct:bstrList
+month	core/date.h	/^    int month;$/;"	m	struct:_date
+mu_assert	cskel/util/minunit.h	8;"	d
+mu_failmsg	cskel/util/minunit.h	6;"	d
+mu_report	cskel/util/minunit.h	11;"	d
+mu_run_suite	cskel/util/minunit.h	12;"	d
+mu_run_test	cskel/util/minunit.h	9;"	d
+mu_suite	cskel/util/minunit.h	5;"	d
+mu_test	cskel/util/minunit.h	4;"	d
+name	cskel/tools/argparse.h	/^    char *name;$/;"	m	struct:Argument
+name	cskel/tools/config.h	/^    char* name;$/;"	m	struct:_setting
+new_argelem	cskel/tools/argparse.c	/^ArgElement* new_argelem(Argument* arg){$/;"	f
+new_argument	cskel/tools/argparse.c	/^Argument* new_argument(){$/;"	f
+next	cskel/cJSON/cJSON.h	/^	struct cJSON *next,*prev;	\/* next\/prev allow you to walk array\/object chains. Alternatively, use GetArraySize\/GetArrayItem\/GetObjectItem *\/$/;"	m	struct:cJSON	typeref:struct:cJSON::cJSON
+next	cskel/structures/list.h	/^    struct listelem* next;$/;"	m	struct:listelem	typeref:struct:listelem::listelem
+next	cskel/tools/argparse.h	/^    struct ArgElement *next;$/;"	m	struct:ArgElement	typeref:struct:ArgElement::ArgElement
+option	cskel/tools/argparse.h	/^    char *option;$/;"	m	struct:Argument
+parm	cskel/bstrlib/bstrlib.c	/^	void * parm;		\/* The stream handle for core stream *\/$/;"	m	struct:bStream	file:
+parse_array	cskel/cJSON/cJSON.c	/^static const char *parse_array(cJSON *item,const char *value)$/;"	f	file:
+parse_hex4	cskel/cJSON/cJSON.c	/^static unsigned parse_hex4(const char *str)$/;"	f	file:
+parse_number	cskel/cJSON/cJSON.c	/^static const char *parse_number(cJSON *item,const char *num)$/;"	f	file:
+parse_object	cskel/cJSON/cJSON.c	/^static const char *parse_object(cJSON *item,const char *value)$/;"	f	file:
+parse_string	cskel/cJSON/cJSON.c	/^static const char *parse_string(cJSON *item,const char *str)$/;"	f	file:
+parse_value	cskel/cJSON/cJSON.c	/^static const char *parse_value(cJSON *item,const char *value)$/;"	f	file:
+parsedate	core/task.c	/^date* parsedate(char* expr){$/;"	f
+precision	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+prev	cskel/cJSON/cJSON.h	/^	struct cJSON *next,*prev;	\/* next\/prev allow you to walk array\/object chains. Alternatively, use GetArraySize\/GetArrayItem\/GetObjectItem *\/$/;"	m	struct:cJSON	typeref:struct:cJSON::
+prev	cskel/structures/list.h	/^    struct listelem* prev;$/;"	m	struct:listelem	typeref:struct:listelem::listelem
+print_array	cskel/cJSON/cJSON.c	/^static char *print_array(cJSON *item,int depth,int fmt)$/;"	f	file:
+print_help	todoc.c	/^void print_help(){$/;"	f
+print_number	cskel/cJSON/cJSON.c	/^static char *print_number(cJSON *item)$/;"	f	file:
+print_object	cskel/cJSON/cJSON.c	/^static char *print_object(cJSON *item,int depth,int fmt)$/;"	f	file:
+print_short_help	todoc.c	/^void print_short_help(){ $/;"	f
+print_string	cskel/cJSON/cJSON.c	/^static char *print_string(cJSON *item)	{return print_string_ptr(item->valuestring);}$/;"	f	file:
+print_string_ptr	cskel/cJSON/cJSON.c	/^static char *print_string_ptr(const char *str)$/;"	f	file:
+print_value	cskel/cJSON/cJSON.c	/^static char *print_value(cJSON *item,int depth,int fmt)$/;"	f	file:
+print_version	todoc.c	/^void print_version(){$/;"	f
+priority	core/task.h	/^	char priority; \/**< priority of the task. *\/$/;"	m	struct:task_t
+qty	cskel/bstrlib/bstrlib.h	/^    int qty, mlen;$/;"	m	struct:bstrList
+readFnPtr	cskel/bstrlib/bstrlib.c	/^	bNread readFnPtr;	\/* fread compatible fnptr for core stream *\/$/;"	m	struct:bStream	file:
+record	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	s	file:
+remove_part	core/task.c	/^static bstring remove_part(bool b, bstring s, size_t len){$/;"	f	file:
+remove_task	todoc.c	/^int remove_task(char* filename, int number){$/;"	f
+safe_block	cskel/util/speedunit.h	31;"	d
+sentinel	cskel/util/dbg.h	32;"	d
+setInCharField	cskel/bstrlib/bstrlib.c	1281;"	d	file:
+setInCharField	cskel/bstrlib/bstrlib.c	1291;"	d	file:
+setting_arr_t	cskel/tools/config.h	/^} setting_arr_t;$/;"	t	typeref:struct:_settings_t
+setting_t	cskel/tools/config.h	/^} setting_t;$/;"	t	typeref:struct:_setting
+settings_parseln	cskel/tools/config.c	/^settings_parseln(char* string){$/;"	f
+settings_read	cskel/tools/config.c	/^settings_read(char* filename){$/;"	f
+skip	cskel/cJSON/cJSON.c	/^static const char *skip(const char *in) {while (in && *in && (unsigned char)*in<=32) in++; return in;}$/;"	f	file:
+slen	cskel/bstrlib/bstrlib.h	/^	int slen;$/;"	m	struct:tagbstring
+slide	cskel/structures/list.c	/^ListNode* slide(ListNode* sl, int howmuch){$/;"	f
+snapUpSize	cskel/bstrlib/bstrlib.c	/^static int snapUpSize (int i) {$/;"	f	file:
+sp_assert	cskel/util/speedunit.h	55;"	d
+sp_assertions	cskel/util/speedunit.h	/^int sp_assertions;$/;"	v
+sp_failmsg	cskel/util/speedunit.h	42;"	d
+sp_report	cskel/util/speedunit.h	80;"	d
+sp_run_suite	cskel/util/speedunit.h	79;"	d
+sp_run_test	cskel/util/speedunit.h	68;"	d
+sp_status	cskel/util/speedunit.h	/^int sp_status;$/;"	v
+sp_streql	cskel/util/speedunit.h	64;"	d
+sp_suite	core/tests/task_test.c	/^sp_suite(task_fixture){$/;"	f
+sp_suite	cskel/structures/tests/list_test.c	/^sp_suite(darray_suite){$/;"	f
+sp_suite	cskel/tools/tests/argparse_test.c	/^sp_suite(argparse_suite){$/;"	f
+sp_suite	cskel/tools/tests/config_test.c	/^sp_suite(config_suite){$/;"	f
+sp_suite	cskel/util/speedunit.h	38;"	d
+sp_test	core/tests/date_test.c	/^sp_test(date_compare_test){$/;"	f
+sp_test	core/tests/date_test.c	/^sp_test(date_mem_test){$/;"	f
+sp_test	core/tests/date_test.c	/^sp_test(date_suite){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(append_test){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(complete_test){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(dump_test){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(keyword_test){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(parse_test){$/;"	f
+sp_test	core/tests/task_test.c	/^sp_test(task_compare_test){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tasklist_fixture){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tlist_append_test){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tlist_get_test){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tlist_load_test){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tlist_remove_test){$/;"	f
+sp_test	core/tests/tasklist_test.c	/^sp_test(tlist_search_test){$/;"	f
+sp_test	cskel/structures/tests/list_test.c	/^sp_test(darray_get_set){$/;"	f
+sp_test	cskel/tools/tests/argparse_test.c	/^sp_test(no_args){$/;"	f
+sp_test	cskel/tools/tests/config_test.c	/^sp_test(config_parseln){$/;"	f
+sp_test	cskel/tools/tests/config_test.c	/^sp_test(config_read_file){$/;"	f
+sp_test	cskel/util/speedunit.h	37;"	d
+sp_tests_failed	cskel/util/speedunit.h	/^int sp_tests_failed;$/;"	v
+sp_tests_run	cskel/util/speedunit.h	/^int sp_tests_run;$/;"	v
+space	cskel/structures/darray.h	/^	int space; \/\/ amount of allocated memory for the array$/;"	m	struct:DArray
+state	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:
+string	cskel/cJSON/cJSON.h	/^	char *string;				\/* The item's name string, if this item is the child of, or is in the list of subitems of an object. *\/$/;"	m	struct:cJSON
+strings_equal	todoc.c	/^bool strings_equal(char* subject, char* first, char* sec){$/;"	f
+suffix_object	cskel/cJSON/cJSON.c	/^static void suffix_object(cJSON *prev,cJSON *item) {prev->next=item;item->prev=prev;}$/;"	f	file:
+tagbstring	cskel/bstrlib/bstrlib.h	/^struct tagbstring {$/;"	s
+tags	cskel/chalk/blackboard.h	/^    bstrList tags;$/;"	m	struct:_blackboard_post_t
+tail	cskel/structures/list.h	/^    ListNode* tail;$/;"	m	struct:llist
+task_append	core/task.c	/^int task_append(Task* t, const char* string){$/;"	f
+task_clear	core/task.c	/^void task_clear(Task* t){$/;"	f
+task_default_compare	core/task.c	/^int task_default_compare(void* a, void* b){$/;"	f
+task_dump	core/task.c	/^char* task_dump(Task* t){$/;"	f
+task_fixture	core/tests/todo_test.c	/^sp_suite(task_fixture);$/;"	v
+task_free	core/task.c	/^void task_free(Task* task){$/;"	f
+task_has_keyword	core/task.c	/^bool task_has_keyword(Task* t, const char* keyword){$/;"	f
+task_new	core/task.c	/^Task* task_new(){$/;"	f
+task_parse	core/task.c	/^int task_parse(Task* task, char* str){$/;"	f
+task_set_complete	core/task.c	/^void task_set_complete(Task* task, bool status){$/;"	f
+task_set_lineno	core/task.c	/^void task_set_lineno(Task* task, int lineno){ task->linenumber = lineno; }$/;"	f
+task_set_string	core/task.c	/^void task_set_string(Task* t, const char* string){$/;"	f
+task_show	core/task.c	/^void task_show(Task* t){$/;"	f
+task_t	core/task.h	/^typedef struct task_t{$/;"	s
+tasklist_append	core/tasklist.c	/^int tasklist_append(Tasklist* this, Task* t){$/;"	f
+tasklist_destroy	core/tasklist.c	/^void tasklist_destroy(Tasklist* list){$/;"	f
+tasklist_display	core/tasklist.c	/^int tasklist_display(Tasklist* list){$/;"	f
+tasklist_dump	core/tasklist.c	/^int tasklist_dump(Tasklist *list, FILE* f){$/;"	f
+tasklist_fixture	core/tests/todo_test.c	/^sp_suite(tasklist_fixture);$/;"	v
+tasklist_free	core/tasklist.c	/^void tasklist_free(Tasklist* list){$/;"	f
+tasklist_get	core/tasklist.c	/^Task* tasklist_get(Tasklist* list, int index){$/;"	f
+tasklist_new	core/tasklist.c	/^Tasklist* tasklist_new(){$/;"	f
+tasklist_read	core/tasklist.c	/^int tasklist_read(Tasklist *list, FILE* f){$/;"	f
+tasklist_remove	core/tasklist.c	/^Task* tasklist_remove(Tasklist* list, int index){$/;"	f
+tasklist_search	core/tasklist.c	/^Tasklist* tasklist_search(Tasklist* list, char* filter){$/;"	f
+tasklist_t	core/tasklist.h	/^typedef struct tasklist_t {$/;"	s
+testInCharField	cskel/bstrlib/bstrlib.c	1280;"	d	file:
+testInCharField	cskel/bstrlib/bstrlib.c	1290;"	d	file:
+tests_run	cskel/util/minunit.h	/^int tests_run;$/;"	v
+type	cskel/cJSON/cJSON.h	/^	int type;					\/* The type of the item, as above. *\/$/;"	m	struct:cJSON
+type	cskel/chalk/blackboard.h	/^    bstring type;$/;"	m	struct:_blackboard_post_t
+upcase	cskel/bstrlib/bstrlib.c	559;"	d	file:
+value	cskel/tools/config.h	/^    char* value;$/;"	m	struct:_setting
+valuedouble	cskel/cJSON/cJSON.h	/^	double valuedouble;			\/* The item's number, if type==cJSON_Number *\/$/;"	m	struct:cJSON
+valueint	cskel/cJSON/cJSON.h	/^	int valueint;				\/* The item's number, if type==cJSON_Number *\/$/;"	m	struct:cJSON
+valuestring	cskel/cJSON/cJSON.h	/^	char *valuestring;			\/* The item's string, if type==cJSON_String *\/$/;"	m	struct:cJSON
+wspace	cskel/bstrlib/bstrlib.c	561;"	d	file:
+year	core/date.h	/^    int year;$/;"	m	struct:_date
+zip	cskel/cJSON/tests/test.c	/^struct record {const char *precision;double lat,lon;const char *address,*city,*state,*zip,*country; };$/;"	m	struct:record	file:

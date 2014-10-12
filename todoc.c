@@ -47,6 +47,7 @@ error:
     return 1;
 }
 
+
 /** List the tasks in the file given.
  */
 int list_tasks(char* filename){
@@ -150,7 +151,7 @@ void complete_task(char* filename, int number)
     FILE* file = fopen(filename, "r");
     tasklist_read(list, file);
     fclose(file);
-    Task* task = tasklist_get(list, number);
+    Task* task = tasklist_get(list, number-1);
     task_set_complete(task, true);
     file = fopen(filename, "w");
     tasklist_dump(list, file);

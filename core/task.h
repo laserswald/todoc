@@ -15,7 +15,8 @@ typedef struct task_t{
 	char* description; /**< description of what the task is about. */
 	char priority; /**< priority of the task. */
     bool complete; /**< completion status */
-	date* datestamp; /**< completion date */ 
+	date* date_completed; /**< completion date */ 
+    date* date_started;
 }Task;
 
 /** Allocate a new Task.
@@ -91,6 +92,8 @@ int task_has_context(Task* t, char* context);
 char* task_dump(Task* t);
 
 void task_show(Task* t);
+
+void task_clear(Task* t);
 
 // Compares the tasks together. 
 int task_default_compare(void* a, void* b);
