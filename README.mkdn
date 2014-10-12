@@ -12,33 +12,11 @@
 
 * Search for a task with `todoc search "Search string"` or `todoc -s "Search string"`. 
 
+* List all your tasks with `todoc ls` or `todoc -l`
+
+Todoc also has flags for specifying what file to use (`-f FILENAME`) and the verbosity (`-v`).
+
 ## Building:
 
-Building Todoc is easy. Use the classic
+Building todoc requires Scons, a Python based build system. Once you have Scons, just run `scons` to build the program.
 
-    make
-
-to build the program. Installation hasn't been placed into the makefile (yet!) but I'm working on it.
-
-## Changelog:
-
-+ fixed a bug from do command for double free of closing file
-
-* **0.2.1**:
-    + Fixed some bugs involving file opening and closing.
-    + Fixed a really strange deallocation bug with deallocating things multiple times (I don't even.) 
-    + New, hopefully more reliable (certainly more testable) seperation of Tasklist into a layer over a generic linked list.
-
-*  **0.2**: Major restructuring into objects.
-    + Cleaner, more friendly output. (Issue 3)
-    + Addition of "-v" and "-f" options.
-    + Asks for confirmation of removal (Issue 3)
-    + Fixed bug where the program crashes if search string not found (Issue 2)
-    - Option parser is no longer ugly (Issue 5)
-    - Remove task fixed (Issue 7, 11)
-    - Appending a task conserves memory
-    - Error system makes program return failure if something bad happens
-    - Added testing code for most of the library
-
-## Dependencies
-*  glibc (for regex.h in task.c)
