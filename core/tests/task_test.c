@@ -106,6 +106,20 @@ sp_test(parse_test){
     date *d = date_new(2014, 10, 12);
     sp_assert(date_cmp(t->date_started, d) == 0, "Created date is not correct");
 
+    
+    task_clear(t);
+    char *t_with_completion_date = "x 2014-10-12 This task has a completion date.";
+    task_parse(t, t_with_completion_date);
+    sp_assert(date_cmp(t->date_completed, d) == 0, "Created date is not correct");
+
+    task_clear(t);
+    char *t_with_completion_and_start_date = "x 2014-10-12 2014-08-11 This task has a completion date";
+    date *ds = date_new(2014, 8, 11);
+    task_parse(t, t_with_completion_and_start_date);
+    sp_assert(date_cmp(t->date_completed, d) == 0, "Created date is not correct");
+    sp_assert(date_cmp(t->date_started, ds) == 0, "Created date is not correct");
+    
+    task_free(t);
     return NULL;
 }
 

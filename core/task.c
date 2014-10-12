@@ -98,6 +98,10 @@ date* parsedate(char* expr){
     return d;
 }
 
+static date *extract_date(bstring taskstr){
+    bstring datestr = bmidstr(taskstr, 0, 11);
+    return parsedate(bstr2cstr(datestr, ' '));
+}
 static char extract_priority(bstring taskstr){
     bstring prio = bmidstr(taskstr, 0, 4);
     if (prio->data[0] == '(' && 
@@ -136,9 +140,13 @@ int task_parse(Task* task, char* str){
     task->complete = extract_complete(s);
     s = remove_part(task->complete, s, 2);
 
+    if (task->complete && isdigit(s->data[0])){
+        task->date_completed = extract_date(s);
+        s = remove_part(true, s, 11);
+    }
+
     if (isdigit(s->data[0])){
-        bstring datestr = bmidstr(s, 0, 11);
-        task->date_started = parsedate(bstr2cstr(datestr, ' '));
+        task->date_started = extract_date(s);
         s = remove_part(true, s, 11);
     }
 
