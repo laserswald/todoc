@@ -124,7 +124,7 @@ int remove_task(char* filename, int number){
         goto error;
     }
 
-    printf("Are you sure you want to remove %d: %s? (y/n)", number, task_dump(t));
+    printf("Are you sure you want to remove %d: %s? (y/n)\n", number, task_dump(t));
     char answer[5];
     char* ans = answer;
     fgets(ans, 5, stdin);
@@ -159,9 +159,9 @@ void set_complete_task(char* filename, int number, bool comp)
     tasklist_dump(list, file);
     fclose(file);
     if (comp == true){
-        printf("Marked task '%s' (%d) as complete.", task->description, number);
+        printf("Marked task '%s' (%d) as complete.\n", task->description, number);
     } else {
-        printf("Marked task '%s' (%d) as incomplete.", task->description, number); 
+        printf("Marked task '%s' (%d) as incomplete.\n", task->description, number); 
     }
     tasklist_free(list);
 }
