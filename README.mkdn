@@ -1,6 +1,6 @@
 # Todoc is a command line todo list.
 
-[![Build Status](https://travis-ci.org/laserdude11/todoc.png)](https://travis-ci.org/laserdude11/todoc)
+[![Build Status](https://travis-ci.org/laserswald/todoc.png)](https://travis-ci.org/laserswald11/todoc)
 
 ## Basic use:
 
