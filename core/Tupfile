@@ -1,8 +1,0 @@
-include_rules
-CFLAGS += -I../cskel
-CFLAGS += -I../cskel/structures
-CFLAGS += -I../cskel/util
-
-:foreach *.c |> !cc |> %B.o
-:*.o |> !a |> libtodoc.a 
-
