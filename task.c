@@ -11,9 +11,9 @@
 #include <math.h> //for parsedate()
 #include <regex.h> //gnu's regex.h
 
-#include "util/dbg.h"
+#include "dbg.h"
 //#include "str.h"  //from libstr library
-#include "bstrlib/bstrlib.h"
+#include "bstrlib.h"
 #include "date.h"
 #include "task.h"  
 

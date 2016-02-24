@@ -1,6 +1,0 @@
-env = Environment(CPPPATH = ['core', 'cskel'], CFLAGS="-g -Wall")
-SConscript('core/SConscript', 'env')
-SConscript('cskel/SConstruct', 'env')
-todoc = env.Program("todoc", "todoc.c", LIBS=["core","cskel"], LIBPATH=['./core', './cskel'])
-env.Install("/usr/bin", todoc)
-env.Alias("install", "/usr/bin")

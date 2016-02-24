@@ -1,4 +1,0 @@
-include_rules
-CFLAGS = -I.. -I../../cskel -lcskel -ltodoc
-: foreach *.c |> !exe |> %B
-

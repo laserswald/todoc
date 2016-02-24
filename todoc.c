@@ -12,7 +12,7 @@
 #define VERSION_BUILD 3
 
 int add_task(char* filename, char* string){
-    Tasklist* list = tasklist_new();
+    tasklist* list = tasklist_new();
     Task* task = task_new();
     
     FILE* file = fopen(filename, "r");
@@ -30,7 +30,7 @@ int add_task(char* filename, char* string){
     }
     
     task_append(task, string);   
-    tasklist_append(list, task);
+    dllist_append(list, task);
 
     freopen(filename, "r+", file);
     if (tasklist_dump(list, file) != 0){
@@ -60,7 +60,7 @@ int list_tasks(char* filename){
         return -1;
     }
     
-    Tasklist* list = tasklist_new();
+    tasklist* list = tasklist_new();
     // TODO: Error handling for reading file.
     tasklist_read(list, file);
     fclose(file);
@@ -84,9 +84,9 @@ void list_tasks_matching(char* filename, char* string){
         return;
     }
 
-	Tasklist* list = tasklist_new();
+	tasklist* list = tasklist_new();
     tasklist_read(list, file);
-    Tasklist* matches = tasklist_search(list, string);
+    tasklist* matches = tasklist_search(list, string);
     int count = tasklist_display(matches);
     if (count == 0){
         puts("No matches.");
@@ -110,7 +110,7 @@ int remove_task(char* filename, int number){
     }
 
     // Open up the tasklist.
-    Tasklist* list = tasklist_new();
+    tasklist* list = tasklist_new();
     if (tasklist_read(list, file) != 0){
         puts("ERROR: could not read tasklist.");
         goto error;
@@ -147,7 +147,7 @@ int remove_task(char* filename, int number){
  */
 void set_complete_task(char* filename, int number, bool comp)
 {    
-    Tasklist* list = tasklist_new();
+    tasklist* list = tasklist_new();
     FILE* file = fopen(filename, "r");
     tasklist_read(list, file);
     fclose(file);
