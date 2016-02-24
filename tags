@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-CFLAGS	/home/ben/usr/src/c/todoc/Makefile	/^CFLAGS= -O3 --std=c11$/;"	m	language:Make
+CFLAGS	/home/ben/usr/src/c/todoc/Makefile	/^CFLAGS= --std=c11$/;"	m	language:Make
 TASKLIST	/home/ben/usr/src/c/todoc/tasklist.h	2;"	d	language:C++
 Tasklist	/home/ben/usr/src/c/todoc/tasklist.h	/^}Tasklist;$/;"	t	language:C++	typeref:struct:tasklist_t
 VERSION_BUILD	/home/ben/usr/src/c/todoc/todoc.c	12;"	d	language:C++	file:
